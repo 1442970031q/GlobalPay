@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../content/css/base.css" rel="stylesheet" />
+    <link href="../../content/css/pages/center/advice.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">意见反馈</div>
+            <button class="submit-button" @click="APP.GLOBAL.gotoNewWindow('advice.listPage', 'advice.list')">我的反馈</button>
+        </div>
+        <div id="app-content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+            <div class="content_commit">
+                <van-cell title="类型" is-link :value="form.typeText" @click="show=true"></van-cell>
+            </div>
+            <div class="content_text">
+                <textarea class="text" v-model="form.text" maxlength="200" placeholder="我们希望能得到你的建议，请写下来发给我们（200字以内）"></textarea>
+            </div>
+            <div class="confirm_button" @click="checkData">提交反馈</div>
+            <van-popup v-model="show" position="bottom">
+                <van-picker show-toolbar @cancel="show=false" @confirm="onConfirm" :columns="type" />
+            </van-popup>
+        </div>
+    </div>
+    <script src="../../content/js/vue.js"></script>
+    <script src="../../content/js/vant.min.js"></script>
+    <script src="../../content/js/base.js"></script>
+    <script src="../../content/js/pages/center/advice.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿.date_box {
+    position: fixed;
+    width: 100%;
+    padding-top: 10px;
+}
+
+    .date_box .input_group {
+        background-color: white;
+        display: flex;
+    }
+
+        .date_box .input_group.bb {
+            border-bottom: 1px solid #f9f9f9;
+        }
+
+        .date_box .input_group .input_text {
+            line-height: 45px;
+            height: 45px;
+            display: block;
+            width: 30%;
+            text-align: right;
+            padding: 0 5px;
+            font-size: .9em;
+        }
+
+        .date_box .input_group .input_control {
+            width: 70%;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 5px;
+            font-size: .9em;
+            line-height: 35px;
+        }
+
+            .date_box .input_group .input_control.gray {
+                color: #a0a0a0;
+            }
+
+            .date_box .input_group .input_control.w-1 {
+                width: calc(70% - 30px);
+            }
+
+        .date_box .input_group .right-icon {
+            width: 30px;
+            text-align: center;
+            line-height: 45px;
+        }
+
+.confirm_button {
+    width: 80%;
+    line-height: 40px;
+    height: 40px;
+    padding: 0;
+    font-size: .9em;
+    margin-top: 10px;
+}

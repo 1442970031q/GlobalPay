@@ -1,0 +1,34 @@
+.app-content-tabs {
+    width: 128px;
+    margin: 15px auto;
+    text-align: center;
+    margin-top: 20%;
+    margin-bottom: 5px;
+}
+
+    .app-content-tabs > img {
+        height: auto;
+        width: 80px;
+    }
+
+    .app-content-tabs .version {
+        height: 30px;
+        line-height: 30px;
+        font-size: .8em;
+        color: #aaa;
+    }
+
+.app-content-text {
+    width: 80%;
+    margin: 0 auto;
+    text-indent: 1em;
+    font-size: 0.8em;
+    padding-top: 10px;
+    color: #C0C0C0;
+    padding-top: 15px;
+    line-height: 20px;
+}
+
+    .app-content-text.van-hairline--top::after {
+        border-color: #e4e4e4 !important;
+    }

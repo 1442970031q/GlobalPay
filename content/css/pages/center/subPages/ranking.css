@@ -1,0 +1,176 @@
+﻿html, body {
+    height: 100%;
+}
+
+#app-head .right-back.white {
+    color: white;
+}
+
+#app-head .app-head-text.white {
+    color: white;
+}
+
+.top_content {
+    background: url('../../../../img/ranking/ranking_top_bg.png') no-repeat, -webkit-gradient(linear, 0% 0%, 10% 100%, from(#fc6868), to(#d73435));
+    background-size: 100% auto;
+    height: 200px;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+    .top_content .text {
+        float: left;
+        width: calc(100% - 180px);
+        text-align: center;
+        color: white;
+    }
+
+        .top_content .text .inner {
+            height: 70px;
+            line-height: 70px;
+        }
+
+            .top_content .text .inner .txt {
+                font-size: .7em;
+            }
+
+            .top_content .text .inner .value {
+                font-size: 4em;
+                font-weight: bold;
+                margin: 0 5px;
+            }
+
+        .top_content .text .time {
+            font-size: .7em;
+            height: 20px;
+            line-height: 20px;
+            color: rgba(255, 255, 255, 0.65);
+            margin-top: -5px;
+        }
+
+    .top_content .icon {
+        position: absolute;
+        width: 200px;
+        right: -25px;
+        bottom: -126px;
+    }
+
+.ranking_list {
+    margin-top: -15px;
+    position: relative;
+    top: 200px;
+}
+
+    .ranking_list table.head {
+        position: fixed;
+        background-color: white;
+        z-index: 2;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+    }
+
+        .ranking_list table.head thead tr td {
+            height: 50px;
+            font-size: .9em;
+        }
+
+    .ranking_list table {
+        width: 100%;
+    }
+
+        .ranking_list table.list {
+            position: relative;
+            top: 50px;
+            background-color: white;
+        }
+
+            .ranking_list table.list tr td {
+                padding: 0 5px;
+            }
+
+        .ranking_list table thead {
+            font-size: .9em;
+        }
+
+            .ranking_list table thead tr td {
+                height: 20px;
+                font-weight: 600;
+                color: #a5a5a5;
+                padding: 0 5px;
+            }
+
+        .ranking_list table tr td.w8 {
+            width: 50px;
+        }
+
+        .ranking_list table tr td.b {
+            font-weight: bold;
+        }
+
+        .ranking_list table tr td.padding_10 {
+            padding: 0 10px;
+        }
+
+        .ranking_list table tr td.w100 {
+            width: 80px;
+        }
+
+        .ranking_list table tbody tr td {
+            height: 60px;
+            padding: 5px 0;
+        }
+
+        .ranking_list table tr td.avatar {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-size: .8em;
+        }
+
+            .ranking_list table tr td.avatar .image {
+                width: 40px;
+                border-radius: 50%;
+                display: block;
+                float: left;
+            }
+
+            .ranking_list table tr td.avatar .nn {
+                height: 40px;
+                display: block;
+                float: left;
+                max-width: 100px;
+                margin-left: 5px;
+            }
+
+                .ranking_list table tr td.avatar .nn .nickname {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    width: 100%;
+                }
+
+                .ranking_list table tr td.avatar .nn p {
+                    height: 20px;
+                    line-height: 20px;
+                }
+
+                .ranking_list table tr td.avatar .nn .fn {
+                    color: #949494;
+                }
+
+        .ranking_list table tr td.money {
+            font-size: .8em;
+        }
+
+        .ranking_list table tr td.number {
+            color: #bfbfbf;
+        }
+
+            .ranking_list table tr td.number .icon {
+                height: 25px;
+                display: block;
+                margin: 0 auto;
+            }

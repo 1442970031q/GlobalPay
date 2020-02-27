@@ -1,0 +1,278 @@
+﻿#app-content.pb-60 {
+    padding-bottom: 60px;
+}
+
+.product_top {
+    background-color: white;
+    padding: 10px;
+    padding-bottom: 0;
+}
+
+    .product_top .product_top_inner {
+        margin-bottom: 15px;
+    }
+
+        .product_top .product_top_inner .image {
+            width: 55px;
+            height: 55px;
+            border-radius: 4px;
+            float: left;
+        }
+
+        .product_top .product_top_inner .product_right {
+            width: calc(100% - 65px);
+            height: 55px;
+            margin-left: 10px;
+            float: left;
+        }
+
+    .product_top .product_right .name {
+        height: 25px;
+        line-height: 25px;
+    }
+
+    .product_top .product_right .price {
+        font-size: .9em;
+        height: 30px;
+        line-height: 30px;
+        color: #d21717;
+        font-weight: 600;
+    }
+
+        .product_top .product_right .price .number {
+            float: left;
+        }
+
+        .product_top .product_right .price .flag {
+            height: 20px;
+            border-radius: 2px;
+            float: right;
+            margin-top: 5px;
+        }
+
+.product_state {
+    background-color: white;
+    padding: 5px;
+}
+
+    .product_state .product_state_title {
+        height: 20px;
+        line-height: 20px;
+        font-size: .9em;
+        padding: 10px;
+        padding-bottom: 5px;
+    }
+
+        .product_state .product_state_title .number {
+            font-weight: 600;
+            float: left;
+        }
+
+        .product_state .product_state_title .state {
+            float: right;
+            font-size: .7em;
+            border-radius: 3px;
+            background-color: #7563eb;
+            color: white;
+            padding: 0 5px;
+        }
+
+            .product_state .product_state_title .state.red {
+                background-color: red;
+                color: white;
+            }
+
+    .product_state .info_panel {
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    .product_state .text {
+        font-size: .9em;
+    }
+
+    .product_state .time {
+        font-size: .8em;
+        margin-top: 2px;
+    }
+
+    .product_state .steps {
+        float: left;
+        width: calc(100% - 140px);
+    }
+
+        .product_state .steps.full {
+            width: 100% !important;
+        }
+
+    .product_state .qr_container {
+        float: right;
+        width: 130px;
+    }
+
+        .product_state .qr_container .qr_box {
+            position: relative;
+            width: 120px;
+            height: 145px;
+            margin: 0 auto;
+            overflow: hidden;
+            background-color: white;
+            border-radius: 3px;
+        }
+
+            .product_state .qr_container .qr_box .qr {
+                width: 100%;
+                display: block;
+                margin: 0 auto;
+            }
+
+            .product_state .qr_container .qr_box .actions {
+                position: absolute;
+                text-align: center;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                line-height: 50px;
+                top: 0;
+                height: 145px;
+                background-color: rgba(0,0,0,.5);
+                padding-top: 25px;
+                box-sizing: border-box;
+            }
+
+.van-cell__title,
+.van-cell__value {
+    line-height: 25px;
+    height: 25px;
+    font-size: .9em;
+}
+
+.detail_item.van-cell {
+    padding: 5px 0;
+}
+
+    .detail_item.van-cell:not(:last-child)::after {
+        left: 0;
+        border-bottom: 0;
+    }
+
+.detail_item .van-cell__value {
+    font-size: .9em;
+    color: #949494;
+}
+
+.van-step--process .van-step__title,
+.van-step--process .van-step__circle-container .van-icon {
+    color: #7563eb !important;
+}
+
+.confirm_button {
+    font-size: .8em;
+}
+
+    .confirm_button.safe-area {
+        padding-bottom: constant(safe-area-inset-bottom);
+        padding-bottom: 50px;
+    }
+
+.van-dialog__message {
+    padding-bottom: 20px;
+    color: #7d7d7d;
+}
+
+.van-checkbox {
+    padding: 0 25px;
+    padding-bottom: 10px;
+    font-size: .9em;
+}
+
+    .van-checkbox .van-checkbox__label {
+        margin-left: 5px;
+    }
+
+    .van-checkbox .van-checkbox__icon {
+        height: 20px;
+        color: #7563eb;
+    }
+
+    .van-checkbox .van-checkbox__label {
+        color: #7563eb;
+    }
+
+.block_center {
+    display: block;
+    margin: 13px auto;
+}
+
+.download_dialog {
+    padding: 25px;
+    padding-top: 10px;
+}
+
+    .download_dialog .f_name {
+        text-align: center;
+        font-size: .9em;
+        color: #7c7c7c;
+        display: block;
+        height: 20px;
+        line-height: 20px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .download_dialog .van-circle {
+        margin: 0 auto;
+        margin-top: 25px;
+        display: block;
+    }
+
+.product_address {
+    background-color: white;
+    padding: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+    .product_address .title {
+        font-size: 1em;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+        .product_address .title .iconfont {
+            margin-right: 5px;
+        }
+
+    .product_address .line {
+        font-size: .9em;
+        color: #444;
+    }
+
+        .product_address .line.text {
+            color: #969696;
+        }
+
+        .product_address .line.single {
+            height: 30px;
+            line-height: 30px;
+            margin: 0 !important;
+        }
+
+            .product_address .line.single .left {
+                float: left;
+                height: 30px;
+                line-height: 30px;
+            }
+
+            .product_address .line.single .right {
+                float: right;
+                height: 30px;
+                line-height: 30px;
+            }
+
+                .product_address .line.single .right .iconfont {
+                    margin-left: 5px;
+                }

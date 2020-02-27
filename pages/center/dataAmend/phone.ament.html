@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/dataAment/name.ament.css" rel="stylesheet" />
+    <style>
+        .title {
+            font-size: .8em;
+            color: #8e8e8e;
+            padding: 0 10px;
+            margin-top: 5px;
+        }
+    </style>
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">修改手机号</div>
+            <button @click="next" class="submit-button">下一步</button>
+        </div>
+        <div id="app-content">
+            <div class="mt-10">
+                <van-field v-model="code" label="短信验证码" placeholder="请输入短信验证码">
+                    <van-button @click="getCode" slot="button" size="small" type="primary">发送</van-button>
+                </van-field>
+                <p class="title">点击“发送”后您当前绑定的手机将会收到短信验证码。</p>
+            </div>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/pages/center/dateAmend/phone.ament.js"></script>
+</body>
+</html>

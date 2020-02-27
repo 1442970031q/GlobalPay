@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../content/css/base.css" rel="stylesheet" />
+    <link href="../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../content/css/pages/center/customerService.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+            <div class="message_box" v-cloak>
+                <div class="socket_state">
+                    <p class="sys_message yellow" v-html="socketState.Text" v-if="socketState.State === 3"></p>
+                    <p class="sys_message red" v-html="socketState.Text" v-else-if="socketState.State === 2"></p>
+                    <p class="sys_message green" v-html="socketState.Text" v-else-if="socketState.State === 1"></p>
+                    <p class="sys_message" v-html="socketState.Text" v-else></p>
+                </div>
+                <div class="message_body"
+                     v-if="chats.length !== 0"
+                     v-bind:class="{'pb60': APP.CONFIG.IsSafeArea()}">
+                    <div v-for="(item,index) in chats"
+                         v-bind:key="index"
+                         class="chat_block">
+                        <div v-if="item.From === 1"
+                             class="chat_block_row clearfix">
+                            <img v-lazy="currentUser.Avatar" class="avarat right" />
+                            <div class="msg_box right" v-text="item.Text" v-if="item.MsgType == 1"></div>
+                            <div class="msg_box right" v-else>
+                                <img v-bind:src="item.Image" class="image" />
+                            </div>
+                        </div>
+                        <div v-else class="chat_block_row clearfix">
+                            <i class="iconfont icon-kefu2 avarat"></i>
+                            <div class="msg_box" v-text="item.Text" v-if="item.MsgType == 1"></div>
+                            <div class="msg_box" v-else>
+                                <img v-bind:src="item.Image" class="image" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="message_control clearfix"
+                 v-if="!isSocketError"
+                 v-bind:class="{'safe-area': APP.CONFIG.IsSafeArea() && isSafeArea}">
+                <div class="icon" @click="actionSheet">
+                    <i class="iconfont icon-plus"></i>
+                </div>
+                <input type="text"
+                       class="ctrl"
+                       placeholder="轻触此处输入信息"
+                       @focus="isSafeArea = false"
+                       @blur="isSafeArea = true"
+                       v-model="form.message"
+                       maxlength="200" />
+                <div class="button">
+                    <button class="send">
+                        <span v-if="!isSend" @click="checkSend">发送</span>
+                        <van-loading color="black" v-else class="small" />
+                    </button>
+                </div>
+            </div>
+            <audio id="audioPlayer">
+                <source src="../../content/sound/new_message.mp3" type="audio/mpeg" />
+            </audio>
+            <van-actionsheet v-bind:class="{'safe-area': APP.CONFIG.IsSafeArea()}" v-model="isActionsheet" v-bind:actions="actions" cancel-text="取消"></van-actionsheet>
+        </div>
+    </div>
+    <script src="../../content/js/vue.js"></script>
+    <script src="../../content/js/vant.min.js"></script>
+    <script src="../../content/js/base.js"></script>
+    <script src="../../content/js/pages/center/customerService.js"></script>
+</body>
+</html>

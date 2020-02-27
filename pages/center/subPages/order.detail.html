@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/subPages/order.detail.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">订单详情</div>
+        </div>
+        <div id="app-content"
+             v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}"
+             v-bind:class="{'pb-60': pageModel.OrderStatus === 16}">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak>
+                <div class="product_top mt-5 van-hairline--top van-hairline--bottom">
+                    <div class="product_top_inner clearfix">
+                        <img v-lazy="pageModel.ImageAddress" class="image" />
+                        <div class="product_right">
+                            <p class="name" v-text="pageModel.Title"></p>
+                            <div class="price">
+                                <span class="number" v-text="pageModel.Symbolize + numberFormat(pageModel.Price, 2)"></span>
+                                <img v-bind:src="pageModel.Flag" class="flag" />
+                            </div>
+                        </div>
+                    </div>
+                    <van-cell-group v-bind:border="false">
+                        <van-cell class="detail_item" title="支付方式" v-bind:value="pageModel.RootCategoryName"></van-cell>
+                        <van-cell class="detail_item" title="支付卡号" v-bind:value="pageModel.FNumber + '*********' + pageModel.LNumber"></van-cell>
+                        <van-cell class="detail_item" title="客服人员" v-bind:value="pageModel.ServiceName"></van-cell>
+                        <van-cell class="detail_item" title="攻略信息" v-if="pageModel.DataUrl && !pageModel.IsEntity">
+                            <van-button solt="right-icon" size="small" @click="downloadFile" v-if="!isExists">点击下载</van-button>
+                            <van-button solt="right-icon" size="small" @click="openFile" v-else>打开攻略</van-button>
+                        </van-cell>
+                        <van-cell class="detail_item" title="创建时间" v-bind:value="pageModel.CreateTime"></van-cell>
+                    </van-cell-group>
+                </div>
+                <div class="product_state mt-5 van-hairline--top van-hairline--bottom">
+                    <div class="product_state_title clearfix">
+                        <span class="number" v-text="'单号：' + pageModel.ForkCode"></span>
+                        <span class="state" @click="gotoUploadPayCode" v-text="pageModel.IsEntity ? pageModel.Extend.StatusName : pageModel.StatusName" v-bind:class="{'red': pageModel.OrderStatus === 0}"></span>
+                    </div>
+                    <div class="info_panel clearfix">
+                        <div class="steps">
+                            <van-steps v-if="!pageModel.IsEntity" direction="vertical" v-bind:active="0">
+                                <van-step v-if="pageModel.OrderStatus === 0">
+                                    <p class="text">已取消</p>
+                                </van-step>
+                                <van-step v-if="pageModel.OrderStatus >= 32">
+                                    <p class="text">已结束</p>
+                                    <p class="time" v-text="pageModel.CompletedTime"></p>
+                                </van-step>
+                                <van-step v-if="pageModel.OrderStatus == 16">
+                                    <p class="text">审核中</p>
+                                    <p class="time"></p>
+                                </van-step>
+                                <van-step v-if="pageModel.OrderStatus >= 4">
+                                    <p class="text">收到二维码</p>
+                                </van-step>
+                                <van-step>
+                                    <p class="text">订单创建</p>
+                                    <p class="time" v-text="pageModel.CreateTime"></p>
+                                </van-step>
+                            </van-steps>
+                        </div>
+						<div v-if="pageModel.IsJust && pageModel.OrderStatus === 4" class="qr_container" v-bind:class="{'full': !pageModel.IsJust}">
+							<div class="qr_box" v-if="pageModel.RootCategory === 1 || pageModel.RootCategory === 2">
+							    <img v-lazy="pageModel.QRCodeAddress" class="qr" />
+							    <div class="actions">
+							        <van-button type="default" size="small" @click="openAPP(1)" class="block_center">打开云闪付</van-button>
+							        <van-button type="default" size="small" @click="openQR" class="block_center">查看二维码</van-button>
+							    </div>
+							</div>
+							<div class="qr_box" v-else-if="pageModel.RootCategory === 3">
+							    <img v-lazy="pageModel.QRCodeAddress" class="qr" />
+							    <div class="actions">
+							        <van-button type="default" size="small" @click="openAPP(3)" class="block_center">打开微信</van-button>
+							        <van-button type="default" size="small" @click="openQR" class="block_center">查看二维码</van-button>
+							    </div>
+							</div>
+							<div class="qr_box" v-else-if="pageModel.RootCategory === 4">
+							    <img v-lazy="pageModel.QRCodeAddress" class="qr" />
+							    <div class="actions">
+							        <van-button type="default" size="small" @click="openAPP(4)" class="block_center">打开支付宝</van-button>
+							        <van-button type="default" size="small" @click="openQR" class="block_center">查看二维码</van-button>
+							    </div>
+							</div>
+						</div>
+                    </div>
+                </div>
+                <div v-if="pageModel.IsEntity" class="product_address">
+                    <p class="title"><i class="iconfont icon-dizhi"></i>收货地址</p>
+                    <p class="line">
+                        <span v-text="getAddressName()"></span>&nbsp;&nbsp;&nbsp;
+                        <span v-text="getAddressPhone()"></span>
+                    </p>
+                    <p class="line text" v-text="getAddress()"></p>
+                </div>
+                <div v-if="pageModel.IsEntity && pageModel.Extend.Status === 16" class="product_address">
+                    <p class="title"><i class="iconfont icon-wuliu"></i>物流信息</p>
+                    <div class="line single clearfix">
+                        <div class="left" v-text="pageModel.Extend.LogisticsCompany"></div>
+                        <div class="right" @click="copyLogisticsNumber">
+                            <span v-text="pageModel.Extend.LogisticsNo"></span>
+                            <i class="iconfont icon-fuzhi"></i>
+                        </div>
+                    </div>
+                </div>
+                <button v-if="pageModel.IsEntity && pageModel.Extend.Status === 16"
+                        class="confirm_button full"
+                        @click="confirmReceive">
+                    确认收货
+                </button>
+                <button v-if="pageModel.OrderStatus === 4||pageModel.OrderStatus === -1"
+                        class="confirm_button red"
+                        @click="cancelOrder">
+                    取消订单
+                </button>
+                <button v-else-if="pageModel.OrderStatus === 16 || pageModel.OrderStatus === 8 || pageModel.OrderStatus === 32 || pageModel.OrderStatus === 0 || pageModel.OrderStatus === 64"
+                        class="confirm_button full"
+                        v-bind:class="{'safe-area': APP.CONFIG.IsSafeArea()}"
+                        @click="gotoChat">
+                    如果您已付款，请点击此处申诉
+                </button>
+                <van-dialog v-model="isTipShow" title="付款码" @confirm="launchAPP" confirm-button-text="我知道了" close-on-click-overlay>
+                    <p class="van-dialog__message">二维码将会自动保存至您的手机相册并启动云闪付/微信/支付宝，打开后进入“扫一扫”界面点击“打开相册”即可。</p>
+                    <van-checkbox class="checkbox" v-model="isTipAgain">
+                        不再提示该信息
+                        <i slot="icon"
+                           class="iconfont"
+                           slot-scope="props"
+                           v-bind:class="[props.checked ? 'icon-checkboxchecked' : 'icon-checkboxunchecked']"></i>
+                    </van-checkbox>
+                </van-dialog>
+                <van-dialog v-model="isDownloadDialogShow"
+                            title="正在下载"
+                            confirm-button-text="取消">
+                    <div class="download_dialog">
+                        <p class="f_name" v-text="pageModel.Title"></p>
+                        <van-circle v-model="downloadProgress"
+                                    v-bind:rate="30"
+                                    layer-color="#ebedf0"
+                                    size="70px"
+                                    v-bind:text="downloadProgress + '%'"
+                                    color="#7563eb" />
+                    </div>
+                </van-dialog>
+            </div>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/pages/center/subPages/order.detail.js"></script>
+</body>
+</html>

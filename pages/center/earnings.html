@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../content/css/base.css" rel="stylesheet" />
+    <link href="../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../content/css/pages/center/earnings.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="van-hairline--bottom fixed" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">收益统计</div>
+            <button class="submit-button" v-if="currentUser.ShowRank" @click="gotoRanking"><i class="iconfont icon-paihang"></i>排行榜</button>
+        </div>
+        <div id="app-content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+            <div v-if="isloadTwo" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak>
+                <div class="mt-5">
+                    <van-collapse v-model="activeNames">
+                        <van-collapse-item title="今日收益" name="2">
+                            <p v-for="item in loadData.toDay" class="text-p">
+                                <span v-text="item.name"></span>
+                                <span v-text="numberFormat(item.number, 2)" class="right"></span>
+                            </p>
+                        </van-collapse-item>
+                        <van-collapse-item title="总收益" name="1" class="mt-5">
+                            <p v-for="item in loadData.sum" class="text-p">
+                                <span v-text="item.name"></span>
+                                <span v-text="numberFormat(item.number, 2)" class="right"></span>
+                            </p>
+                        </van-collapse-item>
+                    </van-collapse>
+                </div>
+                <div class="app-content-p mt-5 van-hairline--top">
+                    <ul>
+                        <li @click="isStartShow = true">
+                            <span v-text="dateRange.beginDisplay"></span>
+                            <i class="iconfont icon-xiajiantou"></i>
+                        </li>
+                        <li @click="isEndShow = true">
+                            <span v-text="dateRange.endDisplay"></span>
+                            <i class="iconfont icon-xiajiantou"></i>
+                        </li>
+                        <li class="litter">
+                            <van-button type="default" size="small" @click="searchData">查询</van-button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="app-content-tabs">
+                    <div v-if="isLoading" class="loading-box pb-15">
+                        <van-loading color="black"></van-loading>
+                        <p class="loading-text">正在加载...</p>
+                    </div>
+                    <div v-else id="container" style="max-width:800px;height:300px"></div>
+                </div>
+                <van-popup v-model="isStartShow" position="bottom">
+                    <van-datetime-picker v-model="startDate" type="date" v-bind:min-date="minDate" v-bind:max-date="maxDate" v-bind:formatter="formatter" @confirm="startConfirm" @cancel="isStartShow = false" />
+                </van-popup>
+                <van-popup v-model="isEndShow" position="bottom">
+                    <van-datetime-picker v-model="endDate" type="date" v-bind:min-date="minDate" v-bind:max-date="maxDate" v-bind:formatter="formatter" @confirm="endConfirm" @cancel="isEndShow = false" />
+                </van-popup>
+            </div>
+        </div>
+    </div>
+    <script src="../../content/js/vue.js"></script>
+    <script src="../../content/js/vant.min.js"></script>
+    <script src="../../content/js/base.js"></script>
+    <script src="../../content/js/echarts.min.js"></script>
+    <script src="../../content/js/pages/center/earnings.js"></script>
+</body>
+</html>

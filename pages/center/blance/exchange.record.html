@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/blance/exchange.record.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">资金明细</div>
+        </div>
+        <div id="app-content">
+            <van-tabs v-model="tabIndex" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}" @change="tabChange">
+                <van-tab title="转换记录">
+                    <div v-if="tabData.tab0.isLoading" class="loading-box p50">
+                        <van-loading color="black"></van-loading>
+                        <p class="loading-text">正在加载...</p>
+                    </div>
+                    <div v-else v-cloak>
+                        <div v-if="tabData.tab0.list.length === 0" class="none-data p50">
+                            <i class="iconfont icon-wushuju"></i>
+                            <p class="none-data-text">暂无兑换记录</p>
+                        </div>
+                        <div v-else class="app-content-text">
+                            <ul>
+                                <li class="app-content-tabs van-hairline--bottom van-hairline--top"
+                                    v-for="(item, index) in tabData.tab0.list"
+                                    v-bind:key="index">
+                                    <div v-if="item.OperatorType === 1">
+                                        <div class="record clearfix">
+                                            <span class="left price_green" v-text="'+' + numberFormat(item.Amount, 2)"></span>
+                                            <span class="right" v-text="item.TarCurrency"></span>
+                                        </div>
+                                        <div class="record clearfix">
+                                            <span class="right" v-text="item.CreateTime"></span>
+                                        </div>
+                                    </div>
+                                    <div v-else>
+                                        <div class="record clearfix">
+                                            <span class="left price_red" v-text="'-' + numberFormat(item.Amount, 2)"></span>
+                                            <span class="right" v-text="item.SrcCurrency + '(' + item.SrcCurrencySymbolize + ')'"></span>
+                                        </div>
+                                        <div class="record clearfix">
+                                            <span class="right" v-text="item.CreateTime"></span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div v-if="tabData.tab1.isLoadMore" class="load_more clearfix">
+                                <van-loading color="black"></van-loading>
+                                <span class="load_text">正在加载...</span>
+                            </div>
+                            <div v-if="tabData.tab1.isLoadComplete" class="load_more_complete">
+                                <span class="load_text">没有更多的数据了...</span>
+                            </div>
+                        </div>
+                    </div>
+                </van-tab>
+                <van-tab title="提现记录">
+                    <div v-if="tabData.tab1.isLoading" class="loading-box p50">
+                        <van-loading color="black"></van-loading>
+                        <p class="loading-text">正在加载...</p>
+                    </div>
+                    <div v-else v-cloak>
+                        <div v-if="tabData.tab1.list.length === 0" class="none-data p50">
+                            <i class="iconfont icon-wushuju"></i>
+                            <p class="none-data-text">暂无提现记录</p>
+                        </div>
+                        <div v-else class="app-content-text">
+                            <ul>
+                                <li class="app-content-tabs touch van-hairline--bottom van-hairline--top"
+                                    @click="gotoDetailt(item.Id)"
+                                    v-for="(item, index) in tabData.tab1.list"
+                                    v-bind:key="index">
+                                    <div class="record clearfix">
+                                        <span class="left price_red" v-text="'-' + numberFormat(item.CashAmount, 2)"></span>
+                                        <span class="right" v-text="'账号：' + item.TargetAccount"></span>
+                                    </div>
+                                    <div class="record clearfix">
+                                        <span class="left text black" v-if="item.CashStatus == 0">无效</span>
+                                        <span class="left text yellow" v-else-if="item.CashStatus == 1">等待执行</span>
+                                        <span class="left text yellow" v-else-if="item.CashStatus == 2">审核中</span>
+                                        <span class="left text red" v-else-if="item.CashStatus == 4">失败</span>
+                                        <span class="left text red" v-else-if="item.CashStatus == 8">驳回</span>
+                                        <span class="left text green" v-else-if="item.CashStatus == 16">已到账</span>
+                                        <span class="right" v-text="item.CreateTime"></span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div v-if="tabData.tab1.isLoadMore" class="load_more clearfix">
+                                <van-loading color="black"></van-loading>
+                                <span class="load_text">正在加载...</span>
+                            </div>
+                            <div v-if="tabData.tab1.isLoadComplete" class="load_more_complete">
+                                <span class="load_text">没有更多的数据了...</span>
+                            </div>
+                        </div>
+                    </div>
+                </van-tab>
+                <van-tab title="退款记录">
+                    <div v-if="tabData.tab2.isLoading" class="loading-box p50">
+                        <van-loading color="black"></van-loading>
+                        <p class="loading-text">正在加载...</p>
+                    </div>
+                    <div v-else v-cloak>
+                        <div v-if="tabData.tab2.list.length === 0" class="none-data p50">
+                            <i class="iconfont icon-wushuju"></i>
+                            <p class="none-data-text">暂无退款记录</p>
+                        </div>
+                        <div v-else class="app-content-text">
+                            <ul>
+                                <li class="app-content-tabs van-hairline--bottom van-hairline--top"
+                                    v-for="(item, index) in tabData.tab2.list"
+                                    v-bind:key="index">
+                                    <div class="record clearfix">
+                                        <span class="left price_red" v-text="'-' + numberFormat(item.Amount, 2)"></span>
+                                        <span class="right" v-text="item.SrcCurrency + '(' + item.SrcCurrencySymbolize + ')'"></span>
+                                    </div>
+                                    <div class="record clearfix">
+                                        <span class="left text gray">退款</span>
+                                        <span class="right" v-text="item.CreateTime"></span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div v-if="tabData.tab2.isLoadMore" class="load_more clearfix">
+                                <van-loading color="black"></van-loading>
+                                <span class="load_text">正在加载...</span>
+                            </div>
+                            <div v-if="tabData.tab2.isLoadComplete" class="load_more_complete">
+                                <span class="load_text">没有更多的数据了...</span>
+                            </div>
+                        </div>
+                    </div>
+                </van-tab>
+            </van-tabs>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/pages/center/blance/exchange.record.js"></script>
+</body>
+</html>

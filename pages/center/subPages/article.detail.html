@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/subPages/help.detail.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head"
+             class="fixed van-hairline--bottom"
+             v-bind:style="{'paddingTop': statusbarHeight + 'px'}"
+             v-bind:class="{'shadow': scrollTop !== 0}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">详情</div>
+            <i v-if="isServiceLoaded" class="iconfont icon-fenxiang submit-button" @click="isPopShow = true"></i>
+        </div>
+        <div id="app-content">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak class="content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+                <div class="article" v-bind:class="{'pb-80': APP.CONFIG.IsSafeArea()}">
+                    <h3 class="caption" v-text="pageModel.Title"></h3>
+                    <p class="time" v-text="pageModel.CreateTime"></p>
+                    <div class="text" v-html="pageModel.Text"></div>
+                </div>
+                <button v-if="isServiceLoaded" class="confirm_button full" v-bind:class="{'safe-area': APP.CONFIG.IsSafeArea()}" @click="isPopShow = true">分享</button>
+                <van-popup v-model="isPopShow"
+                           position="bottom"
+                           v-bind:class="{'bottom-safe-area': APP.CONFIG.IsSafeArea()}">
+                    <div class="share">
+                        <ul>
+                            <li @click="shareTo('WXSceneSession')">
+                                <i class="iconfont icon-weixin"></i>
+                                <p class="text">微信好友</p>
+                            </li>
+                            <li @click="shareTo('WXSceneTimeline')">
+                                <i class="iconfont icon-pengyouquan"></i>
+                                <p class="text">朋友圈</p>
+                            </li>
+                        </ul>
+                        <button class="cancel" @click="isPopShow = false">取消</button>
+                    </div>
+                </van-popup>
+            </div>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script>
+        var _vue = new Vue({
+            el: '#app',
+            data: {
+                'currentUser': APP.GLOBAL.getUserModel(),
+                'isLoading': true,
+                'isPopShow': false,
+                'isServiceLoaded': false,
+                'scrollTop': 0,
+                'statusbarHeight': 20,
+                'request': {
+                    'id': APP.GLOBAL.queryString('aId')
+                },
+                'pageModel': {
+                    'Title': '',
+                    'Text': '',
+                    'ShareBaseUrl': '',
+                    'ImageName': ''
+                },
+                'shareService': {}
+            },
+            methods: {
+                'shareTo': function (to) {
+                    if (!this.shareService.authenticated) {
+                        this.shareService.authorize(function (aut) {
+                            _vue.shareService = aut;
+                        }, function (err) {
+                            APP.GLOBAL.toastMsg(err.message);
+                        });
+                        return;
+                    }
+
+                    this.shareService.send({
+                        type: 'web',
+                        title: this.pageModel.Title,
+                        content: this.getText(this.pageModel.Text),
+                        thumbs: [this.pageModel.ImageName],
+                        href: this.pageModel.ShareBaseUrl + '&frmuid=' + this.currentUser.FlowNumber,
+                        extra: { scene: to }
+                    }, function () {
+                        APP.GLOBAL.toastMsg('已转发');
+                    }, function (err) {
+                        APP.GLOBAL.toastMsg(err.message);
+                    });
+                },
+                'getText': function (text) {
+                    var re = new RegExp('<[^<>]+>', 'g');
+                    text = text.replace(re, '');
+
+                    var space = new RegExp('&nbsp;', 'g');
+                    text = text.replace(space, '');
+
+                    return text.length > 30 ? text.substring(0, 30) : text;
+                },
+                'loadShareService': function () {
+                    plus.share.getServices(function (services) {
+                        for (var i = 0; i < services.length; i++) {
+                            if (services[i].id === 'weixin') {
+                                _vue.shareService = services[i];
+                                _vue.isServiceLoaded = true;
+                                return;
+                            }
+                        }
+                    }, function (err) {
+                        APP.GLOBAL.toastMsg(err.message);
+                    });
+                },
+                'scrollChange': function (top) {
+                    this.scrollTop = top;
+                },
+                'loadPageData': function () {
+                    APP.GLOBAL.ajax({
+                        url: APP.CONFIG.BASE_URL + 'TweetDetails',
+                        data: this.request,
+                        success: function (result) {
+                            if (result.Error) {
+                                APP.GLOBAL.toastMsg(result.Msg);
+                                return;
+                            }
+
+                            _vue.pageModel = Object.assign({}, _vue.pageModel, result.Data);
+                            _vue.isLoading = false;
+                        }
+                    });
+                }
+            },
+            created: function () {
+                if (APP.CONFIG.IS_RUNTIME) {
+                    this.loadShareService();
+                    this.statusbarHeight = plus.navigator.getStatusbarHeight();
+                }
+            },
+            mounted: function () {
+                this.loadPageData();
+                window.scrollChange = this.scrollChange;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+{
+  "pages/center.html": {
+    "href": "pages/center.html",
+    "resources": [
+      "content/css/base.css",
+      "content/css/vant.css",
+      "content/font/vant/vant-icon-3d2f5b.ttf",
+      "content/css/pages/center.css",
+      "content/js/vue.js",
+      "content/js/vant.min.js",
+      "content/js/base.js",
+      "content/js/pages/center.js",
+      "content/img/default_avatar.jpg"
+    ],
+    "priority": 0
+  },
+  "pages/orders.html": {
+    "href": "pages/orders.html",
+    "resources": [
+      "content/css/base.css",
+      "content/css/vant.css",
+      "content/font/vant/vant-icon-3d2f5b.ttf",
+      "content/css/pages/orders.css",
+      "content/js/vue.js",
+      "content/js/vant.min.js",
+      "content/js/base.js",
+      "content/js/pages/orders.js"
+    ],
+    "priority": 1
+  },
+  "pages/home.html": {
+    "href": "pages/home.html",
+    "resources": [
+      "content/css/base.css",
+      "content/css/vant.css",
+      "content/font/vant/vant-icon-3d2f5b.ttf",
+      "content/css/pages/home.css",
+      "content/js/vue.js",
+      "content/js/vant.min.js",
+      "content/js/base.js",
+      "content/js/pages/home.js",
+      "content/img/default_product.jpg",
+      "content/img/logo_text.png",
+      "content/img/temp/s_1.jpg",
+      "content/img/temp/s_2.jpg",
+      "content/img/temp/s_3.jpg",
+      "content/img/temp/big_1.jpg",
+      "content/img/temp/big_2.jpg"
+    ],
+    "priority": 2
+  },
+  "pages/shopping.html": {
+    "href": "pages/shopping.html",
+    "resources": [
+      "content/css/base.css",
+      "content/css/vant.css",
+      "content/font/vant/vant-icon-3d2f5b.ttf",
+      "content/css/pages/shopping.css",
+      "content/js/vue.js",
+      "content/js/vant.min.js",
+      "content/js/base.js",
+      "content/js/pages/shopping.js",
+      "content/img/default_product.jpg",
+      "content/img/flag/default_flag.jpg",
+      "content/img/svg/ajax_error.svg"
+    ],
+    "priority": 3
+  },
+  "pages/cg.html": {
+    "href": "pages/cg.html",
+    "resources": [
+      "content/css/base.css",
+      "content/js/vue.js",
+      "content/js/base.js",
+      "content/img/cg.mp4"
+    ],
+    "refer": [
+      "pages/center.html",
+      "pages/orders.html",
+      "pages/home.html",
+      "pages/shopping.html"
+    ],
+    "priority": 0
+  },
+  "index.html": {
+    "href": "index.html",
+    "resources": [],
+    "refer": [
+      "pages/cg.html"
+    ],
+    "priority": 0
+  }
+}

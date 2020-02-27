@@ -1,0 +1,149 @@
+html, body {
+    background-color: white;
+}
+
+#app {
+    height: 100%;
+}
+
+#app-head {
+    background-color: transparent;
+    color: white;
+}
+
+    #app-head .right-back {
+        background-color: rgba(255, 255, 255, 0.55);
+        border-radius: 50%;
+        color: #525252;
+        font-size: .9em;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        margin-top: 5px;
+        margin-left: 10px;
+    }
+
+.logo_container {
+    background-image: url('../../../img/account/reg_top.png');
+    background-color: #7563eb;
+    padding: 15px;
+    border-bottom-left-radius: 30%;
+    border-bottom-right-radius: 30%;
+    padding-top: 65px;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+
+    .logo_container .logo {
+        display: block;
+        margin: 0 auto;
+        width: 70px;
+    }
+
+.app-content-text {
+    width: 80%;
+    margin: 20px auto;
+}
+
+    .app-content-text .input_group {
+        border-radius: 5px;
+        overflow: hidden;
+        display: flex;
+        position: relative;
+        background-color: #f9f9f9;
+        margin-bottom: 10px;
+    }
+
+        .app-content-text .input_group .input_control {
+            width: 100%;
+            padding: 5px 10px;
+            box-sizing: border-box;
+            height: 40px;
+            line-height: 30px;
+            font-size: .9em;
+        }
+
+        .app-content-text .input_group .input_right_button {
+            width: 100px;
+            font-size: .75em;
+            padding: 0 5px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+            .app-content-text .input_group .input_right_button .inner {
+                display: block;
+                width: 100%;
+                border-radius: 6px;
+                background-color: #7563eb;
+                color: white;
+                height: 30px;
+                line-height: 30px;
+                margin-top: 5px;
+            }
+
+                .app-content-text .input_group .input_right_button .inner:active {
+                    background-color: #6455c7;
+                }
+
+                .app-content-text .input_group .input_right_button .inner.dis,
+                .app-content-text .input_group .input_right_button .inner.dis:active {
+                    background-color: #a9a9a9;
+                }
+
+        .app-content-text .input_group .input_control.w-1 {
+            width: calc(100% - 100px);
+        }
+
+        .app-content-text .input_group .input_control::-webkit-input-placeholder {
+            color: #b7b7b7;
+            font-size: .9em;
+        }
+
+        .app-content-text .input_group .input_control.str {
+            width: calc(100% - 100px);
+        }
+
+        .app-content-text .input_group .strength {
+            width: 100px;
+            margin-top: 21px;
+        }
+
+.confirm_button {
+    width: 80%;
+    font-size: .9em;
+    position: relative;
+}
+
+.bottom_bg {
+    position: absolute;
+    width: 100%;
+    z-index: 0;
+    bottom: 0px;
+}
+
+    .bottom_bg img {
+        width: 100%;
+        display: block;
+    }
+
+.bottom {
+    position: absolute;
+    width: 100%;
+    height: 84px;
+    text-align: center;
+    font-size: .8em;
+    z-index: 1;
+}
+
+    .bottom .ver {
+        color: rgb(154, 154, 154);
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 25px;
+        line-height: 25px;
+        bottom: 0px;
+        font-weight: 600;
+    }

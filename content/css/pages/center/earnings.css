@@ -1,0 +1,65 @@
+﻿#main {
+    width: 100%;
+    height: 200px;
+}
+
+.app-content-tabs {
+    background-color: white;
+}
+
+.app-content-head {
+    background-color: white;
+    padding: 15px 0;
+}
+
+    .app-content-head .head {
+        font-size: 0.9em;
+        color: #C0C0C0;
+        margin-left: 15px;
+    }
+
+    .app-content-head .money {
+        font-size: 3em;
+        padding: 5px 0;
+        margin-left: 15px;
+    }
+
+.submit-button .iconfont {
+    margin-right: 3px;
+}
+
+.app-content-p {
+    background-color: white;
+    padding-top: 5px;
+}
+
+    .app-content-p ul {
+        font-size: 0.8em;
+        display: flex;
+    }
+
+        .app-content-p ul li {
+            margin: 0 auto;
+            padding: 5px 0;
+            width: 33.33333%;
+            text-align: center;
+            line-height: 30px;
+        }
+
+            .app-content-p ul li.litter {
+                width: 65px;
+            }
+
+.text-p {
+    font-size: 0.8em;
+    height: 20px;
+    line-height: 20px;
+}
+
+    .text-p .right {
+        float: right;
+    }
+
+.pb-15 {
+    padding-bottom: 15%;
+}

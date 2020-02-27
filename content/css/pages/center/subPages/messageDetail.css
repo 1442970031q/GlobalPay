@@ -1,0 +1,21 @@
+﻿.message_content {
+    padding: 15px;
+}
+
+    .message_content .title {
+        font-weight: bold;
+        color: #333;
+        font-size: 1.2em;
+    }
+
+    .message_content .time {
+        font-size: 0.7em;
+        text-align: left;
+        margin-top: 10px;
+        color: #868686;
+    }
+
+    .message_content .text {
+        text-align: left;
+        margin-top: 20px;
+    }

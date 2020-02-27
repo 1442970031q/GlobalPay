@@ -1,0 +1,191 @@
+﻿html, body {
+    background-color: white;
+}
+
+#app {
+    height: 100%;
+    overflow: hidden;
+}
+
+#app-head {
+    background-color: transparent;
+    color: white;
+}
+
+    #app-head .right-back {
+        background-color: rgba(255, 255, 255, 0.55);
+        border-radius: 50%;
+        color: #525252;
+        font-size: .9em;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        margin-top: 5px;
+        margin-left: 10px;
+    }
+
+.logo_container {
+    background-image: url('../../../img/account/reg_top.png');
+    background-color: #7563eb;
+    padding: 15px;
+    border-bottom-left-radius: 30%;
+    border-bottom-right-radius: 30%;
+    padding-top: 65px;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+
+    .logo_container .logo_box {
+        position: relative;
+        width: 70px;
+        height: 118px;
+        margin: 0 auto;
+    }
+
+        .logo_container .logo_box .logo {
+            display: block;
+            margin: 0 auto;
+            width: 70px;
+        }
+
+@keyframes rotating {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.logo_container .logo_box .logo_inner {
+    width: 55.65px;
+    position: absolute;
+    height: 55.65px;
+    left: 2px;
+    right: 0;
+    margin: auto;
+    top: 29px;
+    animation: rotating 5s linear infinite;
+}
+
+.app-content-text {
+    width: 80%;
+    margin: 20px auto;
+    margin-top: 30px;
+}
+
+    .app-content-text .input_group {
+        border-radius: 5px;
+        overflow: hidden;
+        display: flex;
+        position: relative;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+    }
+
+        .app-content-text .input_group .iconfont {
+            display: block;
+            width: 40px;
+            text-align: center;
+            line-height: 45px;
+            color: #949494;
+        }
+
+        .app-content-text .input_group .input_control {
+            width: calc(100% - 40px);
+            padding: 10px;
+            box-sizing: border-box;
+            height: 45px;
+            line-height: 25px;
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+            .app-content-text .input_group .input_control::-webkit-input-placeholder {
+                color: #b7b7b7;
+                font-size: .9em;
+            }
+
+    .app-content-text .forgot {
+        font-size: .9em;
+        margin-top: 15px;
+        text-align: right;
+    }
+
+        .app-content-text .forgot .checkbox {
+            float: left;
+            color: #777;
+        }
+
+            .app-content-text .forgot .checkbox .iconfont {
+                font-size: 1em;
+            }
+
+                .app-content-text .forgot .checkbox .iconfont.icon-checkboxchecked {
+                    color: #7563eb;
+                }
+
+            .app-content-text .forgot .checkbox .van-checkbox__label {
+                margin-left: 5px;
+            }
+
+        .app-content-text .forgot .text {
+            line-height: 22px;
+            height: 22px;
+            display: block;
+            color: #7563eb;
+            float: right;
+        }
+
+.confirm_button {
+    width: 80%;
+    font-size: .9em;
+    position: relative;
+}
+
+.reg {
+    text-align: center;
+    font-size: .8em;
+    margin-top: 25px;
+    color: #969696;
+    height: 25px;
+    line-height: 25px;
+}
+
+    .reg .here {
+        color: #7563eb;
+        font-weight: 700;
+    }
+
+.bottom_bg {
+    position: absolute;
+    width: 100%;
+    z-index: 0;
+}
+
+    .bottom_bg img {
+        width: 100%;
+        display: block;
+    }
+
+.bottom {
+    position: absolute;
+    width: 100%;
+    height: 84px;
+    text-align: center;
+    font-size: .8em;
+    z-index: 1;
+}
+
+    .bottom .ver {
+        color: rgb(154, 154, 154);
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 25px;
+        line-height: 25px;
+        bottom: 0px;
+        font-weight: 600;
+    }

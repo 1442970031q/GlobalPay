@@ -1,0 +1,95 @@
+﻿#app-head.shadow {
+    box-shadow: 0 1px 20px #464646;
+}
+
+.submit-button {
+    font-weight: 600 !important;
+}
+
+.caption {
+    margin-bottom: 10px;
+}
+
+.content .article {
+    padding: 15px;
+    padding-bottom: 65px;
+}
+
+    .content .article .text {
+        margin-top: 10px;
+    }
+
+    .content .article .time {
+        font-size: .8em;
+        color: #949494;
+    }
+
+    .content .article img,
+    .content  img{
+        display: block !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    .content .article.pb-80 {
+        padding-bottom: 95px;
+    }
+
+.safe-area {
+    height: inherit !important;
+    padding-bottom: 30px;
+}
+
+.van-popup--bottom {
+    width: calc(100% - 20px);
+    bottom: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+
+.bottom-safe-area {
+    bottom: 30px !important;
+}
+
+.share ul {
+    display: flex;
+}
+
+    .share ul li {
+        width: 20%;
+        text-align: center;
+        padding: 5px 10px;
+    }
+
+        .share ul li:active {
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        .share ul li .iconfont {
+            font-size: 2em;
+            color: #3baf34;
+        }
+
+        .share ul li .text {
+            font-size: .8em;
+            margin-top: 5px;
+            height: 20px;
+            line-height: 20px;
+        }
+
+.share .cancel {
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+    .share .cancel:active {
+        background-color: #f9f9f9;
+    }

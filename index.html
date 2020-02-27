@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <script>
+        var DEFAULT_MODEL = {
+            'Id': 0,
+            'Key': ''
+        };
+		
+        var domain = 'app.huizhifu.ltd';
+		//var domain = "47.92.108.219:8050";
+        var MODEL_KEY = 'GLOBAL_PAY__user_model';
+        var CG_FIRST_KEY = 'GLOBAL_PAY__cg_first';
+        var userModel = null;
+
+        function plusReadyAction() {
+			plus.push.getClientInfo().clientid;
+			
+			var modelText = plus.storage.getItem(MODEL_KEY);
+			if (!modelText) {
+			    nextPage(true);
+			    return;
+			}
+			
+			try {
+			    userModel = JSON.parse(modelText);
+			    if (userModel.Id === 0) {
+			        nextPage(true);
+			    }
+			} catch (e) {
+			    nextPage(true);
+			}
+			
+			var postData = 'key=' + userModel.Key;
+			var xhr = new XMLHttpRequest();
+			xhr.timeout = 10000;
+			xhr.ontimeout = function () {
+			    document.getElementById('msg').innerText = '连接超时，请稍后重试';
+			};
+			
+			xhr.onreadystatechange = function () {
+			    if (xhr.readyState === 4) {
+			        if (xhr.status === 200) {
+			            try {
+			                var json = JSON.parse(xhr.responseText || xhr.response);
+			                nextPage(!json.Data.IsValid);
+			            } catch (e) {
+			                document.getElementById('msg').innerText = e.message;
+			            }
+			        } else {
+			            document.getElementById('msg').innerText = '连接服务器出现异常';
+			        }
+			    }
+			};
+			
+			xhr.open('POST', 'http://' + domain + '/API/ValidKey', true);
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8');
+			xhr.send(postData);
+		}
+		
+        function nextPage(isClearModel) {
+            if (isClearModel) {
+                plus.storage.setItem(MODEL_KEY, JSON.stringify(DEFAULT_MODEL));
+            }
+
+            var isCGFirst = plus.storage.getItem(CG_FIRST_KEY);
+            if (isCGFirst === null || isCGFirst === 'true') {
+                newPage('cgPage', 'pages/cg.html');
+            } else {
+                newPage('mainPage', 'pages/main.html');
+            }
+        }
+
+        function newPage(id, page) {
+            var _openw = plus.webview.create(page, id, {
+                scrollIndicator: 'none',
+                scalable: false,
+                popGesture: 'none',
+                plusrequire: 'ahead',
+                kernel: 'WKWebview',
+                contentAjust: false
+            });
+
+            _openw.addEventListener('loaded', function () {
+                if (id === 'mainPage') {
+					plus.webview.getWebviewById('mainPage').evalJS('_vue.firstScreen()');
+                    plus.navigator.closeSplashscreen();
+                } else if (id === 'cgPage') {
+                    plus.webview.getWebviewById('cgPage').evalJS('_vue.createMainPage()');
+                }
+                
+                plus.webview.currentWebview().close('none');
+            });
+
+            _openw.show('none');
+        }
+
+        document.addEventListener('plusready', function () {
+            try {
+                plusReadyAction();
+            } catch (e) {
+                document.getElementById('title').innerText = 'Error';
+                document.getElementById('msg').innerText = e.message;
+
+                plus.navigator.closeSplashscreen();
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1 id="title" style="text-align:center;padding:50% 0;">LOADING....</h1>
+    <h4 id="msg" style="text-align:center"></h4>
+</body>
+</html>

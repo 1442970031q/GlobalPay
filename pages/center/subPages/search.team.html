@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/subPages/search.team.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app" class="h-100">
+        <div id="app-head" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">搜索团队成员</div>
+        </div>
+        <div id="app-content" v-bind:style="{'height': 'calc(100% - ' + (45 + statusbarHeight) + 'px)'}">
+            <form action="/">
+                <van-search placeholder="请输入会员ID号" 
+                            v-model="searchKey" 
+                            style="background-color:white;" 
+                            @search="doSearch">
+                    <i slot="left-icon" class="iconfont icon-sousuo"></i>
+                </van-search>
+            </form>
+            <div class="container" v-cloak v-show="isSearch">
+                <div v-if="isLoading" class="loading-box p50">
+                    <van-loading color="black"></van-loading>
+                    <p class="loading-text">正在加载...</p>
+                </div>
+                <div v-else class="user_content">
+                    <div v-if="!isFound" class="none-data p50">
+                        <i class="iconfont icon-yonghushanchu"></i>
+                        <p class="none-data-text">没有搜索到用户</p>
+                    </div>
+                    <div v-else class="user_container">
+                        <img v-lazy="pageModel.Avatar" class="avatar" />
+                        <p class="nn" v-text="pageModel.NickName"></p>
+                        <div class="lines">
+                            <div class="line clearfix">
+                                <span class="left">ID</span>
+                                <span class="right" v-text="pageModel.FlowNumber"></span>
+                            </div>
+                            <div class="line clearfix">
+                                <span class="left">关系</span>
+                                <span class="right" v-text="getRelationship(pageModel.FS)">直推</span>
+                            </div>
+                            <div class="line clearfix">
+                                <span class="left">等级</span>
+                                <span class="right" v-text="pageModel.LvName"></span>
+                            </div>
+                            <div class="line clearfix">
+                                <span class="left">推荐信息</span>
+                                <span class="right" v-text="'直' + pageModel.DirectCount + ' / 间' + pageModel.InDirectCount + ' / 粉' + pageModel.LockedCount"></span>
+                            </div>
+                            <div class="line clearfix">
+                                <span class="left">手机号</span>
+                                <div class="right">
+                                    <i class="iconfont icon-shouji"></i>
+                                    <a v-bind:href="'tel:' + pageModel.Phone" class="right" v-text="pageModel.Phone"></a>
+                                </div>
+                            </div>
+                            <div class="line clearfix">
+                                <span class="left">注册时间</span>
+                                <span class="right" v-text="pageModel.CreateTime"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/pages/center/search.team.js"></script>
+</body>
+</html>

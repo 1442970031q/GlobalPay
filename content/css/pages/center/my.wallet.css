@@ -1,0 +1,94 @@
+#app-head {
+    background-color: #7563eb;
+    color: white;
+}
+
+.price {
+    font-size: 1.5em;
+    margin-right: 5px;
+    color: #7563eb;
+}
+
+.van-cell__title{
+    font-weight:500;
+}
+
+.balance {
+    background-color: #7563eb;
+    padding: 15px;
+    padding-bottom: 10px;
+}
+
+    .balance .text {
+        color: white;
+        font-size: .8em;
+        height: 20px;
+        line-height: 20px;
+        font-weight:300;
+    }
+
+    .balance .point {
+        font-weight: 600;
+        font-size: 2.5em;
+        color: white;
+        height: 50px;
+        line-height: 50px;
+        display: block;
+        margin: 10px 0;
+    }
+
+.list {
+    margin-top: 5px;
+}
+
+    .list .coins {
+    }
+
+        .list .coins li {
+            background-color: white;
+            padding: 10px;
+        }
+
+            .list .coins li .row {
+                height: 30px;
+                line-height: 30px;
+            }
+
+                .list .coins li .row .left {
+                    float: left;
+                    width: 50%;
+                }
+
+                    .list .coins li .row .left .flag {
+                        height: 15px;
+                        display: block;
+                        float: left;
+                        margin-top: 7.5px;
+                        border-radius: 2px;
+                        width: 22px;
+                    }
+
+                    .list .coins li .row .left .name {
+                        float: left;
+                        font-size: .9em;
+                        margin-left: 5px;
+                        font-weight: 400;
+                    }
+
+            .list .coins li .right {
+                float: left;
+                width: 50%;
+                text-align: right;
+            }
+
+                .list .coins li .right .money {
+                    height: 30px;
+                    line-height: 30px;
+                    font-weight: 400;
+                    font-size: .9em;
+                }
+
+            .list .coins li .actions {
+                text-align: right;
+                margin-top: 10px;
+            }

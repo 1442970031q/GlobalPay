@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../content/css/base.css" rel="stylesheet" />
+    <link href="../content/css/vant.css" rel="stylesheet" />
+    <link href="../content/css/pages/order.wait.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed tran" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">下单成功</div>
+        </div>
+        <div id="app-content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+            <div class="waiting_box">
+                <p class="des">您已成功下单，请耐心等待客服人员发送的付款二维码。</p>
+            </div>
+            <div class="time">
+                <p class="title">
+                    <span v-text="!pageModel.IsUploaded ? '正在等待二维码' : '已收到二维码'"
+                          v-bind:class="{'uploaded': pageModel.IsUploaded}"></span>
+                    <span class="circular left"></span>
+                    <span class="circular right"></span>
+                </p>
+                <div class="qr_container">
+                    <img v-if="!pageModel.IsUploaded"
+                         src="../content/img/svg/order_waiting.svg"
+                         class="loading" />
+                    <img v-else class="qr" v-bind:src="pageModel.ImageAddress" />
+                </div>
+            </div>
+            <button v-if="pageModel.IsUploaded" class="confirm_button" @click="goPay">前往支付</button>
+        </div>
+    </div>
+    <script src="../content/js/vue.js"></script>
+    <script src="../content/js/vant.min.js"></script>
+    <script src="../content/js/base.js"></script>
+    <script src="../content/js/pages/order.wait.js"></script>
+</body>
+</html>

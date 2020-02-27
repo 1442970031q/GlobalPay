@@ -1,0 +1,53 @@
+﻿.icon {
+    font-size: 2.6em;
+    display: block;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background-color: #7563eb;
+    padding: 15px;
+    color: white;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-top: 20%;
+}
+
+.title {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.info {
+    padding: 10px;
+    background-color: white;
+    margin-top: 20px;
+}
+
+    .info div {
+        height: 30px;
+        height: 30px;
+        font-size: .9em;
+        color: #747474;
+    }
+
+        .info div span {
+            float: left;
+            height: 30px;
+            line-height: 30px;
+            width: 50%;
+            text-align: left;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+            .info div span.left {
+                padding: 0 5px;
+                text-align: right;
+            }
+
+.confirm_button {
+    width: 80%;
+    margin-top: 20px;
+}

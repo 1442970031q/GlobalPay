@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../content/css/base.css" rel="stylesheet" />
+    <link href="../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../content/css/pages/center/my.team.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">我的团队</div>
+            <button class="submit-button iconfont icon-sousuo" @click="gotoSearch"></button>
+            <button v-if="!isLoading"
+                    class="iconfont submit-button"
+                    v-bind:class="[isShowPhone ? 'icon-in_biyan' : 'icon-in_zhengyan']"
+                    @click="isShowPhone = !isShowPhone"></button>
+        </div>
+        <div id="app-content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak>
+                <div class="first_team van-hairline--bottom"
+                     v-bind:style="{'top': (45 + statusbarHeight) + 'px'}"
+                     @touchstart.stop.prevent
+                     @touchmove.stop.prevent>
+                    <div class="info pd-10 clearfix">
+                        <div class="team_left">
+                            <img v-lazy="currentUser.Avatar" class="avatar" />
+                        </div>
+                        <div class="team_right">
+                            <p class="nn" v-text="currentUser.NickName + '(' + currentUser.FlowNumber + ')'"></p>
+                            <p class="phone">
+                                <i class="iconfont icon-shouji"></i>
+                                <span v-text="currentUser.Phone"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <ul class="points">
+                        <li class="van-hairline--right">
+                            <p class="value" v-text="numberFormat(userInfo.UserCreditAmount, 0)"></p>
+                            <p class="text">个人刷卡</p>
+                        </li>
+                        <li class="van-hairline--right">
+                            <p class="value" v-text="numberFormat(userInfo.TeamInvestCount, 0)"></p>
+                            <p class="text">团队人数</p>
+                        </li>
+                        <li class="van-hairline--right">
+                            <p class="value" v-text="numberFormat(userInfo.TeamCreditAmount, 0)"></p>
+                            <p class="text">团队刷卡</p>
+                        </li>
+                        <li>
+                            <p class="value" v-text="numberFormat(userInfo.TeamInvestAmount, 0)"></p>
+                            <p class="text">团队招商</p>
+                        </li>
+                    </ul>
+                </div>
+                <van-tabs v-model="tabIndex"
+                          v-bind:style="{'paddingTop':'140px'}"
+                          @change="tabChanged">
+                    <van-tab v-for="(item,index) in tabData.tabs"
+                             v-bind:key="index"
+                             v-bind:title="item.name">
+                        <div v-if="!item.isLoaded" class="loading-box">
+                            <van-loading color="black"></van-loading>
+                            <p class="loading-text">正在加载...</p>
+                        </div>
+                        <div v-else>
+                            <div v-if="item.list.length == 0" class="none-data">
+                                <i class="iconfont icon-tuandui"></i>
+                                <p class="none-data-text">没有团队信息</p>
+                            </div>
+                            <div v-else class="members">
+                                <ul>
+                                    <li class="clearfix"
+                                        v-for="(member, mIndex) in item.list"
+                                        v-bind:key="mIndex">
+                                        <img v-lazy="member.Avatar" class="avarat" @click="member.Avatar.indexOf('default.jpg') === -1 && bigAvarat(member)" />
+                                        <div class="member_right">
+                                            <p class="nn" v-text="member.NickName + '(' + member.FlowNumber + ')'"></p>
+                                            <div class="middle">
+                                                <span v-text="'直' + member.DirectCount + ' / 间' + member.InDirectCount + ' / 粉' + member.LockedCount">直32 / 间2 / 粉22</span>
+                                            </div>
+                                            <div class="bottom">
+                                                <span class="tag" v-text="splitLevelName(member)"></span>
+                                                <span class="tag" v-text="member.FS === 'S' ? 'A': 'B'"></span>
+                                                <a v-show="isShowPhone" v-bind:href="'tel:' + member.Phone" class="tag" v-text="member.Phone"></a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div v-if="item.isLoadMore" class="load_more clearfix">
+                                    <van-loading color="black"></van-loading>
+                                    <span class="load_text">正在加载...</span>
+                                </div>
+                                <div v-if="item.isLoadComplete" class="load_more_complete">
+                                    <span class="load_text">没有更多的数据了...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </van-tab>
+                </van-tabs>
+            </div>
+        </div>
+    </div>
+    <script src="../../content/js/vue.js"></script>
+    <script src="../../content/js/vant.min.js"></script>
+    <script src="../../content/js/base.js"></script>
+    <script src="../../content/js/pages/center/my.team.js"></script>
+</body>
+</html>

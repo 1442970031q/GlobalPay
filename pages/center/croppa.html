@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../content/css/base.css" rel="stylesheet" />
+    <link href="../../content/css/vue-croppa.min.css" rel="stylesheet" />
+    <link href="../../content/css/pages/center/croppa.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <p class="app-head-text">头像裁剪</p>
+            <button class="submit-button" @click="confirmUsed">使用</button>
+        </div>
+        <div id="app-content" v-cloak>
+            <div class="center">
+                <croppa v-model="myCroppa"
+                        placeholder=""
+                        v-bind:width="300"
+                        v-bind:height="300"
+                        v-bind:canvas-color="'default'"
+                        v-bind:accept="'image/*'"
+                        v-bind:file-size-limit="0"
+                        v-bind:zoom-speed="5"
+                        v-bind:disabled="false"
+                        v-bind:disable-drag-and-drop="false"
+                        v-bind:disable-click-to-choose="true"
+                        v-bind:disable-drag-to-move="false"
+                        v-bind:disable-scroll-to-zoom="false"
+                        v-bind:disable-rotation="false"
+                        v-bind:prevent-white-space="true"
+                        v-bind:reverse-scroll-to-zoom="false"
+                        v-bind:show-remove-button="false"
+                        v-bind:initial-image="fileName"></croppa>
+                <i class="rotate iconfont icon-xuanzhuan" @click="rotateImage"></i>
+            </div>
+        </div>
+    </div>
+    <script src="../../content/js/vue.js"></script>
+    <script src="../../content/js/vant.min.js"></script>
+    <script src="../../content/js/vue-croppa.min.js"></script>
+    <script src="../../content/js/base.js"></script>
+    <script>
+        Vue.use(Croppa);
+
+        var _vue = new Vue({
+            el: '#app',
+            data: {
+                'currentUser': APP.GLOBAL.getUserModel(),
+                'myCroppa': {},
+                'fileName': APP.GLOBAL.queryString('fn'),
+                'statusbarHeight': 20
+            },
+            methods: {
+                'rotateImage': function () {
+                    //每次旋转头像90°
+                    this.myCroppa.rotate(1);
+                },
+                'confirmUsed': function () {
+                    this.myCroppa.generateBlob((blob) => {
+                        APP.GLOBAL.toastLoading({ 'message': '正在保存' });
+
+                        //创建文件对象
+                        var reader = new FileReader();
+                        reader.onload = _vue.loadComplete;
+                        reader.readAsDataURL(blob);
+                    }, 'image/jpeg', 0.75);
+                    //生成裁剪后的头像数据
+                },
+                'loadComplete': function (e) {
+                    var result = e.target.result.toString();
+                    var base64 = null;
+
+                    //根据头部信息判断格式并移除
+                    if (result.indexOf('data:image/jpeg') !== -1) {
+                        base64 = e.target.result.toString().replace('data:image/jpeg;base64,', '');
+                    } else if (result.indexOf('data:image/png') !== -1) {
+                        base64 = e.target.result.toString().replace('data:image/png;base64,', '');
+                    }
+
+                    var encode = encodeURIComponent(base64);
+                    APP.GLOBAL.ajax({
+                        url: APP.CONFIG.BASE_URL + 'UploadAvatar',
+                        data: {
+                            'base64': encode
+                        },
+                        timeout: 120000,
+                        success: function (result) {
+                            if (result.Error) {
+                                APP.GLOBAL.closeToastLoading();
+                                APP.GLOBAL.toastMsg(result.Msg);
+                                return;
+                            }
+
+                            //更新本地信息
+                            APP.GLOBAL.updateUserModel({
+                                'Avatar': result.Msg
+                            }, [{
+                                'pageName': 'presonDataPage',
+                                'actionName': '_vue.updatePage()'
+                            }, {
+                                'pageName': 'center.htmlPage',
+                                'actionName': '_vue.updatePage()'
+                            }]);
+
+                            APP.GLOBAL.toastMsg('保存成功');
+                            APP.GLOBAL.closeWindow();
+                        }
+                    });
+                }
+            },
+            created: function () {
+                if (APP.CONFIG.IS_RUNTIME) {
+                    this.statusbarHeight = plus.navigator.getStatusbarHeight();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

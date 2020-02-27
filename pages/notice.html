@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,viewport-fit=cover" />
+    <link href="../content/css/vant.css" rel="stylesheet" />
+    <link href="../content/css/base.css" rel="stylesheet" />
+    <link href="../content/css/pages/notice.css" rel="stylesheet" />
+    <title></title>
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <h4 class="caption">系统公告</h4>
+        <div class="bg">
+            <img src="../content/img/first_screen_bg.png" />
+            <div class="context">
+                <p class="text">由于您首次操作失误所导致的“全球购”账号被关闭，请及时联系您的上级推荐人协助处理。</p>
+                <p class="text">本平台扫码支付仅接受本人本卡，不允许同一张信用卡单日累计支付超过2笔，否则系统将自动识别并认定为风险用卡，账号将被冻结。</p>
+                <p class="text">禁止储蓄卡支付！</p>
+            </div>
+            <button class="close" @click="closeNotice">朕已阅</button>
+        </div>
+    </div>
+    <script src="../content/js/vue.js"></script>
+    <script src="../content/js/vant.min.js"></script>
+    <script src="../content/js/base.js"></script>
+    <script>
+        var _vue = new Vue({
+            el: '#app',
+            methods: {
+                'closeNotice': function () {
+                    plus.webview.getWebviewById('mainPage').evalJS('_vue.setWebviewMask(false)');
+                    APP.GLOBAL.closeWindow();
+                }
+            },
+            mounted: function () {
+                window.backButton = this.closeNotice;
+            }
+        });
+    </script>
+</body>
+</html>

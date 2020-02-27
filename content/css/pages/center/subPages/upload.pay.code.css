@@ -1,0 +1,34 @@
+html,
+body {
+	background: white;
+}
+
+.content {
+	padding: 0 15px;
+	margin-top: 30%
+}
+
+.content .title {
+	font-size: 0.8em;
+	color: #aaaaaa;
+}
+
+.content .up {
+	background-color: white;
+	margin-top: 15px;
+	border-radius: 5px;
+	text-align: center;
+	box-shadow: 0 0 10px #e5e5e5;
+}
+
+.content .up .iconfont {
+	font-size: 5em;
+	color: #eeeeee;
+}
+
+.confirm_button {
+	position: fixed;
+	bottom: 30px;
+	width: calc(100% - 30px);
+	margin-left: 15px;
+}

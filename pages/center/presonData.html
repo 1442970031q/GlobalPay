@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../content/css/base.css" rel="stylesheet" />
+    <link href="../../content/css/pages/center/perdsonData.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">个人资料</div>
+        </div>
+        <div id="app-content">
+            <van-cell-group class="mt-10">
+                <van-cell is-link class="avatar_box" @click="isActionsheet=true">
+                    <template slot="title">
+                        <img v-lazy="currentUser.Avatar" class="avatar" />
+                    </template>
+                </van-cell>
+            </van-cell-group>
+            <van-cell-group class="mt-10">
+                <van-cell title="ID" v-bind:value="currentUser.FlowNumber"></van-cell>
+                <van-cell title="昵称" v-bind:value="currentUser.NickName" is-link @click="APP.GLOBAL.gotoNewWindow('name.amentPage','dataAmend/name.ament')"></van-cell>
+                <van-cell title="手机号" v-bind:value="phoneMask" is-link @click="APP.GLOBAL.gotoNewWindow('phone.amentPage','dataAmend/phone.ament')"></van-cell>
+            </van-cell-group>
+            <van-cell-group class="mt-10">
+                <van-cell @click="APP.GLOBAL.gotoNewWindow('my.addressPage','subPages/my.address')" title="收货地址管理" is-link></van-cell>
+            </van-cell-group>
+            <van-cell-group class="mt-10">
+                <van-cell @click="APP.GLOBAL.gotoNewWindow('pay.amentPage','dataAmend/pay.ament')" title="提现信息" is-link></van-cell>
+            </van-cell-group>
+            <van-actionsheet v-bind:class="{'safe-area': APP.CONFIG.IsSafeArea()}" v-model="isActionsheet" v-bind:actions="actions" cancel-text="取消"></van-actionsheet>
+        </div>
+    </div>
+    <script src="../../content/js/vue.js"></script>
+    <script src="../../content/js/vant.min.js"></script>
+    <script src="../../content/js/base.js"></script>
+    <script src="../../content/js/pages/center/presonData.js"></script>
+</body>
+</html>

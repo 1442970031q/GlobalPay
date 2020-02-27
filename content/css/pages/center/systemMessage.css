@@ -1,0 +1,60 @@
+.tabs-ul {
+    margin-top: 5px;
+}
+
+    .tabs-ul .tabs-ul-item {
+        background-color: white;
+        padding: 15px 10px;
+        border-bottom: 1px solid #f9f9f9;
+    }
+
+        .tabs-ul .tabs-ul-item:active {
+            background-color: #f9f9f9;
+        }
+
+        .tabs-ul .tabs-ul-item:last-child {
+            border-bottom: 0;
+        }
+
+        .tabs-ul .tabs-ul-item .tabs-ul-item-left {
+            float: left;
+            width: 60px;
+        }
+
+            .tabs-ul .tabs-ul-item .tabs-ul-item-left .iconfont {
+                display: block;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                color: white;
+                background-color: #7563eb;
+                border-radius: 50%;
+                margin-top: 10px;
+            }
+
+        .tabs-ul .tabs-ul-item .tabs-ul-item-right {
+            float: left;
+            width: calc(100% - 60px);
+        }
+
+            .tabs-ul .tabs-ul-item .tabs-ul-item-right .title {
+                font-size: 1em;
+                font-weight: bold;
+                color: #4c4c4c;
+                height: 25px;
+                line-height: 25px;
+            }
+
+            .tabs-ul .tabs-ul-item .tabs-ul-item-right .des {
+                margin-top: 5px;
+                font-size: .8em;
+                color: #848484;
+            }
+
+            .tabs-ul .tabs-ul-item .tabs-ul-item-right .time {
+                text-align: right;
+                font-size: .8em;
+                color: #848484;
+                margin-top: 10px;
+            }

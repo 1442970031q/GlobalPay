@@ -1,0 +1,46 @@
+html,
+body {
+    background-color: white;
+}
+
+.inner_box {
+    width: 95%;
+    text-align: center;
+    margin: auto;
+    margin-top: 20%;
+    padding: 20px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+    .inner_box .text {
+        font-size: 1.5em;
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+
+    .inner_box .icon {
+        padding: 10px;
+        background-color: #00a048;
+        color: white;
+        text-align: center;
+        display: block;
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+        border-radius: 50%;
+        margin: 0 auto;
+        font-size: 4em;
+    }
+
+    .inner_box .amount {
+        font-size: 1.4em;
+        margin-bottom: 20px;
+    }
+
+    .inner_box .des {
+        font-size: .8em;
+        color: #8a8a8a;
+        margin-bottom: 20px;
+    }

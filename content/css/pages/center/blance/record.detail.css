@@ -1,0 +1,30 @@
+﻿.app-content-tabs {
+    background-color: white;
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: 0.85em;
+}
+
+    .app-content-tabs .text {
+        display: flex;
+        margin: 10px 0;
+    }
+
+        .app-content-tabs .text li {
+            height: 20px;
+            line-height: 20px;
+        }
+
+            .app-content-tabs .text li.title {
+                width: 80px;
+                text-align: right;
+            }
+
+            .app-content-tabs .text li.value {
+                width: calc(100% - 80px);
+                font-weight: 600;
+            }
+
+.color {
+    color: #776e6e;
+}

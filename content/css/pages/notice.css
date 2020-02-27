@@ -1,0 +1,65 @@
+html,
+body {
+    height: 100%;
+    background-color: transparent;
+}
+
+#app {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+    #app .caption {
+        text-align: center;
+        color: white;
+        height: 30px;
+        line-height: 30px;
+        font-size: 1em;
+    }
+
+    #app .bg {
+        width: 300px;
+        height: 244.5px;
+        position: relative;
+    }
+
+        #app .bg img {
+            position: absolute;
+            width: 300px;
+            height: 244.5px;
+            display: block;
+        }
+
+        #app .bg .context {
+            position: absolute;
+            width: 200px;
+            height: 95px;
+            top: 27px;
+            font-size: .9em;
+            left: 68px;
+            overflow-y: auto;
+            color: white;
+            transform: rotate(-6.9deg);
+            line-height: 18px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+            #app .bg .context .text {
+                text-indent: 2em;
+            }
+
+    #app .close {
+        position: absolute;
+        font-size: .9em;
+        height: 30px;
+        line-height: 30px;
+        color: white;
+        left: 19px;
+        top: 134px;
+        width: 150px;
+    }
+
+        #app .close:active {
+            color: #dcdbdb;
+        }

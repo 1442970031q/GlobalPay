@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../content/css/base.css" rel="stylesheet" />
+    <link href="../../content/css/pages/account/register.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+        </div>
+        <div id="app-content">
+            <div class="logo_container">
+                <img src="../../content/img/logo_white.png" class="logo" />
+            </div>
+            <div class="app-content-text">
+                <div class="input_group">
+                    <input type="tel" v-model="form.phone" class="input_control" placeholder="填写手机号码" maxlength="11" />
+                </div>
+                <div class="input_group">
+                    <input type="tel" v-model="form.phoneCode" class="input_control w-1" placeholder="短信验证码" maxlength="6" />
+                    <div class="input_right_button"
+                         @click="!isTiming && sendPhoneCode()">
+                        <span class="inner"
+                              v-bind:class="{'dis': isTiming}"
+                              v-text="isTiming ? time + '秒后发送' : '获取验证码'"></span>
+                    </div>
+                </div>
+                <div class="input_group">
+                    <input type="password" maxlength="16" v-model="form.pwd" class="input_control str" placeholder="登录密码" />
+                    <div class="strength" v-if="form.pwd">
+                        <van-progress v-bind:percentage="progressData.per"
+                                      v-bind:pivot-text="progressData.text"
+                                      v-bind:color="progressData.color" />
+                    </div>
+                </div>
+                <div class="input_group">
+                    <input type="password" maxlength="16" v-model="confirmPwd" class="input_control" placeholder="重复登录密码" />
+                </div>
+                <div class="input_group">
+                    <input type="number" v-model="form.rFlow" class="input_control" placeholder="邀请人ID" />
+                </div>
+            </div>
+            <div @click="checkData" class="confirm_button">立即注册</div>
+            <div class="bottom" v-bind:style="{'top': (screenHeight - 90) + 'px'}">
+                <p class="ver" v-text="publicVersion"></p>
+            </div>
+        </div>
+        <div id="bg" class="bottom_bg" v-bind:style="{'top': (screenHeight - bgHeight) + 'px'}">
+            <img src="../../content/img/account/reg_bottom.png" />
+        </div>
+    </div>
+    <script src="../../content/js/vue.js"></script>
+    <script src="../../content/js/vant.min.js"></script>
+    <script src="../../content/js/base.js"></script>
+    <script src="../../content/js/pages/account/register.js"></script>
+</body>
+</html>

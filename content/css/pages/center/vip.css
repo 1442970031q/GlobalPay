@@ -1,0 +1,224 @@
+html, body {
+    background-image: url('../../../img/center/vip/vip_top.jpg');
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-color: #230344;
+}
+
+#app-head {
+    background-color: transparent;
+}
+
+    #app-head .right-back {
+        height: 30px;
+        line-height: 30px;
+        width: 30px;
+        background-color: rgba(255, 255, 255, 0.80);
+        border-radius: 50%;
+        margin-left: 7.5px;
+        margin-top: 7.5px;
+        font-size: 1em;
+    }
+
+#app-content {
+    background-repeat: no-repeat;
+    background-image: url(../../../img/center/vip/vip_bottom.png);
+    background-position: center bottom;
+    background-size: 100% auto;
+}
+
+.app-content-tabs {
+    background-image: -webkit-linear-gradient(top, #8b2efb, #3d00a6);
+    margin: 0 auto;
+    width: 90%;
+    border-radius: 8px;
+    padding-bottom: 25px;
+    margin-top: 55%;
+    box-shadow: 0 0 20px 0 #500e6f;
+}
+
+    .app-content-tabs.middle {
+        margin-top: 65%;
+    }
+
+    .app-content-tabs p {
+        width: 90%;
+        margin: auto;
+        font-size: 0.8em;
+    }
+
+    .app-content-tabs .caption {
+        font-size: 1.1em;
+        font-weight: 600;
+        padding-left: 5px;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .app-content-tabs p .fl {
+        float: right;
+    }
+
+    .app-content-tabs p img {
+        height: 20px;
+    }
+
+    .app-content-tabs .lv {
+        padding: 10px 0;
+    }
+
+        .app-content-tabs .lv span i {
+            color: #826cf2;
+            margin-left: 5px;
+        }
+
+    .app-content-tabs .money {
+        padding: 10px 0;
+    }
+
+        .app-content-tabs .money .blod {
+            font-weight: bold;
+        }
+
+.buttons {
+    width: 90%;
+    padding: 10px 0;
+    margin-top: 10px;
+}
+
+.fenge {
+    height: 20px;
+    margin: 10px 0;
+    overflow-x: hidden;
+}
+
+    .fenge .left {
+        float: left;
+        height: 20px;
+        background-color: #f6f6f6;
+        display: inline-block;
+        width: 20px;
+        border-radius: 50px;
+        position: relative;
+        right: 10px;
+    }
+
+    .fenge .right {
+        float: right;
+        height: 20px;
+        background-color: #f6f6f6;
+        display: inline-block;
+        width: 20px;
+        border-radius: 50px;
+        position: relative;
+        left: 10px;
+    }
+
+.app-content-tabs .head {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    padding: 25px 0;
+}
+
+
+    .app-content-tabs .head img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: block;
+        box-shadow: 0 0 20px rgba(117, 99, 235, 0.25);
+    }
+
+    .app-content-tabs .head .text {
+        width: 80%;
+    }
+
+        .app-content-tabs .head .text .name {
+            font-weight: bold;
+            font-size: 1em;
+            position: relative;
+            line-height: 25px;
+            height: 25px;
+            color: white;
+        }
+
+        .app-content-tabs .head .text .jieshao {
+            color: #969696;
+            position: relative;
+            line-height: 25px;
+            height: 25px;
+            text-align: left;
+        }
+
+            .app-content-tabs .head .text .jieshao .lv {
+                background-color: #826cf2;
+                color: white;
+                padding: 2px 5px;
+                font-size: .7em;
+                border-radius: 4px;
+            }
+
+.confirm_button {
+    width: 85%;
+    margin-top: 25px;
+}
+
+.center {
+    width: 85% !important;
+    margin: 0 auto !important;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.red .van-cell__value {
+    color: #e82525;
+    font-weight: 600;
+}
+
+.max {
+    padding: 40px 20px;
+    padding-bottom: 25px;
+}
+
+    .max .icon {
+        display: block;
+        margin: 0 auto;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        background-color: #7563eb;
+        color: white;
+        font-size: 2em;
+        border-radius: 50%;
+        padding: 15px;
+    }
+
+    .max .caption {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+        color: white;
+    }
+
+    .max .des {
+        text-align: center;
+        font-size: .9em;
+        color: #989898;
+        margin-top: 10px;
+        width: 100%;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+.loading-box.p50 {
+    padding: 0;
+    padding-top: 75%;
+}
+
+.loading-box .loading-text,
+.van-loading--black circle {
+    color: white !important;
+    stroke: #ffffff !important;
+}

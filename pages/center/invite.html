@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../content/css/base.css" rel="stylesheet" />
+    <link href="../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../content/css/pages/center/invite.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">邀请好友</div>
+        </div>
+        <div id="app-content" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <div class="top_bg">
+                <img src="../../content/img/invite_top_bg.png" class="top_img" />
+                <p class="nn" v-text="currentUser.NickName"></p>
+            </div>
+            <div class="content_box">
+                <img v-lazy="currentUser.Avatar" class="avatar" />
+                <div class="qr_content">
+                    <div class="qr">
+                        <div v-if="isLoading" class="loading-box p50">
+                            <van-loading color="black"></van-loading>
+                        </div>
+                        <img v-else v-lazy="{'src':base64, 'loading':'../../content/img/default_product.jpg'}" />
+                    </div>
+                    <p class="text">扫描二维码</p>
+                    <button class="confirm_button" @click="loadPosterList">邀请我的好友</button>
+                </div>
+            </div>
+            <div class="bottom_text">
+                <span class="van-hairline--right" @click="gotoAwardDetail"><i class="iconfont icon-shouyi"></i>我的奖励</span>
+                <span @click="gotoMyTeam"><i class="iconfont icon-tuandui"></i>我的团队</span>
+            </div>
+        </div>
+        <van-popup v-model="isPosterShow" v-cloak class="poster">
+            <div class="poster_items">
+                <div v-if="isLoadPoster" class="loading-box">
+                    <van-loading color="black"></van-loading>
+                    <p class="loading-text">正在加载...</p>
+                </div>
+                <div v-else>
+                    <div v-if="posterList.length == 0" class="none-data">
+                        <i class="iconfont icon-xiangce"></i>
+                        <p class="none-data-text">暂无海报</p>
+                    </div>
+                    <van-swipe v-else @change="swipeChanged" id="buffer">
+                        <van-swipe-item v-for="(item, index) in posterList" 
+                                        v-bind:key="index"
+                                        class="swpie-item">
+                            <img v-lazy="item.ImageAddress" class="poster_item" />
+                            <div class="bottom_info clearfix">
+                                <img v-lazy="currentUser.Avatar" class="info_left" />
+                                <div class="info_middle">
+                                    <p v-text="currentUser.NickName"></p>
+                                    <p v-text="currentUser.FlowNumber"></p>
+                                </div>
+                                <div class="info_right">
+                                    <img v-bind:src="base64" />
+                                    <p class="text">长按识别</p>
+                                </div>
+                            </div>
+                        </van-swipe-item>
+                    </van-swipe>
+                </div>
+            </div>
+            <div class="poster_actions">
+                <button class="btn cancel" @click="isPosterShow = false">取消</button>
+                <button class="btn confirm" @click="!isLoadPoster && posterList.length !== 0 && generatePoster()">生成海报</button>
+            </div>
+        </van-popup>
+    </div>
+    <script src="../../content/js/vue.js"></script>
+    <script src="../../content/js/vant.min.js"></script>
+    <script src="../../content/js/base.js"></script>
+    <script src="../../content/js/pages/center/invite.js"></script>
+</body>
+</html>

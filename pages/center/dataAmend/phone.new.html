@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/dataAment/name.ament.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">新手机号</div>
+            <button @click="checkData" class="submit-button">保存</button>
+        </div>
+        <div id="app-content">
+            <div class="mt-5">
+                <van-field type="tel" v-model="phones" placeholder="请输入新的手机号" maxlength="11"></van-field>
+                <van-field v-model="codes" placeholder="请输入短信验证码" maxlength="6">
+                    <van-button @click="getPhoneCode" slot="button" size="small" type="primary">获得验证码</van-button>
+                </van-field>
+            </div>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/pages/center/dateAmend/phone.new.js"></script>
+</body>
+</html>

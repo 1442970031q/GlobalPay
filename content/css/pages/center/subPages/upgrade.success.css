@@ -1,0 +1,43 @@
+﻿html, body {
+    background-color: white;
+}
+
+.inner_box {
+    width: 95%;
+    text-align: center;
+    margin: auto;
+    margin-top: 20%;
+    padding: 20px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+    .inner_box .text {
+        font-size: 1.5em;
+    }
+
+    .inner_box .icon {
+        padding: 10px;
+        background-color: #7563eb;
+        color: white;
+        text-align: center;
+        display: block;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        border-radius: 50%;
+        margin: 20px auto;
+        font-size: 2em;
+    }
+
+    .inner_box .amount {
+        font-size: 1.4em;
+        margin-bottom: 20px;
+    }
+
+    .inner_box .des {
+        font-size: .8em;
+        color: #8a8a8a;
+        margin-bottom: 20px;
+    }

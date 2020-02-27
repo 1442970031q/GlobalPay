@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <style>
+        .warn {
+            padding: 10px;
+            margin: 10px auto;
+            width: 95%;
+            font-size: .8em;
+            background-color: #f9c679;
+            border-radius: 5px;
+            color: #774e00;
+            box-sizing: border-box;
+        }
+
+            .warn .caption {
+                font-weight: bold;
+            }
+
+            .warn .text {
+                margin-top: 5px;
+            }
+    </style>
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">设置<span v-text="request.type"></span>信息</div>
+        </div>
+        <div id="app-content">
+            <div class="mt-10">
+                <div class="tabs" v-if="request.type=='支付宝'">
+                    <div class="warn">
+                        <p class="caption">重要提醒</p>
+                        <p class="text">收款人姓名必须和支付宝账号匹配，否则支付宝将视为无效数据导致提现失败！</p>
+                    </div>
+                    <van-cell-group>
+                        <van-field label="真实姓名" v-model="alipay.realName" placeholder="请输入真实姓名" maxlength="14"></van-field>
+                        <van-field label="支付宝账号" v-model="alipay.alipay" placeholder="请输入支付宝账号" maxlength="50"></van-field>
+                    </van-cell-group>
+                    <div @click="checkAlipayInput" class="buttons mt-10">保存</div>
+                </div>
+                <div class="tabs" v-if="request.type=='银行卡'">
+                    <van-cell-group>
+                        <van-field label="真实姓名" v-model="bank.bankRealName" placeholder="请输入真实姓名" maxlength="15"></van-field>
+                        <van-field label="银行卡号" v-model="bank.bankNumber" type="number" maxlength="25" placeholder="请输入银行卡号"></van-field>
+                        <van-cell @click="show = true" title="选择银行卡" is-link :value="!bank.bankName ? '请选择银行名称' : bank.bankName" />
+                    </van-cell-group>
+                    <div @click="checkBankInput" class="buttons mt-10">保存</div>
+                </div>
+            </div>
+            <van-popup v-model="show" position="bottom">
+                <van-picker show-toolbar :columns="columns" @cancel="show = false" @confirm="onConfirm" />
+            </van-popup>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/pages/center/dateAmend/set.pay.data.js"></script>
+</body>
+</html>

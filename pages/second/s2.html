@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,viewport-fit=cover" />
+    <title></title>
+    <link href="../../content/css/base.css" rel="stylesheet" />
+    <link href="../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../content/css/pages/second/s2.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="bg"></div>
+        <div id="app-head" class="fixed bg-none" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+        </div>
+        <div id="app-content" v-bind:style="{'top': (40 + statusbarHeight) + 'px'}" v-cloak>
+            <img src="../../content/img/second/s2_top_logo.png" class="logo_text" />
+            <div v-show="isList" class="bank_list">
+                <ul class="clearfix">
+                    <li v-for="(item,index) in childPages"
+                        v-bind:key="index">
+                        <div class="inner">
+                            <img v-bind:src="item.BankLogo" class="bank_logo" />
+                            <van-button class="button" type="info" size="mini" @click="gotoChildPage(item)">点击进入</van-button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div v-show="!isList" class="input_box">
+                <p class="caption">申请人信息<i class="iconfont icon-chahao" @click="closeForm"></i></p>
+
+                <div class="input_inner">
+                    <div class="input_line">
+                        <span class="input_text">姓名</span>
+                        <input type="text" v-model="form.realName" class="input_control" maxlength="14" placeholder="填写您的真实姓名" />
+                    </div>
+                    <div class="input_line">
+                        <span class="input_text">手机号</span>
+                        <input type="text" v-model="form.phone" class="input_control" maxlength="12" placeholder="您的本人的手机号码" />
+                    </div>
+                </div>
+                <button class="confirm_button" @click="checkData">立即申请</button>
+                <p class="text">您正在申请 <b v-if="selectedBank" v-text="selectedBank.BankName">浦发银行</b> 信用卡</p>
+            </div>
+        </div>
+        <img id="bg" src="../../content/img/center/vip/vip_bottom.png" class="bottom_bg" v-bind:style="{'top': (screenHeight - bgHeight) + 'px'}" />
+    </div>
+    <script src="../../content/js/vue.js"></script>
+    <script src="../../content/js/vant.min.js"></script>
+    <script src="../../content/js/base.js"></script>
+    <script src="../../content/js/pages/second/s2.js"></script>
+</body>
+</html>

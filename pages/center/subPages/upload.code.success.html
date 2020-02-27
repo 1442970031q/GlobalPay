@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+	<link rel="stylesheet" href="../../../content/css/pages/center/subPages/upload.code.success.css"/>
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+        </div>
+        <div id="app-content">
+            <div class="inner_box">
+                <i class="iconfont icon-duihao1 icon"></i>
+                <p class="text">上传成功</p>
+                <p class="des">您的二维码已上传，请耐心等待客服人员处理</p>
+                <div @click="APP.GLOBAL.closeWindow()" class="confirm_button">确认</div>
+            </div>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/pages/center/subPages/upload.code.success.js"></script>
+</body>
+</html>

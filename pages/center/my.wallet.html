@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../content/css/base.css" rel="stylesheet" />
+    <link href="../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../content/css/pages/center/my.wallet.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" v-bind:class="{'fixed': !isLoading}" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">我的钱包</div>
+            <button class="submit-button" @click="gotoRecord">明细</button>
+        </div>
+        <div id="app-content">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak>
+                <div class="balance" v-bind:style="{'paddingTop': (60 + statusbarHeight) + 'px'}">
+                    <p class="text">我的Go币</p>
+                    <span class="point" v-text="numberFormat(myPoint.Amount, 2)"></span>
+                </div>
+                <div class="list van-hairline--top">
+                    <ul class="coins">
+                        <li class="van-hairline--bottom"
+                            v-for="(item,index) in walletData"
+                            v-bind:key="index">
+                            <div class="row clearfix">
+                                <div class="left">
+                                    <img v-lazy="item.ImageUrl" class="flag" />
+                                    <span class="name" v-text="item.Title + '(' + item.Symbolize + ')'"></span>
+                                </div>
+                                <div class="right">
+                                    <span class="money" v-text="numberFormat(item.Amount, 2)"></span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <van-cell-group class="mt-5">
+                    <van-cell title="我要提现" is-link @click="gotoCash">
+                        <i slot="icon" class="iconfont icon-ico_home_obligation price"></i>
+                    </van-cell>
+                    <van-cell title="兑换Go币" is-link @click="gotoExchange">
+                        <i slot="icon" class="iconfont icon-c-duihuan price"></i>
+                    </van-cell>
+                </van-cell-group>
+            </div>
+        </div>
+    </div>
+    <script src="../../content/js/vue.js"></script>
+    <script src="../../content/js/vant.min.js"></script>
+    <script src="../../content/js/base.js"></script>
+    <script src="../../content/js/pages/center/my.wallet.js"></script>
+</body>
+</html>

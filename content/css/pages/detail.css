@@ -1,0 +1,570 @@
+﻿#app-head .right-back,
+#app-head .submit-button {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    font-size: 1em;
+    margin-left: 7.5px;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    margin-top: 7.5px;
+}
+
+#app-head .app-head-text {
+    padding: 0 40px;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#app-head .submit-button {
+    margin-right: 5px;
+    margin-left: 0;
+}
+
+.van-pull-refresh {
+    overflow: inherit;
+}
+
+    .van-pull-refresh .loading {
+        height: 40px;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        margin-top: 5px;
+    }
+
+        .van-pull-refresh .loading .svg {
+            width: 40px;
+        }
+
+        .van-pull-refresh .loading .text {
+            display: block;
+            height: 40px;
+            line-height: 40px;
+        }
+
+.van-swipe .swipe_img,
+.swipe_img {
+    display: block;
+    width: 100%;
+}
+
+.van-swipe__indicator {
+    opacity: .8;
+    background-color: white;
+}
+
+.van-swipe__indicator--active {
+    background-color: #7563eb !important;
+}
+
+.full_queue {
+    padding: 50% 0 !important;
+    text-align: center;
+}
+
+    .full_queue .inner {
+        position: relative;
+    }
+
+        .full_queue .inner .bg {
+            width: 300px;
+        }
+
+        .full_queue .inner .iconfont {
+            font-size: 5em;
+            position: absolute;
+            margin: auto;
+            left: -4px;
+            right: 0;
+            top: 0;
+            bottom: 25px;
+            color: white;
+            font-weight: bold;
+            width: 80px;
+            height: 80px;
+        }
+
+        .full_queue .inner .text {
+            position: absolute;
+            margin-top: 5px;
+            font-size: .9em;
+            height: 20px;
+            line-height: 20px;
+            bottom: 24px;
+            color: white;
+            left: -8px;
+            right: 0;
+            margin: auto;
+        }
+
+        .full_queue .confirm_button{
+            width:300px;
+        }
+
+        .product_top {
+            background-color: white;
+            padding: 10px;
+        }
+
+    .product_top .name {
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        height: 25px;
+        line-height: 25px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 1em;
+        font-weight: 600;
+    }
+
+    .product_top .middle {
+        margin-top: 10px;
+    }
+
+        .product_top .middle .info {
+            float: left;
+            width: calc(100% - 70px);
+        }
+
+            .product_top .middle .info .price {
+                font-size: 1.6em;
+                height: 50px;
+                line-height: 50px;
+                color: #da0000;
+                font-weight: 600;
+            }
+
+            .product_top .middle .info .count {
+                font-size: .8em;
+                height: 25px;
+                line-height: 25px;
+                color: #9e9e9e;
+            }
+
+        .product_top .middle .queue {
+            float: right;
+            width: 70px;
+            text-align: center;
+            border: 1px solid #7563eb;
+            border-radius: 4px;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+            .product_top .middle .queue .value {
+                height: 28px;
+                line-height: 28px;
+                font-size: .9em;
+            }
+
+            .product_top .middle .queue .text {
+                font-size: .7em;
+                padding: 0 5px;
+                background-color: #7563eb;
+                color: white;
+                height: 20px;
+                line-height: 20px;
+            }
+
+    .product_top .time {
+        margin-top: 10px;
+        font-size: .8em;
+        padding: 5px 0;
+        color: #656565;
+        font-weight: bold;
+    }
+
+.product_middle {
+    margin-top: 5px;
+    background-color: white;
+    font-size: .9em;
+}
+
+    .product_middle .caption {
+        font-size: 1.4em;
+        font-weight: bold;
+        text-align: center;
+        padding: 15px 0;
+        background-color:#f9f9f9;
+    }
+
+    .product_middle .content {
+        overflow: hidden;
+        padding-bottom: 50px;
+    }
+
+        .product_middle .content.safe-area {
+            padding-bottom: 75px;
+        }
+
+        .product_middle .content span {
+            display: inherit !important;
+            margin: 0 !important;
+        }
+
+        .product_middle .content p {
+            color: #525252 !important;
+        }
+
+        .product_middle .content img {
+            display: block !important;
+            max-width: 100% !important;
+            margin: 0 auto !important;
+        }
+
+.bottom_buttons {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+}
+
+    .bottom_buttons .collec {
+        width: 90px;
+        background-color: white;
+        height: 50px;
+        color: #565656;
+    }
+
+        .bottom_buttons .collec .loading-box {
+            padding: 0;
+            margin: 15px 0;
+        }
+
+            .bottom_buttons .collec .loading-box .van-loading {
+                width: 20px;
+                height: 20px;
+            }
+
+        .bottom_buttons .collec .collect_btn {
+            width: 100%;
+            padding: 5px 0;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+            .bottom_buttons .collec .collect_btn:active {
+                background-color: #f9f9f9;
+            }
+
+            .bottom_buttons .collec .collect_btn .text {
+                font-size: .7em;
+                height: 20px;
+                line-height: 20px;
+            }
+
+            .bottom_buttons .collec .collect_btn .iconfont {
+                display: block;
+                height: 20px;
+                line-height: 20px;
+            }
+
+                .bottom_buttons .collec .collect_btn .iconfont.fill {
+                    color: #7563eb;
+                }
+
+    .bottom_buttons .confirm_button {
+        margin: 0;
+        width: calc(100% - 90px);
+        border-radius: 0;
+        font-size: .9em;
+    }
+
+    .bottom_buttons.safe-area {
+        background-color: #f9f9f9;
+        padding-bottom: 25px;
+        height: inherit;
+    }
+
+.van-popup--bottom {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.share_box {
+    padding: 10px;
+}
+
+    .share_box ul {
+        display: flex;
+        padding-bottom: 10px;
+    }
+
+        .share_box ul li {
+            width: 25%;
+            text-align: center;
+            padding: 5px 0;
+        }
+
+            .share_box ul li:active {
+                background-color: #f9f9f9;
+                border-radius: 7px;
+            }
+
+            .share_box ul li .iconfont {
+                font-size: 1.5em;
+                background-color: #19d368;
+                padding: 5px;
+                display: block;
+                width: 25px;
+                height: 25px;
+                border-radius: 7px;
+                color: white;
+                margin: 0 auto;
+            }
+
+            .share_box ul li .text {
+                font-size: .8em;
+                height: 20px;
+                line-height: 20px;
+                margin-top: 5px;
+                color: #616161;
+            }
+
+    .share_box .cancel {
+        text-align: center;
+        margin-top: 10px;
+        width: 100%;
+        height: 35px;
+        font-size: .9em;
+        border-radius: 4px;
+    }
+
+        .share_box .cancel:active {
+            background-color: #f9f9f9;
+        }
+
+    .share_box.safe-area,
+    .bank_card_dialog.safe-area,
+    .safe-area {
+        padding-bottom: 25px;
+    }
+
+.bank_card_dialog {
+    padding: 10px;
+    padding-bottom: 50px;
+}
+
+    .bank_card_dialog.safe-area {
+        padding-bottom: 75px;
+    }
+
+    .bank_card_dialog .caption {
+        text-align: center;
+        height: 25px;
+        line-height: 25px;
+        position: relative;
+    }
+
+        .bank_card_dialog .caption .text {
+            margin: 0 auto;
+            display: block;
+            height: 25px;
+            line-height: 25px;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+        }
+
+        .bank_card_dialog .caption .iconfont {
+            float: right;
+            color: #9f9f9f;
+            position: relative;
+            z-index: 1;
+            padding: 0 10px;
+            display: block;
+            height: 25px;
+            line-height: 25px;
+        }
+
+    .bank_card_dialog .content {
+        margin: 15px 0;
+    }
+
+        .bank_card_dialog .content .demo_box {
+            width: 200px;
+            height: 128.5px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+            .bank_card_dialog .content .demo_box .demo {
+                width: 200px;
+                height: 128.5px;
+                display: block;
+            }
+
+            .bank_card_dialog .content .demo_box .mask {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 128.5px;
+                background-color: rgba(0,0,0,.65);
+                z-index: 1;
+                border-radius: 6px;
+            }
+
+            .bank_card_dialog .content .demo_box .demo_mask {
+                z-index: 2;
+                position: absolute;
+            }
+
+                .bank_card_dialog .content .demo_box .demo_mask.m1 {
+                    width: 68.5px;
+                    top: 76.5px;
+                    left: 7px;
+                    height: 15.5px;
+                }
+
+                .bank_card_dialog .content .demo_box .demo_mask.m2 {
+                    width: 44.25px;
+                    height: 16px;
+                    top: 76.5px;
+                    left: 147px;
+                }
+
+        .bank_card_dialog .content .input_box {
+            width: 200px;
+            margin: 0 auto;
+            margin-top: 15px;
+        }
+
+            .bank_card_dialog .content .input_box .input {
+                width: 100%;
+                height: 35px;
+                line-height: 25px;
+                padding: 5px;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                background-color: #f9f9f9;
+                border-radius: 4px;
+                border: 1px solid #f2f2f2;
+                float: left;
+                text-align: center;
+                width: 105px;
+                font-weight: 600;
+            }
+
+                .bank_card_dialog .content .input_box .input.last {
+                    width: 80px;
+                    margin-left: 15px;
+                }
+
+                .bank_card_dialog .content .input_box .input::-webkit-input-placeholder {
+                    font-size: .8em;
+                    font-weight: normal;
+                }
+
+                .bank_card_dialog .content .input_box .input.middle {
+                    margin: 11px 0;
+                }
+
+    .bank_card_dialog .des {
+        margin: 0 auto;
+        padding: 5px 10px;
+        font-size: .7em;
+        box-sizing: border-box;
+        background-color: #ffe692;
+        color: #a39f00;
+        border-radius: 4px;
+        margin-top: 15px;
+        width: 200px;
+    }
+
+    .bank_card_dialog .confirm_button.safe-area {
+        height: 75px;
+    }
+
+.block {
+    border-radius: 4px;
+    margin-top: 5px;
+    overflow: hidden;
+    background-color: white;
+    padding: 10px 0;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+    .block .title {
+        font-size: 16px;
+        padding: 10px 15px;
+        font-weight: bold;
+    }
+
+    .block .block-content {
+        position: relative;
+    }
+
+        .block .block-content .address-block {
+            padding: 5px;
+            width: calc(100% - 20px);
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+            .block .block-content .address-block .line {
+                line-height: 40px;
+                color: #909090;
+                font-size: .9em;
+            }
+
+            .block .block-content .address-block:active {
+                background-color: #f9f9f9;
+                border-radius: 4px;
+            }
+
+            .block .block-content .address-block .text {
+                margin-right: 15px;
+                line-height: 20px;
+            }
+
+            .block .block-content .address-block .address-block-left {
+                float: left;
+                width: calc(100% - 20px);
+                font-size: .8em;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+                .block .block-content .address-block .address-block-left .first {
+                    line-height: 20px;
+                    font-size: 1.1em;
+                }
+
+                .block .block-content .address-block .address-block-left .address-text {
+                    color: #909090;
+                    line-height: 18px;
+                    max-height: 36px;
+                    display: -webkit-box;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    word-break: break-all;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    margin-top: 5px;
+                }
+
+            .block .block-content .address-block .address-block-right {
+                float: left;
+                width: 20px;
+                text-align: center;
+                border-radius: 2px;
+            }
+
+                .block .block-content .address-block .address-block-right .iconfont {
+                    font-size: .9em;
+                    line-height: 56px;
+                    color: #c7c7c7;
+                }

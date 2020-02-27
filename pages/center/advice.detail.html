@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link href="../../content/css/vant.css" rel="stylesheet" />
+		<link href="../../content/css/base.css" rel="stylesheet" />
+		<link href="../../content/css/pages/center/advice.detail.css" rel="stylesheet" />
+		<script src="html5plus://ready"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div id="app-head" class="fixed van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+				<i id="app-back-button" class="iconfont icon-back right-back"></i>
+				<div class="app-head-text">我的回复</div>
+			</div>
+			<div id="app-content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+				<div v-if="isLoading" class="loading-box p50">
+					<van-loading color="black"></van-loading>
+					<p class="loading-text">正在加载...</p>
+				</div>
+				<div v-else>
+					<div class="content_querstion">
+						<p class="time"><span class="border" v-text="adviceList.CreateTime"></span></p>
+						<p class="text" v-text="adviceList.Text"></p>
+						<p class="type" v-text="'类型：  '+adviceList.TypeName"></p>
+					</div>
+					<div v-if="!adviceList.IsReplyed" class="content_response">
+						<p class="noresponse">未回复</p>
+					</div>
+					<div v-else class="content_response">
+						<p class="text">系统回复：</p>
+						<p class="content" v-text="adviceList.Reply"></p>
+						<p class="time" v-text="adviceList.ReplyTime"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../content/js/vue.js"></script>
+		<script src="../../content/js/vant.min.js"></script>
+		<script src="../../content/js/base.js"></script>
+		<script src="../../content/js/pages/center/advice.detail.js"></script>
+	</body>
+</html>

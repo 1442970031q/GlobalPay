@@ -1,0 +1,98 @@
+﻿.records_content {
+    padding-bottom: 45px;
+}
+
+.records {
+}
+
+    .records li {
+        padding: 10px;
+        background-color: white;
+        border-bottom: 1px solid #f9f9f9;
+    }
+
+        .records li:last-child {
+            border-bottom: 0;
+        }
+
+        .records li .line {
+            line-height: 20px;
+            height: 20px;
+            margin: 5px 0;
+        }
+
+            .records li .line .money {
+                font-weight: 600;
+                color: green;
+                line-height: 20px;
+                height: 20px;
+                display: block;
+                float: left;
+            }
+
+            .records li .line .symbol {
+                float: right;
+                font-size: .8em;
+                color: #717171;
+            }
+
+            .records li .line .from {
+                font-size: .8em;
+                float: left;
+                color: #a9a9a9;
+            }
+
+            .records li .line .time {
+                font-size: .8em;
+                float: right;
+                color: #a9a9a9;
+            }
+
+            .records li .line:last-child {
+                margin-bottom: 0;
+            }
+
+.total {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 45px;
+    background-color: white;
+    box-shadow: 0 0 20px #e4e4e4;
+}
+
+    .total ul {
+        display: flex;
+    }
+
+        .total ul li {
+            width: 50%;
+            text-align: center;
+            font-size: .9em;
+            padding: 2.5px 0;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+            .total ul li p {
+                height: 20px;
+                line-height: 20px;
+            }
+
+            .total ul li .value {
+                font-weight: 600;
+            }
+
+            .total ul li .text {
+                color: #777;
+                font-size: .8em;
+            }
+
+.safe-area-padding {
+    padding-bottom: 70px;
+}
+
+.safe-area-bottom {
+    padding-bottom: 25px;
+}

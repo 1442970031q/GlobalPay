@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/dataAment/pay.ament.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">提现信息</div>
+        </div>
+        <div id="app-content">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak>
+                <div class="mt-10">
+                    <p class="app-content-title">
+                        <img src="../../../content/img/center/realityMoney/pay-bg2.png" />
+                        <span>支付宝</span>
+                    </p>
+                    <van-cell-group>
+                        <van-cell title="认证姓名" v-bind:value="!payData.AlipayData.AlipayRealName ? '未填写' : payData.AlipayData.AlipayRealName"></van-cell>
+                        <van-cell title="支付宝账号" v-bind:value="!payData.AlipayData.Alipay ? '未填写' : payData.AlipayData.Alipay"></van-cell>
+                        <van-cell @click="gotoAlipay" title="设置" is-link />
+                    </van-cell-group>
+                </div>
+                <div class="mt-10">
+                    <p class="app-content-title">
+                        <img src="../../../content/img/center/realityMoney/bnck.png" />
+                        <span>银行卡</span>
+                    </p>
+                    <van-cell-group>
+                        <van-cell title="姓名" v-bind:value="!payData.BankData.BankRealName ? '未填写' : payData.BankData.BankRealName"></van-cell>
+                        <van-cell title="银行名称" v-bind:value="!payData.BankData.BankName ? '未填写' : payData.BankData.BankName"></van-cell>
+                        <van-cell title="银行卡号" v-bind:value="!payData.BankData.BankNumber ? '未填写' : payData.BankData.BankNumber"></van-cell>
+                        <van-cell @click="gotoSet('银行卡')" title="设置" is-link />
+                    </van-cell-group>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/pages/center/dateAmend/pay.ament.js"></script>
+</body>
+
+</html>

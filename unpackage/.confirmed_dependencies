@@ -1,0 +1,169 @@
+{
+	"pages/center.html": {
+		"href": "pages/center.html",
+		"resources": [
+			"content/css/base.css",
+			"content/css/vant.css",
+			"content/css/pages/center.css",
+			"content/js/vue.js",
+			"content/js/vant.min.js",
+			"content/js/base.js",
+			"content/js/pages/center.js",
+			"content/img/default_avatar.jpg"
+		],
+		"refer": [
+			"pages/center/customerService.html",
+			"pages/account/login.html",
+			"pages/center/private.message.html",
+			"pages/center/article.list.html",
+			"pages/center/presonData.html",
+			"pages/center/setting.html",
+			"pages/center/help.html",
+			"pages/center/my.collection.html",
+			"pages/center/invite.html",
+			"pages/center/my.team.html",
+			"pages/center/security.html",
+			"pages/center/awardDetail.html",
+			"pages/center/realityMoney.html",
+			"pages/center/earnings.html",
+			"pages/center/advice.html",
+			"pages/center/my.wallet.html",
+			"pages/center/download.list.html",
+			"pages/center/VIP.html"
+		],
+		"priority": 0
+	},
+	"pages/orders.html": {
+		"href": "pages/orders.html",
+		"resources": [
+			"content/css/base.css",
+			"content/css/vant.css",
+			"content/css/pages/orders.css",
+			"content/js/vue.js",
+			"content/js/vant.min.js",
+			"content/js/base.js",
+			"content/js/pages/orders.js",
+			"content/img/default_produce_80.jpg"
+		],
+		"refer": [
+			"pages/center/subPages/systemMessage.html"
+		],
+		"priority": 0
+	},
+	"pages/home.html": {
+		"href": "pages/home.html",
+		"resources": [
+			"content/css/base.css",
+			"content/css/vant.css",
+			"content/css/pages/home.css",
+			"content/js/vue.js",
+			"content/js/vant.min.js",
+			"content/js/base.js",
+			"content/js/pages/home.js",
+			"content/img/default_product.jpg",
+			"content/img/logo_text.png",
+			"content/img/temp/s_1.jpg",
+			"content/img/temp/s_2.jpg",
+			"content/img/temp/s_3.jpg",
+			"content/img/temp/big_1.jpg",
+			"content/img/temp/big_2.jpg"
+		],
+		"refer": [
+			"pages/second/s2.html",
+			"pages/second/s1.html",
+			"pages/center/invite.html",
+			"pages/center/subPages/systemMessage.html",
+			"pages/detail.html"
+		],
+		"priority": 0
+	},
+	"pages/shopping.html": {
+		"href": "pages/shopping.html",
+		"resources": [
+			"content/css/base.css",
+			"content/css/vant.css",
+			"content/css/pages/shopping.css",
+			"content/js/vue.js",
+			"content/js/vant.min.js",
+			"content/js/base.js",
+			"content/js/pages/shopping.js",
+			"content/img/default_product.jpg",
+			"content/img/flag/default_flag.jpg",
+			"content/img/svg/ajax_error.svg"
+		],
+		"refer": [],
+		"priority": 0
+	},
+	"pages/cg.html": {
+		"href": "pages/cg.html",
+		"resources": [
+			"content/css/base.css",
+			"content/js/vue.js",
+			"content/js/base.js",
+			"content/img/cg.mp4"
+		],
+		"refer": [
+			"pages/center.html",
+			"pages/orders.html",
+			"pages/home.html",
+			"pages/shopping.html",
+			"pages/main.html"
+		],
+		"priority": 0
+	},
+	"index.html": {
+		"href": "index.html",
+		"resources": [],
+		"refer": [
+			"pages/cg.html",
+			"pages/main.html"
+		],
+		"priority": 0
+	},
+	"pages/main.html": {
+		"resources": [
+			"pages/center.html"
+		],
+		"refer": [
+			"pages/shopping.html",
+			"pages/notice.html",
+			"pages/center.html",
+			"pages/home.html",
+			"pages/orders.html"
+		]
+	},
+	"pages/center/article.list.html": {
+		"refer": [
+			"pages/center/subPages/article.detail.html"
+		]
+	},
+	"pages/center/presonData.html": {
+		"refer": [
+			"pages/center/subPages/gesture.lock.html",
+			"pages/center/dataAmend/phone.ament.html",
+			"pages/center/dataAmend/pay.ament.html"
+		]
+	},
+	"pages/center/subPages/systemMessage.html": {
+		"refer": [
+			"pages/center/subPages/messageDetail.html"
+		]
+	},
+	"pages/center/advice.html": {
+		"refer": [
+			"pages/center/advice.detail.html",
+			"pages/center/advice.list.html",
+			"pages/center/advice.success.html"
+		]
+	},
+	"pages/center/awardDetail.html": {
+		"refer": [
+			"pages/center/subPages/awardList.html"
+		]
+	},
+	"pages/center/advice.list.html": {
+		"refer": [
+			"pages/center/advice.detail.html"
+		]
+	}
+}

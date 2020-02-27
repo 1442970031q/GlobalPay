@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/dataAment/about.app.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">关于全球购</div>
+        </div>
+        <div id="app-content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+            <div class="app-content-tabs">
+                <img src="../../../content/img/logo_color.png" />
+                <p v-text="'v' + APP.CONFIG.VERSION / 10" class="version"></p>
+            </div>
+            <div v-if="isLoading" class="loading-box">
+                <van-loading color="black"></van-loading>
+            </div>
+            <div v-else class="app-content-text van-hairline--top" v-text="pageModel.Msg">
+                全球购是亚洲第一大综合网络购物平台，其中全球购APP商城携手中国卡王，整合数千家品牌商家，提供100%品质保证的商品，以及购物积分返现等优质服务。
+            </div>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script>
+        var _vue = new Vue({
+            el: '#app',
+            data: {
+                'currentUser': APP.GLOBAL.getUserModel(),
+                'pageModel': {},
+                'isLoading': true,
+                'statusbarHeight': 20
+            },
+            methods: {
+                'loadPageData': function () {
+                    APP.GLOBAL.ajax({
+                        url: APP.CONFIG.BASE_URL + 'AboutUS',
+                        success: function (result) {
+                            if (result.Error) {
+                                APP.GLOBAL.toastMsg(result.Msg);
+                                return;
+                            }
+
+                            Vue.set(_vue, 'pageModel', result);
+                            _vue.isLoading = false;
+                        }
+                    });
+                }
+            },
+            created: function () {
+                if (APP.CONFIG.IS_RUNTIME) {
+                    this.statusbarHeight = plus.navigator.getStatusbarHeight();
+                }
+            },
+            mounted: function () {
+                this.loadPageData();
+            }
+        })
+    </script>
+</body>
+</html>

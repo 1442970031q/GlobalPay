@@ -1,0 +1,162 @@
+#app-head .submit-button {
+    font-size: 1.4em;
+}
+
+.cash_content {
+    background-color: white;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 6px;
+    margin-top: 10%;
+    padding-bottom: 20px;
+    overflow: hidden;
+}
+
+.app-content-pay {
+    display: flex;
+    height: 40px;
+    padding: 15px;
+    background-color: #fdfdfd;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+    .app-content-pay .cash_title {
+        font-size: .9em;
+        height: 40px;
+        line-height: 40px;
+        display: block;
+        width: 40px;
+        text-align: center;
+    }
+
+        .app-content-pay .cash_title img {
+            display: block;
+            width: 40px;
+            height: 40px;
+        }
+
+    .app-content-pay .cash_info {
+        width: calc(100% - 50px);
+        height: 40px;
+        font-size: .9em;
+        margin-left: 10px;
+    }
+
+        .app-content-pay .cash_info p {
+            height: 20px;
+            line-height: 20px;
+        }
+
+            .app-content-pay .cash_info p.nn {
+                font-size: 1em;
+            }
+
+.dodgerblue {
+    color: dodgerblue;
+}
+
+.green {
+    color: green;
+}
+
+.deepskyblue {
+    color: deepskyblue;
+}
+
+.app-content-money {
+    padding: 20px;
+}
+
+    .app-content-money p {
+        width: 95%;
+        margin: auto;
+        padding-top: 15px;
+        font-size: 0.8em;
+        color: #8a8a8a;
+    }
+
+        .app-content-money p.caption {
+            color: #616161;
+            padding-top: 0;
+        }
+
+#app-content-money-p {
+    font-size: 0.9em;
+}
+
+.app-content-money > input {
+    width: 95%;
+    margin-left: 2.5%;
+    border-bottom: 1px solid #f9f9f9;
+    height: 50px;
+    font-size: 1.5em;
+    font-weight: bold;
+    border-radius: 0;
+}
+
+.pay-pass {
+    padding: 20px 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+    .pay-pass > i {
+        position: absolute;
+        left: 15px;
+        font-size: 1.5em;
+        color: #a5a5a5;
+        font-weight: normal;
+    }
+
+.pay-money {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+
+
+.keyboard-heigth {
+    height: 250px;
+}
+
+.pay-pass-heigth {
+    height: 60px;
+}
+
+.buttons {
+    width: 85%;
+    padding: 10px 0;
+    font-size: .9em;
+}
+
+.color {
+    color: #7563eb;
+}
+
+.rules {
+    box-sizing: border-box;
+}
+
+    .rules .caption {
+        padding: 10px;
+        color: #737373;
+        font-size: .9em;
+        background-color: #f9f9f9;
+        border-bottom: 1px solid #f2f2f2;
+    }
+
+        .rules .caption .iconfont {
+            margin-right: 3px;
+        }
+
+    .rules .rules_box {
+        padding: 10px;
+    }
+
+    .rules .confirm_button.full {
+        position: relative;
+    }
+
+        .rules .confirm_button.full.safe-area {
+            padding-bottom: 45px;
+        }

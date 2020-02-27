@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,viewport-fit=cover" />
+    <title></title>
+    <link href="../content/css/base.css" rel="stylesheet" />
+    <link href="../content/css/vant.css" rel="stylesheet" />
+    <link href="../content/css/pages/shopping.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed" v-bind:class="{'bg_tran': !isTabLoading && !pageError.isError}" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <div class="app-head-text text-shadow">跨境购物</div>
+            <div v-show="!isRightLoading" class="submit-button" @click="flushOrder" v-cloak>
+                <i class="iconfont icon-shuaxin"></i>
+            </div>
+        </div>
+        <div id="app-content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+            <div v-if="isTabLoading" class="loading-box p60">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak>
+                <div v-if="pageError.isError" class="error">
+                    <img src="../content/img/svg/ajax_error.svg" />
+                    <div class="msg_content">
+                        <p class="title">Ooops！程序出现了一点小问题(T_T)</p>
+                        <p class="retry" @click="loadPageData">轻触此处重试</p>
+                    </div>
+                </div>
+                <div v-else>
+                    <div v-if="pageData.tabs.length == 0" class="none-data">
+                        <i class="iconfont icon-zanwukoubei"></i>
+                        <p class="none-data-text">暂无任何商品信息</p>
+                    </div>
+                    <van-tabs v-model="tabIndex"
+                              class="tab_head"
+                              @change="tabChange">
+                        <van-tab v-for="(tab, tIndex) in pageData.tabs"
+                                 v-bind:key="tIndex"
+                                 v-bind:title="tab.Name">
+                            <div v-if="isLeftLoading" class="loading-box p60">
+                                <van-loading color="black"></van-loading>
+                                <p class="loading-text">正在加载...</p>
+                            </div>
+                            <van-row v-else>
+                                <van-col span="5">
+                                    <div class="nav_bar van-hairline--right"
+                                         v-bind:style="{'height': (screenHeight - (89 + statusbarHeight)) + 'px'}">
+                                        <ul class="flags">
+                                            <li v-for="(country, cIndex) in tab.Countrys"
+                                                v-bind:key="cIndex"
+                                                @click="selectedCountry(country)"
+                                                v-bind:class="{'active': countryId == country.Id}">
+                                                <img v-lazy="country.Image" class="image" />
+                                                <p class="text" v-text="country.Name"></p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </van-col>
+                                <van-col span="19">
+                                    <div v-if="isRightLoading" class="loading-box p50">
+                                        <van-loading color="black"></van-loading>
+                                        <p class="loading-text">正在加载...</p>
+                                    </div>
+                                    <div v-else class="product_content">
+                                        <div v-if="pageData.Products.list.length === 0" class="none-data p60">
+                                            <i class="iconfont icon-zanwukoubei"></i>
+                                            <p class="none-data-text">暂无任何商品信息</p>
+                                        </div>
+                                        <div v-else>
+                                            <ul class="products">
+                                                <li v-for="(item, index) in pageData.Products.list"
+                                                    v-bind:key="index"
+                                                    @click="gotoDetail(item)">
+                                                    <div class="image">
+                                                        <img v-lazy="item.ImageAddress" />
+                                                    </div>
+                                                    <div class="context">
+                                                        <p class="name" v-text="item.Title"></p>
+                                                        <div class="bottom clearfix">
+                                                            <div class="price">
+                                                                <span v-text="item.Currency"></span>
+                                                                <span v-text="numberFormat(item.Price, 2)"></span>
+                                                            </div>
+                                                        </div>
+                                                        <p class="queue">
+                                                            <span class="num" v-text="item.QueueCount">0</span>人排队
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+											<div v-if="isLoadMore" class="load_more clearfix">
+												<van-loading color="black"></van-loading>
+												<span class="load_text">正在加载...</span>
+											</div>
+											<div v-if="isLoadComplete" class="load_more_complete">
+												<span class="load_text">没有更多的数据了...</span>
+											</div>
+                                        </div>
+                                    </div>
+                                </van-col>
+                            </van-row>
+                        </van-tab>
+                    </van-tabs>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../content/js/vue.js"></script>
+    <script src="../content/js/vant.min.js"></script>
+    <script src="../content/js/base.js"></script>
+    <script src="../content/js/pages/shopping.js"></script>
+</body>
+</html>

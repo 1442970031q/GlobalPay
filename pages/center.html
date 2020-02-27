@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,viewport-fit=cover" />
+    <title></title>
+    <link href="../content/css/base.css" rel="stylesheet" />
+    <link href="../content/css/vant.css" rel="stylesheet" />
+    <link href="../content/css/pages/center.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <div class="right-back" @click="gotoPrivateMessage">
+                <i class="iconfont icon-sixin"></i>
+                <span class="new" v-if="isPrivateMsg"></span>
+            </div>
+            <i class="iconfont icon-shezhi submit-button" @click="APP.GLOBAL.gotoNewWindow('settingPage', 'center/setting')"></i>
+            <i class="iconfont icon-kefu2 submit-button nr" @click="createService"></i>
+        </div>
+        <div id="app-content">
+            <van-pull-refresh v-model="isLoading"
+                              @refresh="onRefresh"
+                              v-cloak
+                              v-bind:disabled="currentUser.Id === 0"
+                              v-bind:head-height="45 + statusbarHeight">
+                <div slot="loading" class="loading">
+                    <img src="../content/img/svg/center_loading_ajax.svg" class="svg" />
+                    <span class="text">正在刷新...</span>
+                </div>
+                <div class="profile_box" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+                    <div class="top_inner">
+                        <div class="container clearfix"
+                             @click="newPage('presonDataPage', 'center/presonData')">
+                            <div class="avt">
+                                <img v-lazy="currentUser.Id === 0 ? '../content/img/default_avatar.jpg' : currentUser.Avatar" />
+                                <p class="level" v-if="currentUser.Id !== 0" v-text="currentUser.LvName"></p>
+                            </div>
+                            <div class="rig">
+                                <p class="nn" v-text="currentUser.Id === 0 ? '点击登录' : currentUser.NickName"></p>
+                                <p class="number" v-text="currentUser.Id === 0 ? 'ID：未登录' : 'ID：' + currentUser.FlowNumber"></p>
+                            </div>
+                            <div class="goto">
+                                <i class="iconfont icon-more"></i>
+                            </div>
+                        </div>
+                        <ul class="bottom">
+                            <li>
+                                <p class="value" v-text="currentUser.Id === 0 ? '-' : numberFormat(pageModel.TodayIncome, 2)"></p>
+                                <p class="text"><i class="iconfont icon-24hours"></i>今日收益</p>
+                            </li>
+                            <li>
+                                <p class="value" v-text="currentUser.Id === 0 ? '-' : numberFormat(pageModel.TotalIncome, 2)"></p>
+                                <p class="text"><i class="iconfont icon-xiangao"></i>总收益</p>
+                            </li>
+                            <li>
+                                <p class="value" v-text="currentUser.Id === 0 ? '-' : numberFormat(pageModel.Amount, 2)"></p>
+                                <p class="text"><i class="iconfont icon-Bbi"></i>Go币</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="middle_menu clearfix">
+                    <div class="middle_menu_button" @click="gotoInvite"><i class="iconfont icon-yaoqinghaoyou"></i>邀请好友</div>
+                    <div class="middle_menu_button right" @click="gotoVIP"><i class="iconfont icon-vip"></i>充值VIP</div>
+                </div>
+                <div class="center_menu">
+                    <ul>
+                        <li @click="newPage('securityPage', 'center/security')">
+                            <i class="iconfont icon-dunpaisuo"></i>
+                            <p class="text">账户安全</p>
+                        </li>
+                        <li @click="lockPage('my.teamPage', 'center/my.team')">
+                            <i class="iconfont icon-tuandui"></i>
+                            <p class="text">我的团队</p>
+                        </li>
+                        <li @click="newPage('my.fansPage', 'center/my.fans')">
+                            <i class="iconfont icon-fensi"></i>
+                            <p class="text">我的粉丝</p>
+                        </li>
+                        <li @click="lockPage('awardDetailPage', 'center/awardDetail')">
+                            <i class="iconfont icon-tixianmingxi"></i>
+                            <p class="text">奖励明细</p>
+                        </li>
+                        <li @click="lockPage('earningsPage', 'center/earnings')">
+                            <i class="iconfont icon-tongji"></i>
+                            <p class="text">收益统计</p>
+                        </li>
+                        <li @click="lockPage('my.walletPage', 'center/my.wallet')">
+                            <i class="iconfont icon-qianbao"></i>
+                            <p class="text">我的钱包</p>
+                        </li>
+                        <li @click="newPage('realityMoneyPage', 'center/realityMoney')">
+                            <i class="iconfont icon-tixian"></i>
+                            <p class="text">立即提现</p>
+                        </li>
+                        <li @click="newPage('download.listPage', 'center/download.list')">
+                            <i class="iconfont icon-xiazai"></i>
+                            <p class="text">我的攻略</p>
+                        </li>
+                        <li @click="newPage('my.collectionPage', 'center/my.collection')">
+                            <i class="iconfont icon-collection"></i>
+                            <p class="text">我的收藏</p>
+                        </li>
+                        <li @click="newPage('helpPage', 'center/help')">
+                            <i class="iconfont icon-bangzhuzhongxin"></i>
+                            <p class="text">新手上路</p>
+                        </li>
+                        <li @click="newPage('article.listPage', 'center/article.list')">
+                            <i class="iconfont icon-wenzhang"></i>
+                            <p class="text">推广软文</p>
+                        </li>
+                        <li @click="newPage('advicePage', 'center/advice')">
+                            <i class="iconfont icon-yijianfankui"></i>
+                            <p class="text">意见反馈</p>
+                        </li>
+                    </ul>
+                </div>
+                <div v-if="currentUser.Id !== 0" class="exit" @click="logoutConfirm">
+                    <i class="iconfont icon-tuichu-"></i>安全退出
+                </div>
+            </van-pull-refresh>
+        </div>
+    </div>
+    <script src="../content/js/vue.js"></script>
+    <script src="../content/js/vant.min.js"></script>
+    <script src="../content/js/base.js"></script>
+    <script src="../content/js/pages/center.js"></script>
+</body>
+</html>

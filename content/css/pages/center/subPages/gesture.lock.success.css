@@ -1,0 +1,32 @@
+﻿#app-content {
+    padding-bottom: 15px;
+}
+
+.icon {
+    font-size: 5em;
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    line-height: 100px;
+    color: #464646;
+    margin-top: 15px;
+}
+
+.text {
+    height: 20px;
+    line-height: 20px;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1em;
+}
+
+.des {
+    text-align: center;
+    font-size: .8em;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 5px;
+    display: block;
+    color: #868686;
+}

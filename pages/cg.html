@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no,viewport-fit=cover" />
+    <link href="../content/css/vant.css" rel="stylesheet" />
+    <link href="../content/css/base.css" rel="stylesheet" />
+    <style>
+        html, body, #app {
+            background-color: white;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #cg_player {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="loading-box p50">
+            <van-loading color="black"></van-loading>
+            <p class="loading-text">正在载入...</p>
+        </div>
+        <div id="cg_player"></div>
+    </div>
+    <script src="../content/js/vue.js"></script>
+    <script src="../content/js/vant.min.js"></script>
+    <script src="../content/js/base.js"></script>
+    <script>
+        var _vue = new Vue({
+            el: '#app',
+            data: {
+                'player': null,
+                'bottomButton': null,
+                'mainPage': null
+            },
+            methods: {
+                'createMainPage': function () {
+                    this.mainPage = plus.webview.create('main.html', 'mainPage', {
+                        scrollIndicator: 'none',
+                        scalable: false,
+                        popGesture: 'none',
+                        kernel: 'WKWebview',
+                        contentAjust: false,
+                    });
+
+                    this.createVideo();
+                },
+                'createVideo': function () {
+                    var self = plus.webview.currentWebview();
+                    this.player = plus.video.createVideoPlayer('cg_player', {
+                        'src': '_www/content/img/cg.mp4',
+                        'autoplay': false,
+                        'controls': false,
+                        'top': 0,
+                        'left': 0,
+                        'width': '100%',
+                        'height': '100%',
+                        'objectFit': 'fill',
+                        'show-center-play-btn': false,
+                        'enable-progress-gesture': false,
+                        'show-play-btn': false,
+                        'show-fullscreen-btn': false,
+                        'show-progress': false
+                    });
+
+                    self.append(this.player);
+                    this.player.addEventListener('play', plus.navigator.closeSplashscreen);
+                    this.player.addEventListener('ended', this.goMain);
+                    this.player.play();
+                    this.createButton();
+                },
+                'createButton': function () {
+                    this.bottomButton = new plus.nativeObj.View('bottomButton', {
+                        'left': (plus.screen.resolutionWidth - 130) / 2 + 'px',
+                        'bottom': '20%',
+                        'width': '130px',
+                        'height': '40px'
+                    });
+                    this.bottomButton.drawRect({
+                        'borderColor': '#7563eb',
+                        'color': '#7563eb',
+                        'radius': '6px',
+                        'borderWidth': '1px'
+                    });
+                    this.bottomButton.drawText('进入应用', {}, {
+                        'color': '#FFFFFF',
+                        'size': '14px'
+                    }, 'in');
+                    this.bottomButton.addEventListener('click', this.goMain);
+                    this.bottomButton.show();
+                },
+                'goMain': function () {
+                    if (this.bottomButton !== null) {
+                        this.bottomButton.close();
+                    }
+
+                    if (this.player !== null) {
+                        this.player.close();
+                    }
+
+                    var duration = APP.CONFIG.SYSTEM_NAME === 'ios' ? 250 : 200;
+                    this.mainPage.show('fade-in', duration, function () {
+                        _vue.mainPage.evalJS('_vue.firstScreen()');
+                        plus.webview.currentWebview().close('none');
+                    });
+                },
+                'appResume': function () {
+                    if (this.player == null) return;
+
+                    this.player.play();
+                }
+            },
+            created: function () {
+                window.backButton = this.goMain;
+            }
+        });
+
+        document.addEventListener("resume", _vue.appResume);
+    </script>
+</body>
+</html>

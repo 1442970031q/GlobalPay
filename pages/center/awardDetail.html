@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../content/css/base.css" rel="stylesheet" />
+    <link href="../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../content/css/pages/center/awardDetail.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">查询时间</div>
+        </div>
+        <div id="app-content">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak class="date_box">
+                <div class="input_group van-hairline--bottom van-hairline--top">
+                    <span class="input_text">起始日期</span>
+                    <div class="input_control w-1"
+                         v-bind:class="{'gray': !display.startTime}"
+                         @click="isStartShow = true"
+                         v-text="display.startTime ? display.startTime : '请选择起始日期'"></div>
+                    <i class="iconfont icon-more right-icon"></i>
+                </div>
+                <div class="input_group van-hairline--bottom">
+                    <span class="input_text">结束日期</span>
+                    <div class="input_control w-1"
+                         v-bind:class="{'gray': !display.endTime}"
+                         v-text="display.endTime ? display.endTime : '请选择结束日期'"
+                         @click="isEndShow = true"></div>
+                    <i class="iconfont icon-more right-icon"></i>
+                </div>
+                <div class="input_group van-hairline--bottom">
+                    <span class="input_text">币种选择</span>
+                    <div class="input_control w-1"
+                         v-bind:class="{'gray': !display.currency}"
+                         @click="isCurrencyShow = true"
+                         v-text="display.currency ? display.currency : '请选择币种'"></div>
+                    <i class="iconfont icon-more right-icon"></i>
+                </div>
+                <button class="confirm_button" @click="checkData">立即查询</button>
+            </div>
+            <van-popup v-model="isCurrencyShow" position="bottom">
+                <van-picker v-bind:columns="currencyList"
+                            show-toolbar
+                            @confirm="currencyConfirm"
+                            @cancel="isCurrencyShow = false" />
+            </van-popup>
+            <van-popup v-model="isStartShow" position="bottom">
+                <van-datetime-picker v-model="startDate"
+                                     type="date"
+                                     :min-date="minDate"
+                                     :max-date="maxDate"
+                                     :formatter="formatter"
+                                     @cancel="isStartShow = false"
+                                     @confirm="startConfirm" />
+            </van-popup>
+            <van-popup v-model="isEndShow" position="bottom">
+                <van-datetime-picker v-model="endDate"
+                                     type="date"
+                                     :min-date="minDate"
+                                     :max-date="maxDate"
+                                     :formatter="formatter"
+                                     @cancel="isEndShow = false"
+                                     @confirm="endConfirm" />
+            </van-popup>
+        </div>
+    </div>
+    <script src="../../content/js/vue.js"></script>
+    <script src="../../content/js/vant.min.js"></script>
+    <script src="../../content/js/base.js"></script>
+    <script src="../../content/js/pages/center/awardDetail.js"></script>
+</body>
+</html>

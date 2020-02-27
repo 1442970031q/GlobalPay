@@ -1,0 +1,91 @@
+﻿.van-loading__spinner {
+    display: block;
+    margin: 0 auto !important;
+}
+
+.van-address-list {
+    padding-bottom: 60px;
+}
+
+    .van-address-list.safe-area {
+        padding-bottom: 80px;
+    }
+
+        .van-address-list.safe-area .van-address-list__add {
+            padding-bottom: 20px;
+            height: initial;
+        }
+
+    .van-address-list.none .van-radio__icon {
+        display: none;
+    }
+
+.van-address-list__add {
+    border-top: 1px solid #efefef;
+    min-height: initial !important;
+}
+
+    .van-address-list__add:active {
+        background-color: #f3f3f3;
+    }
+
+.van-address-list .van-icon-checked {
+    color: #7563eb;
+    font-size: 20px;
+}
+
+.van-radio__icon--checked .van-icon {
+    background-color: #02b9ff !important;
+    border-color: #02b9ff !important;
+}
+
+.van-cell {
+    min-height: 80px;
+}
+
+    .van-cell:active {
+        background-color: #f7f7f7;
+    }
+
+.van-address-list__edit:active {
+    color: #040404;
+}
+
+.msg {
+    margin-bottom: 15px;
+    margin-top: 30%;
+}
+
+img.loading {
+    width: 32px;
+    height: 32px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 30%;
+}
+
+p.text {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #7563eb;
+    color: white;
+    border-radius: 3px;
+    display: block;
+    margin: 0 auto;
+    font-size: .8em;
+}
+
+.van-button--danger {
+    background-color: #7563eb;
+    border: 1px solid #7563eb;
+}
+
+    .van-button--danger:active,
+    .btn:active {
+        background-color: #6455c7;
+    }

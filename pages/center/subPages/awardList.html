@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/subPages/awardList.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">奖励明细</div>
+        </div>
+        <div id="app-content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else
+                 v-cloak
+                 class="records_content mt-5"
+                 v-bind:class="{'safe-area-padding': APP.CONFIG.IsSafeArea()}">
+                <div v-if="pageModel.list.length == 0" class="none-data p50">
+                    <i class="iconfont icon-wushuju"></i>
+                    <p class="none-data-text">暂无分润信息</p>
+                </div>
+                <div v-else>
+                    <ul class="records">
+                        <li v-for="(item, index) in pageModel.list"
+                            v-bind:key="index">
+                            <p class="line">
+                                <span class="money" v-text="'+' + numberFormat(item.Amount, 2)"></span>
+                                <span class="symbol" v-text="item.Currencie.Title + '(' + item.Currencie.Symbol + ')'"></span>
+                            </p>
+                            <p class="line">
+                                <span class="from" v-text="'来自 ' + item.Investor"></span>
+                                <span class="time" v-text="item.CreateTime"></span>
+                            </p>
+                        </li>
+                    </ul>
+                    <div v-if="isLoadMore" class="load_more clearfix">
+                        <van-loading color="black"></van-loading>
+                        <span class="load_text">正在加载...</span>
+                    </div>
+                    <div v-if="isLoadComplete" class="load_more_complete">
+                        <span class="load_text">没有更多的数据了...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-cloak
+             v-show="!isLoading"
+             class="total"
+             v-bind:class="{'safe-area-bottom': APP.CONFIG.IsSafeArea()}">
+            <ul>
+                <li>
+                    <p class="value" v-text="pageParam.endTime.substring(0, 10)"></p>
+                    <p class="text">截至日期</p>
+                </li>
+                <li>
+                    <p class="value" v-text="numberFormat(pageModel.totalAmount, 2)"></p>
+                    <p class="text">累计收益</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/pages/center/subPages/awardList.js"></script>
+</body>
+</html>

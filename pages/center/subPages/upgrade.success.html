@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/subPages/upgrade.success.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+        </div>
+        <div id="app-content">
+            <div class="inner_box">
+                <p class="text">支付完成</p>
+                <i class="iconfont icon-duihao1 icon"></i>
+                <p class="amount" v-text="'￥' + numberFormat(request.amount, 2)"></p>
+                <p class="des">感谢您的购买，如有任何问题或疑问请及时联系客服</p>
+                <div @click="APP.GLOBAL.closeWindow()" class="confirm_button">确认</div>
+            </div>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/pages/center/subPages/upgrade.success.js"></script>
+</body>
+</html>

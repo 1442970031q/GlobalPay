@@ -1,0 +1,48 @@
+﻿html, body {
+    background-color: white;
+}
+
+.first {
+    margin-top: 20%;
+}
+
+    .first .caption {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.3em;
+    }
+
+.safe-area {
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+    background-color: #ebedf0;
+}
+
+    .safe-area .van-key {
+        background-color: white;
+    }
+
+        .safe-area .van-key:active {
+            background-color: #f9f9f9;
+        }
+
+    .safe-area .van-key--gray {
+        background-color: #ebedf0 !important;
+    }
+
+    .safe-area .van-key--delete:active {
+        background-color: #cecece !important;
+        color: #636363;
+    }
+
+.caption {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.msg {
+    font-size: .8em;
+    text-align: center;
+    color: #a0a0a0;
+    margin-bottom: 10px;
+}

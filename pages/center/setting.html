@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../content/css/base.css" rel="stylesheet" />
+    <style>
+        .caption {
+            font-size: .8em;
+            padding-left: 15px;
+            padding-bottom: 5px;
+            color: #828282;
+        }
+    </style>
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">设置</div>
+        </div>
+        <div id="app-content">
+            <div class="mt-10">
+                <van-cell-group>
+                    <van-cell title="缓存清理" @click="cofirmClear" is-link v-bind:value="fileSize"></van-cell>
+                    <van-cell title="程序版本" v-bind:value="version" is-link @click="checkUpgrade"></van-cell>
+                    <van-cell title="内部版本" v-bind:value="plus.runtime.innerVersion"></van-cell>
+                    <van-switch-cell v-model="isAutoUpgrade" title="自动更新" @change="autoUpgradeChange"></van-switch-cell>
+                </van-cell-group>
+            </div>
+            <div class="mt-10">
+                <p class="caption">APP启动时是否先显示动画</p>
+                <van-cell-group>
+                    <van-switch-cell v-model="isCGFirst" title="启动动画" @change="CGFirstUpgradeChange"></van-switch-cell>
+                </van-cell-group>
+            </div>
+            <div class="mt-10">
+                <p class="caption">开启/关闭通知</p>
+                <van-cell-group>
+                    <van-switch-cell v-model="isNewMember" title="团队新成员" @change="newMemberChange"></van-switch-cell>
+                    <van-switch-cell v-model="isNewBonus" title="佣金奖励" @change="newBonusChange"></van-switch-cell>
+                </van-cell-group>
+            </div>
+            <div class="mt-10">
+                <van-cell-group>
+                    <van-cell @click="APP.GLOBAL.gotoNewWindow('apbout.appPage', 'setting/about.app')" title="关于全球购" is-link></van-cell>
+                </van-cell-group>
+            </div>
+        </div>
+    </div>
+    <script src="../../content/js/vue.js"></script>
+    <script src="../../content/js/vant.min.js"></script>
+    <script src="../../content/js/base.js"></script>
+    <script src="../../content/js/pages/center/setting.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/subPages/id.upload.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">上传身份证</div>
+        </div>
+        <div id="app-content">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak>
+                <div v-if="uploadState === 1" class="uploaded_state">
+                    <div class="has_uploaded">
+                        <p class="caption van-hairline--bottom">审核中</p>
+                        <div class="has_content">
+                            <i class="iconfont icon-shenfenzheng"></i>
+                            <p class="text">您的证件照正在审核中，请您耐心等待</p>
+                        </div>
+                    </div>
+                </div>
+                <div v-else-if="uploadState === 4" class="uploaded_state">
+                    <div class="has_uploaded">
+                        <p class="caption van-hairline--bottom">已通过</p>
+                        <div class="has_content">
+                            <i class="iconfont icon-duihao1 success"></i>
+                            <p class="text">您的证件照已通过审核</p>
+                        </div>
+                    </div>
+                </div>
+                <div v-else>
+                    <ul class="upload_items">
+                        <li class="reason" v-if="uploadState === 2">
+                            <p class="caption">证件照不符合规则</p>
+                            <p class="text" v-text="reason"></p>
+                        </li>
+                        <li @click="openSheet('front')">
+                            <div class="tip_box" v-if="!images.front.image">
+                                <img src="../../../content/img/id_front_bg.jpg" class="bg" />
+                                <div class="text">
+                                    <i class="iconfont icon-xiangji"></i>
+                                    <p class="txt">点击拍摄 / 上传人像面</p>
+                                </div>
+                            </div>
+                            <div v-else class="tip_box">
+                                <img v-bind:src="images.front.image" class="id_img" />
+                                <div class="text mask">
+                                    <i class="iconfont icon-duihao1"></i>
+                                    <p class="txt">已选择</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li @click="openSheet('back')">
+                            <div class="tip_box" v-if="!images.back.image">
+                                <img src="../../../content/img/id_back_bg.jpg" class="bg" />
+                                <div class="text">
+                                    <i class="iconfont icon-xiangji"></i>
+                                    <p class="txt">点击拍摄 / 上传国徽面</p>
+                                </div>
+                            </div>
+                            <div v-else class="tip_box">
+                                <img v-bind:src="images.back.image" class="id_img" />
+                                <div class="text mask">
+                                    <i class="iconfont icon-duihao1"></i>
+                                    <p class="txt">已选择</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="none">
+                            <button class="confirm_button" v-bind:class="{'dis': !isEnable}" @click="isEnable && doUploadAjax()">确认上传</button>
+                        </li>
+                    </ul>
+                    <van-actionsheet v-bind:class="{'safe-area': APP.CONFIG.IsSafeArea()}"
+                                     v-model="isActionsheet"
+                                     v-bind:actions="actions"
+                                     cancel-text="取消"></van-actionsheet>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/pages/center/subPages/id.upload.js"></script>
+</body>
+</html>

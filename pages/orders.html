@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,viewport-fit=cover" />
+    <title></title>
+    <link href="../content/css/base.css" rel="stylesheet" />
+    <link href="../content/css/vant.css" rel="stylesheet" />
+    <link href="../content/css/pages/orders.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <div class="right-back" @click="APP.GLOBAL.gotoNewWindow('systemMessagePage','center/subPages/systemMessage')">
+                <i class="iconfont icon-youjian"></i>
+                <span class="new"></span>
+            </div>
+            <div class="app-head-text">我的订单</div>
+            <div v-if="currentUser.Id !== 0"
+                 class="submit-button" 
+                 v-bind:class="{'rot': isFlush}" 
+                 @click="!isFlush && flushOrder()">
+                <i class="iconfont icon-shuaxin"></i>
+            </div>
+        </div>
+        <div id="app-content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}" v-cloak>
+            <div v-if="currentUser.Id == 0" class="none-data">
+                <i class="iconfont icon-people"></i>
+                <p class="none-data-text">登录后查看订单信息</p>
+            </div>
+            <div v-else>
+                <div v-if="isLoading" class="loading-box p50">
+                    <van-loading color="black"></van-loading>
+                    <p class="loading-text">正在加载...</p>
+                </div>
+                <div v-else>
+                    <div class="filters van-hairline--bottom" v-bind:style="{'top': (45 + statusbarHeight) + 'px'}">
+                        <ul class="filter">
+                            <li @click="openFilter('isTypePopupShow')">
+                                <span class="text">类型<i class="iconfont icon-xiajiantou"></i></span>
+                            </li>
+                            <li @click="openFilter('isTimePopupShow')">
+                                <span class="text">下单时间<i class="iconfont icon-xiajiantou"></i></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div v-if="orderData.list.length == 0" class="none-data">
+                        <i class="iconfont icon-dingdan1"></i>
+                        <p class="none-data-text">暂无订单信息</p>
+                    </div>
+                    <div v-else class="item_container">
+                        <ul>
+                            <li v-for="(item,index) in orderData.list"
+                                v-bind:key="index"
+                                class="app-content-orders van-hairline--top van-hairline--bottom"
+                                @click="gotoDetail(item)">
+                                <div class="first_row">
+                                    <span class="number" v-text="'单号：' + item.ForkCode"></span>
+                                    <div class="flag">
+                                        <img v-lazy="{'error':'../content/img/flag/default_flag.jpg', 'src':item.Flag}" class="image" />
+                                    </div>
+                                </div>
+                                <ul class="product clearfix">
+                                    <li class="product-img">
+                                        <img v-lazy="item.ImageAddress" class="image" />
+                                    </li>
+                                    <li class="product-right">
+                                        <span class="name" v-text="item.CreditCardPro"></span>
+                                        <p class="price" v-text="item.Simple + ' ' + numberFormat(item.TotalPrice, 2)"></p>
+                                    </li>
+                                    <li class="product-flag">
+                                        <span v-if="!item.IsEntity || item.Extend === null" class="state" v-text="item.OrderStatusText"></span>
+                                        <span v-else class="state" v-text="item.Extend.StatusName"></span>
+                                    </li>
+                                </ul>
+                                <div class="bottom">
+                                    <span v-text="item.CreateTime" class="time"></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div v-if="isLoadMore" class="load_more clearfix">
+                            <van-loading color="black"></van-loading>
+                            <span class="load_text">正在加载...</span>
+                        </div>
+                        <div v-if="isLoadComplete" class="load_more_complete">
+                            <span class="load_text">没有更多的数据了...</span>
+                        </div>
+                    </div>
+                    <van-popup class="z2001"
+                               v-model="isTypePopupShow"
+                               position="top"
+                               v-bind:style="{'top':(85 + statusbarHeight) + 'px'}"
+                               @click-overlay="popupClose">
+                        <div class="filter_types clearfix">
+                            <div class="filter_types_left van-hairline--right">
+                                <ul>
+                                    <li v-for="(item, index) in filter.payType.items"
+                                        v-bind:key="index"
+                                        v-bind:class="{'van-hairline--bottom': index !== filter.payType.items.length - 1, 'active': filter.payType.typeId == item.Id}"
+                                        @click="selectedPaytype(item)">
+                                        <span v-text="item.Title"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="filter_types_right">
+                                <ul v-if="filter.selectedPaytype !== null">
+                                    <li v-for="(item,index) in filter.selectedPaytype.Childs"
+                                        v-bind:key="index"
+                                        @click="selectedCountry(item)"
+                                        v-bind:class="{'active': filter.selectedCountry !== null && filter.selectedCountry.Id == item.Id}">
+                                        <img v-bind:src="item.Flag" class="flag" />
+                                        <span v-text="item.Title"></span>
+                                        <i class="iconfont icon-duihao1" v-show="filter.selectedCountry !== null && filter.selectedCountry.Id == item.Id"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </van-popup>
+                    <van-popup class="z2001"
+                               v-model="isTimePopupShow"
+                               position="top"
+                               v-bind:style="{'top':(85 + statusbarHeight) + 'px'}"
+                               @click-overlay="popupClose">
+                        <ul class="paytype_filter">
+                            <li v-bind:class="{'active':filter.timeType.typeId == 0}"
+                                @click="selectedTimetype(0)">
+                                <span>时间倒序</span>
+                                <i class="iconfont icon-duihao1"></i>
+                            </li>
+                            <li v-bind:class="{'active':filter.timeType.typeId == 1}"
+                                @click="selectedTimetype(1)">
+                                <span>时间正序</span>
+                                <i class="iconfont icon-duihao1"></i>
+                            </li>
+                        </ul>
+                    </van-popup>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../content/js/vue.js"></script>
+    <script src="../content/js/vant.min.js"></script>
+    <script src="../content/js/base.js"></script>
+    <script src="../content/js/pages/orders.js"></script>
+</body>
+</html>

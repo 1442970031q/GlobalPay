@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/subPages/success.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">处理结果</div>
+        </div>
+        <div id="app-content">
+            <div class="app-content-tabs">
+                <i class="iconfont icon-duihao1 head"></i>
+                <p class="text">提交成功</p>
+                <p class="des">由于网络原因，实际到账时间可能有延迟，请您耐心等待。如有任何问题或疑问请联系客服人员</p>
+                <div @click="APP.GLOBAL.closeWindow()" class="confirm_button">确认</div>
+            </div>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/pages/center/subPages/success.js"></script>
+</body>
+</html>

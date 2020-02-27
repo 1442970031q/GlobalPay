@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../content/css/base.css" rel="stylesheet" />
+    <link href="../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../content/css/pages/center/subPages/my.collection.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">我的收藏</div>
+        </div>
+        <div id="app-content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else class="mt-10" v-cloak>
+                <div v-if="likeProduct.length === 0" class="none-data p50">
+                    <i class="iconfont icon-wushuju"></i>
+                    <p class="none-data-text">暂无收藏信息</p>
+                </div>
+                <div v-else>
+                    <ul class="app-content-tabs van-hairline--bottom"
+                        @click="gotoDetail(item.Id)"
+                        v-for="(item,index) in likeProduct"
+                        v-bind:key="index">
+                        <li>
+                            <img class="img" v-lazy="item.ProImageAddress" />
+                        </li>
+                        <li class="app-content-tabs-content">
+                            <p class="title" v-text="item.Title"></p>
+                            <p class="text" v-text="item.Symbolize + numberFormat(item.Price, 2)"></p>
+                        </li>
+                        <li class="right">
+                            <img v-lazy="{'error':'../../content/img/flag/default_flag.jpg?v=1', 'src':item.CurrImageAddress}" />
+                        </li>
+                    </ul>
+                    <div v-if="isLoadMore" class="load_more clearfix">
+                        <van-loading color="black"></van-loading>
+                        <span class="load_text">正在加载...</span>
+                    </div>
+                    <div v-if="isLoadComplete" class="load_more_complete">
+                        <span class="load_text">没有更多的数据了...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../content/js/vue.js"></script>
+    <script src="../../content/js/vant.min.js"></script>
+    <script src="../../content/js/base.js"></script>
+    <script src="../../content/js/pages/center/my.collection.js"></script>
+</body>
+</html>

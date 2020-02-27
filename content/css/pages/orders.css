@@ -1,0 +1,311 @@
+﻿.submit-button {
+    font-weight: bold;
+}
+
+.none-data .iconfont {
+    font-size: 5em;
+}
+
+@keyframes rotating {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#app-head {
+    z-index: 2002;
+}
+
+    #app-head .right-back {
+        margin-left: 12.5px;
+    }
+
+        #app-head .right-back .iconfont {
+            font-size: 1em;
+        }
+
+        #app-head .right-back .new {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            display: block;
+            background-color: red;
+            border-radius: 50%;
+            top: 12px;
+            right: 12px;
+        }
+
+    #app-head .submit-button {
+        font-size: 1.1em;
+        margin-right: 12.5px;
+    }
+
+        #app-head .submit-button.rot {
+            animation: rotating 2s linear infinite;
+        }
+
+#app-content {
+    padding-bottom: 1px;
+}
+
+.none-data {
+    color: #868686;
+    margin-top: 40%;
+}
+
+.filters {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 2002;
+}
+
+    .filters .filter {
+        display: flex;
+    }
+
+        .filters .filter li {
+            width: 50%;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+        }
+
+            .filters .filter li:active {
+                background-color: #f9f9f9;
+            }
+
+            .filters .filter li .text {
+                font-size: .9em;
+                font-weight: 600;
+            }
+
+                .filters .filter li .text .iconfont {
+                    margin-left: 3px;
+                    font-size: .8em;
+                }
+
+.item_container {
+    position: relative;
+    z-index: 0;
+    padding-top: 40px;
+}
+
+.app-content-orders {
+    background-color: white;
+    padding: 0 15px;
+    margin: 5px 0;
+    position: relative;
+}
+
+    .app-content-orders:active {
+        background-color: #f9f9f9;
+    }
+
+    .app-content-orders .first_row {
+        font-size: 0.8em;
+        line-height: 20px;
+        height: 20px;
+        padding: 10px 0;
+    }
+
+        .app-content-orders .first_row .flag {
+            height: 20px;
+            display: block;
+            float: right;
+        }
+
+            .app-content-orders .first_row .flag .image {
+                vertical-align: -2.5px;
+                border-radius: 2px;
+                height: 15px;
+            }
+
+        .app-content-orders .first_row .number {
+            float: left;
+            color: #333;
+            font-weight: 600;
+        }
+
+    .app-content-orders .product {
+        width: 100%;
+        padding: 5px 0;
+    }
+
+        .app-content-orders .product li {
+            float: left;
+        }
+
+            .app-content-orders .product li.product-img {
+                height: 40px;
+                width: 40px;
+            }
+
+                .app-content-orders .product li.product-img .image {
+                    height: 40px;
+                    width: 40px;
+                    display: block;
+                    border-radius: 2px;
+                }
+
+    .app-content-orders ul li.product-right {
+        margin-left: 15px;
+        height: 40px;
+        width: calc(100% - 115px);
+    }
+
+        .app-content-orders ul li.product-right .name {
+            font-size: .9em;
+            height: 20px;
+            line-height: 20px;
+        }
+
+        .app-content-orders ul li.product-right .price {
+            color: #d40505;
+            font-size: 0.8em;
+            width: 100%;
+            height: 20px;
+            line-height: 20px;
+        }
+
+    .app-content-orders ul li.product-flag {
+        width: 60px;
+        height: 40px;
+        text-align: right;
+    }
+
+        .app-content-orders ul li.product-flag .state {
+            font-size: .7em;
+            line-height: 40px;
+            color: #909090;
+        }
+
+    .app-content-orders .bottom {
+        height: 30px;
+        line-height: 30px;
+        padding-bottom: 5px;
+        text-align: left;
+    }
+
+        .app-content-orders .bottom .van-button--small {
+            height: 25px;
+            line-height: 23px;
+        }
+
+        .app-content-orders .bottom .van-button--default {
+            color: #757575;
+        }
+
+        .app-content-orders .bottom .van-button--plain.van-button--danger {
+            color: rgba(255, 68, 68, 0.5);
+        }
+
+        .app-content-orders .bottom .van-button--danger {
+            border: 1px solid rgba(255, 68, 68, 0.3);
+        }
+
+        .app-content-orders .bottom .time {
+            float: right;
+            font-size: .7em;
+            color: #a0a0a0;
+            height: 30px;
+            line-height: 30px;
+        }
+
+.van-modal {
+    z-index: 2000 !important;
+}
+
+.z2001 {
+    z-index: 2001 !important;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    overflow: hidden;
+}
+
+.paytype_filter li {
+    padding: 0 15px;
+    line-height: 45px;
+    height: 45px;
+    font-size: .9em;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+    .paytype_filter li:active {
+        background-color: #f9f9f9;
+    }
+
+    .paytype_filter li.active {
+        color: #7563eb;
+    }
+
+    .paytype_filter li .iconfont {
+        float: right;
+        font-size: 1em;
+        display: none;
+    }
+
+    .paytype_filter li.active .iconfont {
+        display: block;
+    }
+
+    .paytype_filter li:last-child {
+        border-bottom: 0;
+    }
+
+.filter_types .filter_types_left {
+    float: left;
+    width: 35%;
+    height: 180px;
+    overflow-y: auto;
+}
+
+    .filter_types .filter_types_left ul li {
+        line-height: 35px;
+        height: 35px;
+        font-size: .9em;
+        padding: 5px 15px;
+        text-align: center;
+    }
+
+        .filter_types .filter_types_left ul li.active span {
+            background-color: #7563eb;
+            color: white;
+            border-radius: 4px;
+            padding: 5px 15px;
+        }
+
+.filter_types .filter_types_right {
+    float: left;
+    width: 65%;
+    height: 180px;
+    overflow-y: auto;
+}
+
+    .filter_types .filter_types_right ul li {
+        line-height: 35px;
+        height: 35px;
+        font-size: .9em;
+        padding: 5px 15px;
+        text-align: left;
+    }
+
+        .filter_types .filter_types_right ul li.active {
+            color: #7563eb;
+        }
+
+        .filter_types .filter_types_right ul li .flag {
+            width: 20px;
+            vertical-align: -2px;
+            border-radius: 2px;
+        }
+
+        .filter_types .filter_types_right ul li .iconfont {
+            float: right;
+        }

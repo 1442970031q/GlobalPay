@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/subPages/ranking.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed" v-bind:class="{'bg-none': !isLoading}" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" v-bind:class="{'white': !isLoading}" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text" v-bind:class="{'white': !isLoading}">排行榜</div>
+        </div>
+        <div id="app-content">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak>
+                <div class="top_content">
+                    <div class="text" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+                        <div class="inner">
+                            <span class="txt">前</span>
+                            <span class="value" v-text="pageModel.RankCount"></span>
+                            <span class="txt">名</span>
+                        </div>
+                        <p class="time" v-text="pageModel.RankDate"></p>
+                    </div>
+                    <img src="../../../content/img/ranking/ranking_icon.png" class="icon" />
+                </div>
+                <div class="ranking_list">
+                    <table class="head">
+                        <thead>
+                            <tr>
+                                <td class="w8 text-center">排名</td>
+                                <td class="padding_10">用户昵称</td>
+                                <td class="w100 text-center">总收入</td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <table class="list">
+                        <tr v-for="(item,index) in pageModel.Ranks"
+                            v-bind:key="index">
+                            <td class="w8 text-center b number">
+                                <img v-if="index === 0" src="../../../content/img/ranking/ranking_1.png" class="icon" />
+                                <img v-else-if="index === 1" src="../../../content/img/ranking/ranking_2.png" class="icon" />
+                                <img v-else-if="index === 2" src="../../../content/img/ranking/ranking_3.png" class="icon" />
+                                <span v-else v-text="index + 1"></span>
+                            </td>
+                            <td class="avatar padding_10">
+                                <img class="image" v-lazy="item.Avatar" @click="viewAvatar(item)" />
+                                <div class="nn">
+                                    <p class="nickname" v-text="item.NickName"></p>
+                                    <p class="fn" v-text="'ID：' + item.FlowNumber"></p>
+                                </div>
+                            </td>
+                            <td class="w100 money text-center" v-text="numberFormat(item.TotalAmount, 2)"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/pages/center/subPages/ranking.js"></script>
+</body>
+</html>

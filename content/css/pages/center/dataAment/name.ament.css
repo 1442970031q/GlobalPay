@@ -1,0 +1,15 @@
+.app-head-right {
+    position: absolute;
+    right: 15px;
+    font-size: 0.8em;
+    z-index: 100;
+}
+
+    .app-head-right:active {
+        color: #DDDDDD;
+    }
+
+.van-button--primary {
+    background-color: #7563eb;
+    border-color: #7563eb;
+}

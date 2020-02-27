@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../content/css/base.css" rel="stylesheet" />
+    <link href="../content/css/vant.css" rel="stylesheet" />
+    <link href="../content/css/bottom.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="bottom" class="panel pos van-hairline--top">
+        <transition name="van-fade">
+            <div class="mask" v-show="isMask" v-bind:style="{'height': APP.CONFIG.IsSafeArea() ? '80px' : '55px'}"></div>
+        </transition>
+        <ul id="bottom-menus-items" class="menus clearfix">
+            <li v-for="(item, index) in menus"
+                v-bind:key="index"
+                v-bind:class="{'active': currentIndex === item.index}"
+                @click="switchPage(item)">
+                <i class="iconfont icon" v-bind:class="[currentIndex === item.index ? item.active : item.default]"></i>
+                <p class="menus-text" v-text="item.text"></p>
+            </li>
+        </ul>
+    </div>
+    <script src="../content/js/vue.js"></script>
+    <script src="../content/js/base.js"></script>
+    <script src="../content/js/pages/main.js"></script>
+</body>
+</html>

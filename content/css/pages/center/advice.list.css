@@ -1,0 +1,27 @@
+	#app-content .content_advice {
+		background-color: white;
+		margin-top: 8px;
+	}
+	
+	#app-content .content_advice .advice_list {
+		padding: 8px;
+		border-bottom: 1px solid #F8F8FF;
+	}
+	
+	#app-content .content_advice .advice_list:active {
+		background: #eff0f0;
+	}
+	
+	#app-content .content_advice .advice_list .state {
+		font-size: 0.85em;
+		color: darkgray;
+		margin-top: 16px;
+	}
+	
+	#app-content .content_advice .advice_list .state .right {
+		float: right;
+	}
+	
+	.green {
+		color: green;
+	}

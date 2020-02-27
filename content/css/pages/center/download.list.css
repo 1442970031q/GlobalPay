@@ -1,0 +1,67 @@
+﻿#app-head .submit-button {
+    font-weight: normal;
+    font-size: .8em;
+}
+
+.files {
+    margin-top: 5px;
+}
+
+    .files .file {
+        background-color: white;
+        padding: 10px;
+        margin-bottom: 5px;
+        display: flex;
+    }
+
+        .files .file:active {
+            background-color: #f9f9f9;
+        }
+
+        .files .file .file_left {
+            width: 60px;
+            height: 60px;
+        }
+
+            .files .file .file_left .icon {
+                width: 50px;
+                height: 50px;
+                display: block;
+                margin: 0 auto;
+                margin-top: 5px;
+            }
+
+        .files .file .file_right {
+            width: calc(100% - 70px);
+            height: 60px;
+            margin-left: 10px;
+            padding: 5px 0;
+            box-sizing: border-box;
+        }
+
+            .files .file .file_right p.fn {
+                font-size: 1em;
+                font-weight: 600;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                height: 30px;
+                line-height: 30px;
+            }
+
+            .files .file .file_right p.line span {
+                height: 20px;
+                line-height: 20px;
+            }
+
+            .files .file .file_right p.line .size {
+                font-size: .8em;
+                float: left;
+            }
+
+            .files .file .file_right p.line .time {
+                font-size: .8em;
+                color: gray;
+                float: right;
+            }

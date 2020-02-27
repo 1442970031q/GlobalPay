@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+     <link href="../../../content/css/pages/center/blance/record.detail.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">提现详情</div>
+        </div>
+        <div id="app-content">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak>
+                <div class="app-content-tabs van-hairline--bottom van-hairline--top">
+                	  <ul class="text">
+                	  	<li class="title">姓名：</li>
+                	  	<li class="value" v-text="detailData.RealName"></li>
+                	  </ul>
+                	   <ul class="text">
+                	  	<li class="title">支付方式：</li>
+                	  	<li class="value" v-text="detailData.CashType"></li>
+                	  </ul>
+                	   <ul class="text">
+                	  	<li class="title">账号：</li>
+                	  	<li class="value" v-text="detailData.TargetAccount"></li>
+                	  </ul>
+                	  <ul class="text">
+                	  	<li class="title">提现金额：</li>
+                	  	<li class="value" v-text="numberFormat(detailData.CashAmount,2) + ' (单位：元)'"></li>
+                	  </ul>
+                	   <ul class="text">
+                	  	<li class="title">手续费：</li>
+                	  	<li class="value" v-text="numberFormat(detailData.ServiceFee,2) + ' (单位：元)'"></li>
+                	  </ul>
+                	  <ul class="text">
+                	  	<li class="title">到账金额：</li>
+                	  	<li class="value" v-text="numberFormat(detailData.RealAmount,2) + ' (单位：元)'"></li>
+                	  </ul>
+                	   <ul class="text">
+                	  	<li class="title">手机号：</li>
+                	  	<li class="value" v-text="detailData.Phone"></li>
+                	  </ul>
+                	   <ul class="text">
+                	  	<li class="title">状态：</li>
+                	  	<li class="color value" v-text="detailData.CashStatus"></li>
+                	  </ul>
+                	  <ul class="text">
+                	  	<li class="title">提现时间：</li>
+                	  	<li class="value" v-text="detailData.CreateTime"></li>
+                	  </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/pages/center/blance/record.detail.js"></script>
+</body>
+</html>

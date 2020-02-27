@@ -1,0 +1,101 @@
+﻿.van-tabs--line .van-tabs__wrap {
+    position: fixed;
+    top: inherit;
+}
+
+.van-tab--active {
+    color: #7b44ff;
+    font-weight: bold;
+}
+
+.van-tabs__content {
+    padding-top: 44px;
+}
+
+[class*=van-hairline]::after {
+    content: '';
+    border-top-width: 0px;
+}
+
+.app-content-text {
+    margin-top: 5px;
+    padding-bottom: 10px;
+}
+
+    .app-content-text .app-content-tabs {
+        background-color: white;
+        padding: 10px;
+        font-size: .9em;
+        margin-bottom: 5px;
+    }
+
+        .app-content-text .app-content-tabs:last-child {
+            margin-bottom: 0;
+        }
+
+        .app-content-text .app-content-tabs.touch:active {
+            background-color: #f9f9f9;
+        }
+
+        .app-content-text .app-content-tabs .record {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+        }
+
+            .app-content-text .app-content-tabs .record .left {
+                font-size: 1.1em;
+                font-weight: 600;
+            }
+
+                .app-content-text .app-content-tabs .record .left.price_red {
+                    color: red;
+                }
+
+                .app-content-text .app-content-tabs .record .left.price_green {
+                    color: green;
+                }
+
+                .app-content-text .app-content-tabs .record .left.text {
+                    font-weight: normal;
+                    font-size: .8em;
+                    color: white;
+                    padding: 0 5px;
+                    border-radius: 3px;
+                    line-height: 20px;
+                    height: 20px;
+                    display: block;
+                    float: left;
+                    margin-top: 5px;
+                }
+
+                    .app-content-text .app-content-tabs .record .left.text.gray {
+                        color: #776e6e;
+                        font-size: .9em;
+                        height: 30px;
+                        line-height: 30px;
+                        margin-top: 0;
+                        padding: 0;
+                    }
+
+                    .app-content-text .app-content-tabs .record .left.text.green {
+                        background-color: green;
+                    }
+
+                    .app-content-text .app-content-tabs .record .left.text.yellow {
+                        background-color: #c9b900;
+                    }
+
+                    .app-content-text .app-content-tabs .record .left.text.red {
+                        background-color: red;
+                    }
+
+                    .app-content-text .app-content-tabs .record .left.text.black {
+                        background-color: black;
+                    }
+
+            .app-content-text .app-content-tabs .record .right {
+                float: right;
+                color: #776e6e;
+                font-size: .9em;
+            }

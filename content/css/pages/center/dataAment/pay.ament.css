@@ -1,0 +1,20 @@
+﻿.app-content-title {
+    font-size: 0.8em;
+    width: 95%;
+    margin: auto;
+    padding: 5px 0;
+    margin-bottom: 5px;
+}
+
+    .app-content-title * {
+        vertical-align: middle;
+    }
+
+    .app-content-title > span {
+        font-weight: 600;
+    }
+
+    .app-content-title > img {
+        height: 15px;
+        width: auto;
+    }

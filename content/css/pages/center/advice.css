@@ -1,0 +1,28 @@
+#app-content .content_text,
+.content_commit {
+    width: calc(100% - 20px);
+    margin: 8px auto;
+}
+
+#app-content .content_text {
+    background-color: white;
+    height: 200px;
+    border-radius: 5px;
+}
+
+    #app-content .content_text .text {
+        width: 100%;
+        background-color: white;
+        padding: 10px;
+        box-sizing: border-box;
+        height: 200px;
+    }
+
+        #app-content .content_text .text::-webkit-input-placeholder {
+            font-size: 0.9em;
+            color: #c7c7c7;
+        }
+
+.confirm_button {
+    margin-top: 10px;
+}

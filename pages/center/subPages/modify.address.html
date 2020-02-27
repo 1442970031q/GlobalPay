@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title></title>
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/subPages/new.address.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body class="h-100">
+    <div id="app">
+        <div id="app-head" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">修改收货地址</div>
+        </div>
+        <div id="app-content">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak class="login-box">
+                <div class="input-group bb">
+                    <span class="input-text">收货人</span>
+                    <input type="text" class="input-control" v-model="name" placeholder="收货人的姓名" maxlength="8" />
+                </div>
+                <div class="input-group bb">
+                    <span class="input-text">联系电话</span>
+                    <input type="tel" class="input-control" v-model="tel" placeholder="手机号码或固定电话" maxlength="12" />
+                </div>
+                <div class="input-group bb">
+                    <span class="input-text">所在地区</span>
+                    <div class="input-control" v-bind:class="{'gray': !displayName}" v-text="displayName ? displayName : '省、市、县（区）'" @click="isShowArea = !isShowArea"></div>
+                </div>
+                <div class="input-group bb">
+                    <span class="input-text">详细地址</span>
+                    <input type="text" class="input-control" v-model="address" placeholder="如街道、楼层、门牌号等" maxlength="100" />
+                </div>
+                <div class="input-group">
+                    <van-switch v-model="isDefault"></van-switch>
+                    <span class="input-text w-30">设为默认收货地址</span>
+                </div>
+                <button class="confirm_button" @click="saveCallback">保存修改</button>
+            </div>
+        </div>
+        <van-popup v-model="isShowArea" position="bottom" v-bind:overlay="true">
+            <van-area v-bind:area-List="areaList" @confirm="selected" @cancel="isShowArea = false" />
+        </van-popup>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/data.js"></script>
+    <script src="../../../content/js/pages/center/subPages/modify.address.js"></script>
+</body>
+</html>

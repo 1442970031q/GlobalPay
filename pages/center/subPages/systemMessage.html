@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/systemMessage.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">消息</div>
+        </div>
+        <div id="app-content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak>
+                <div v-if="pageModel.list.length === 0" class="none-data p50">
+                    <i class="iconfont icon-wushuju"></i>
+                    <p class="none-data-text">暂无消息</p>
+                </div>
+                <div v-else class="app-content-tabs van-hairline--bottom van-hairline--top">
+                    <ul class="tabs-ul">
+                        <li v-for="(item, index) in pageModel.list"
+                            v-bind:key="index"
+                            @click="gotoDetail(item)"
+                            class="tabs-ul-item clearfix">
+                            <div class="tabs-ul-item-left">
+                                <i class="iconfont icon-xiaolaba"></i>
+                            </div>
+                            <div class="tabs-ul-item-right">
+                                <p v-text="item.Title" class="title"></p>
+                                <p v-text="getText(item.Text)" class="des"></p>
+                                <p v-text="item.SendTime" class="time"></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/pages/center/subPages/systemMessage.js"></script>
+</body>
+</html>

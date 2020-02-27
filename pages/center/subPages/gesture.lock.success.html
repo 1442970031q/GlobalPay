@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/subPages/gesture.lock.success.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">配置界面</div>
+            <button class="submit-button" @click="gotoReset">修改手势锁</button>
+        </div>
+        <div id="app-content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+            <i class="iconfont icon-shoushijiesuo icon"></i>
+            <p class="text">配置您的手势锁</p>
+            <p class="des">您的手势密码已创建完毕，请选择进入哪些界面需要使用手势密码</p>
+            <div class="mt-15">
+                <van-cell-group>
+                    <van-switch-cell @change="openWalletChanged" v-model="lockSettings.isOpenWallet" title="查看“我的钱包”"></van-switch-cell>
+                    <van-switch-cell @change="openAwardChanged" v-model="lockSettings.isOpenAward" title="查看“奖励明细”"></van-switch-cell>
+                    <van-switch-cell @change="openTeamChanged" v-model="lockSettings.isOpenTeam" title="查看“我的团队”"></van-switch-cell>
+                    <van-switch-cell @change="openEarningsChanged" v-model="lockSettings.isOpenEarnings" title="查看“收益统计”"></van-switch-cell>
+                    <van-switch-cell @change="openAlipayChanged" v-model="lockSettings.isOpenAlipay" title="修改支付宝信息"></van-switch-cell>
+                </van-cell-group>
+            </div>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script>
+        var _vue = new Vue({
+            el: '#app',
+            data: {
+                'currentUser': APP.GLOBAL.getUserModel(),
+                'statusbarHeight': 20,
+                'lockSettings': {
+                    'isOpenWallet': false,
+                    'isOpenAward': false,
+                    'isOpenTeam': false,
+                    'isOpenEarnings': false,
+                    'isOpenAlipay': false
+                }
+            },
+            methods: {
+                'openWalletChanged': function () {
+                    APP.GLOBAL.setItem(APP.CONFIG.GESTURE_LOCK_KEYS.IS_OPEN_WALLET, this.lockSettings.isOpenWallet.toString());
+                },
+                'openAwardChanged': function () {
+                    APP.GLOBAL.setItem(APP.CONFIG.GESTURE_LOCK_KEYS.IS_OPEN_AWARD, this.lockSettings.isOpenAward.toString());
+                },
+                'openTeamChanged': function () {
+                    APP.GLOBAL.setItem(APP.CONFIG.GESTURE_LOCK_KEYS.IS_OPEN_TEAM, this.lockSettings.isOpenTeam.toString());
+                },
+                'openEarningsChanged': function () {
+                    APP.GLOBAL.setItem(APP.CONFIG.GESTURE_LOCK_KEYS.IS_OPEN_EARNINGS, this.lockSettings.isOpenEarnings.toString());
+                },
+                'openAlipayChanged': function () {
+                    APP.GLOBAL.setItem(APP.CONFIG.GESTURE_LOCK_KEYS.IS_OPEN_ALIPAY, this.lockSettings.isOpenAlipay.toString());
+                },
+                'gotoReset': function () {
+                    APP.GLOBAL.gotoNewWindow('gesture.lockPage', 'gesture.lock', {
+                        'openCallback': function () {
+                            APP.GLOBAL.closeWindow('none');
+                        }
+                    });
+                }
+            },
+            created: function () {
+                if (APP.CONFIG.IS_RUNTIME) {
+                    this.statusbarHeight = plus.navigator.getStatusbarHeight();
+                }
+            },
+            mounted: function () {
+                var value = APP.GLOBAL.getItem(APP.CONFIG.GESTURE_LOCK_KEYS.IS_OPEN_WALLET);
+                this.lockSettings.isOpenWallet = value === 'true';
+
+                value = APP.GLOBAL.getItem(APP.CONFIG.GESTURE_LOCK_KEYS.IS_OPEN_AWARD);
+                this.lockSettings.isOpenAward = value === 'true';
+
+                value = APP.GLOBAL.getItem(APP.CONFIG.GESTURE_LOCK_KEYS.IS_OPEN_TEAM);
+                this.lockSettings.isOpenTeam = value === 'true';
+
+                value = APP.GLOBAL.getItem(APP.CONFIG.GESTURE_LOCK_KEYS.IS_OPEN_EARNINGS);
+                this.lockSettings.isOpenEarnings = value === 'true';
+
+                value = APP.GLOBAL.getItem(APP.CONFIG.GESTURE_LOCK_KEYS.IS_OPEN_ALIPAY);
+                this.lockSettings.isOpenAlipay = value === 'true';
+            }
+        });
+    </script>
+</body>
+</html>

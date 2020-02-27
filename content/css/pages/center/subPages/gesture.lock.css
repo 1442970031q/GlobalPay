@@ -1,0 +1,82 @@
+﻿html, body {
+    height: 100%;
+    /*background: -webkit-gradient(linear, 0% 0%, 10% 100%, from(#000000), to(#3a3a3a));*/
+    background-color: white;
+}
+
+#app {
+    position: inherit;
+    overflow: hidden;
+    height: 100%;
+    background-image: url(../../../../img/gesture_lock_bg.png);
+    background-repeat:no-repeat;
+    background-size: 180px auto;
+    background-position: left bottom;
+}
+
+/*#app-head .right-back,
+#app-head .app-head-text {
+    color: white;
+}*/
+
+#app-content {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 65px);
+    overflow: hidden;
+}
+
+    #app-content .text-container {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+        #app-content .text-container .title {
+            color: #505050;
+            line-height: 30px;
+            font-size: 1.4em;
+        }
+
+        #app-content .text-container .state {
+            color: rgba(82, 82, 82, 0.8);
+            font-size: .9em;
+            line-height: 20px;
+            margin-top: 15px;
+        }
+
+            #app-content .text-container .state.red_text {
+                color:red;
+            }
+
+#buffer {
+    height: calc(100% - 150px);
+    position: relative;
+}
+
+    #buffer #wrap {
+        height: 100% !important;
+        width: 100% !important;
+        position: relative;
+    }
+
+        #buffer #wrap canvas {
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+.caption {
+    text-align: center;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.msg {
+    font-size: .8em;
+    text-align: center;
+    color: #a0a0a0;
+    margin-bottom: 10px;
+}

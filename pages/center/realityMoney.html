@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../content/css/base.css" rel="stylesheet" />
+    <link href="../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../content/css/pages/center/realityMoney.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">提现</div>
+            <button class="submit-button iconfont icon-gengduo" @click="isRulesShow = true"></button>
+        </div>
+        <div id="app-content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak class="cash_content">
+                <div class="app-content-pay">
+                    <div class="cash_title">
+                        <img src="../../content/img/center/realityMoney/pay-bg.png" />
+                    </div>
+                    <div class="cash_info">
+                        <p class="nn" v-text="pay.Alipay"></p>
+                        <p class="account" v-text="pay.RealName"></p>
+                    </div>
+                </div>
+                <div class="app-content-money">
+                    <p class="caption">提现金额(元)</p>
+                    <input type="number" v-model="money" placeholder="￥" />
+                    <p>
+                        <span>可用余额：</span>
+                        <span v-text="numberFormat(pay.Amount, 2) + ' - '"></span>
+                        <span class="color" @click="cashAll">全部提现</span>
+                    </p>
+                </div>
+                <button class="buttons" @click="checkoutNumber">确认提现</button>
+            </div>
+            <van-popup v-model="isPopupShow" position="bottom" v-cloak>
+                <p class="pay-pass">
+                    <i class="iconfont icon-chahao" @click="isPopupShow = false"></i> 输入支付密码
+                </p>
+                <p class="pay-money" v-html="'金额：<b>' + numberFormat(money, 2) +'</b> 元'"></p>
+                <div class="pay-pass-heigth">
+                    <van-password-input v-bind:value="payPass" info="密码为 6 位数字" />
+                </div>
+                <div class="keyboard-heigth">
+                    <van-number-keyboard v-bind:show="true" @input="onInput" @delete="onDelete" />
+                </div>
+            </van-popup>
+            <van-popup v-model="isRulesShow" position="bottom" v-cloak class="rules">
+                <p class="caption"><i class="iconfont icon-shouyi"></i>提现规则</p>
+                <div class="rules_box" v-html="pay.CashNotice"></div>
+                <button class="confirm_button full" 
+                        v-bind:class="{'safe-area': APP.CONFIG.IsSafeArea()}"
+                        @click="isRulesShow = false">
+                    我知道了
+                </button>
+            </van-popup>
+        </div>
+    </div>
+    <script src="../../content/js/vue.js"></script>
+    <script src="../../content/js/vant.min.js"></script>
+    <script src="../../content/js/base.js"></script>
+    <script src="../../content/js/pages/center/realityMoney.js"></script>
+</body>
+</html>

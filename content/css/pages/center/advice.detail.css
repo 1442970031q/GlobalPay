@@ -1,0 +1,45 @@
+#app-content .content_querstion,
+.content_response {
+	width: calc(100% - 16px);
+	margin: 16px auto;
+}
+
+#app-content .content_querstion .time {
+	font-size: 0.8em;
+	text-align: center;
+}
+
+#app-content .content_querstion .time .border {
+	background-color: #C8C9CC;
+	padding: 2px 3px;
+	border-radius: 50px;
+}
+
+#app-content .content_querstion .text {
+	text-indent: 16px;
+	margin: 8px 0;
+}
+
+#app-content .content_querstion .type {
+	font-size: 0.8em;
+}
+
+#app-content .content_response {
+	margin-top: 32px;
+}
+
+#app-content .content_response .content {
+	text-indent: 16px;
+	margin-top: 8px;
+}
+
+#app-content .content_response .time {
+	font-size: 0.8em;
+	text-align: right;
+	color: darkgrey;
+}
+
+#app-content .content_response .noresponse {
+	color: darkgrey;
+	text-align: center;
+}

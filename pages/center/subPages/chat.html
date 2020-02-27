@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/subPages/chat.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">申诉</div>
+        </div>
+        <div id="app-content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak>
+                <div class="message_box">
+                    <p class="notice" v-text="ServiceNotice"></p>
+                    <div class="message_body"
+                         v-if="chats.length !== 0"
+                         v-bind:class="{'pb60': APP.CONFIG.IsSafeArea()}">
+                        <div v-for="(item,index) in chats"
+                             v-bind:key="index"
+                             class="chat_block">
+                            <div v-if="item.Text">
+                                <div v-if="item.CommentType !== 2"
+                                     class="chat_block_row clearfix">
+                                    <img v-lazy="currentUser.Avatar" class="avarat right" />
+                                    <div class="msg_box right">
+                                        <p v-text="item.Text"></p>
+                                        <p class="time" v-text="item.CreateTime"></p>
+                                    </div>
+                                </div>
+                                <div v-else
+                                     class="chat_block_row clearfix">
+                                    <img v-lazy="currentUser.Avatar" class="avarat right" />
+                                    <div class="msg_box right">
+                                        <img v-bind:src="item.Text" class="image" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="item.ReplyText" class="chat_block_row clearfix">
+                                <i class="iconfont icon-kefu2 avarat"></i>
+                                <div class="msg_box">
+                                    <p v-text="item.ReplyText"></p>
+                                    <p class="time" v-text="item.ReplyTime"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message_control clearfix"
+                     v-bind:class="{'safe-area': APP.CONFIG.IsSafeArea() && isSafeArea}">
+                    <div class="icon" @click="isActionsheet = true">
+                        <i class="iconfont icon-plus"></i>
+                    </div>
+                    <input type="text"
+                           class="ctrl"
+                           placeholder="轻触此处输入信息"
+                           @focus="isSafeArea = false"
+                           @blur="isSafeArea = true"
+                           v-model="form.txt"
+                           maxlength="200"/>
+                    <div class="button">
+                        <button class="send">
+                            <span v-if="!isSend" @click="!isSend && checkSend()">发送</span>
+                            <van-loading color="black" v-else class="small" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <van-actionsheet v-bind:class="{'safe-area': APP.CONFIG.IsSafeArea()}" v-model="isActionsheet" v-bind:actions="actions" cancel-text="取消"></van-actionsheet>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/pages/center/subPages/chat.js"></script>
+</body>
+</html>

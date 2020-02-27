@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/subPages/unlock.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed bg-none" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <div class="app-head-text"></div>
+        </div>
+        <div id="app-content" v-bind:style="{'top': (45 + statusbarHeight) + 'px'}">
+            <div class="text-container">
+                <p class="title">绘制您的解锁图案</p>
+                <p class="state" v-html="stateItems[currentState]" v-bind:class="{'red_text': currentState === 1 || currentState === 3}"></p>
+            </div>
+            <div id="buffer"></div>
+            <p class="forgot" @click="APP.GLOBAL.gotoNewWindow('gesture.lockPage', 'gesture.lock')">忘记解锁图案？</p>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script src="../../../content/js/h5lock.js"></script>
+    <script src="../../../content/js/pages/center/subPages/unlock.js"></script>
+</body>
+</html>

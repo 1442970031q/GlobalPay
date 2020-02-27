@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/subPages/help.detail.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" 
+             class="fixed van-hairline--bottom" 
+             v-bind:style="{'paddingTop': statusbarHeight + 'px'}"
+             v-bind:class="{'shadow': scrollTop !== 0}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text" v-text="request.title"></div>
+        </div>
+        <div id="app-content">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak class="content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+                <div v-html="pageModel.Text" @click="pageModel.ContentType === 2 && views()"></div>
+            </div>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script>
+        var _vue = new Vue({
+            el: '#app',
+            data: {
+                'currentUser': APP.GLOBAL.getUserModel(),
+                'isLoading': true,
+                'scrollTop': 0,
+                'statusbarHeight': 20,
+                'request': {
+                    'title': APP.GLOBAL.queryString('title'),
+                    'hId': APP.GLOBAL.queryString('hId')
+                },
+                'pageModel': {
+                    'images': []
+                }
+            },
+            methods: {
+                'scrollChange': function (top) {
+                    this.scrollTop = top;
+                },
+                'views': function () {
+                    vant.ImagePreview({
+                        images: this.pageModel.images,
+                        showIndex: false
+                    });
+                },
+                'loadPageData': function () {
+                    APP.GLOBAL.ajax({
+                        url: APP.CONFIG.BASE_URL + 'NoticeDetail',
+                        data: {
+                            'nId': this.request.hId
+                        },
+                        success: function (result) {
+                            APP.GLOBAL.closeToastLoading();
+                            if (result.Error) {
+                                APP.GLOBAL.toastMsg(result.Msg);
+                                return;
+                            }
+
+                            if (result.Data.ContentType === 2) {
+                                result.Data.Text = result.Data.Text.replace(/<br\s*\/?>/g, '');
+                                _vue.pageModel.images = [];
+
+                                var imgList = result.Data.Text.toString().match(/<img.*?(?:>|\/>)/gi);
+                                if (typeof imgList.length !== 'undefined') {
+                                    for (var i = 0; i < imgList.length; i++) {
+                                        var url = imgList[i].match(/src=[\'\"]?([^\'\"]*)[\'\"]?/i);
+                                        _vue.pageModel.images.push(url[1]);
+                                    }
+                                }
+                            } else if (result.Data.ContentType === 4) {
+                                var pattern = new RegExp('<p.*?>(.*?)<\/p>', 'i');
+                                var videoSrc = result.Data.Text.match(pattern)[1];
+                                result.Data.Text = '<video class="v" src="' + videoSrc + '" controls="controls"></video>';
+                            }
+
+                            _vue.pageModel = Object.assign({}, _vue.pageModel, result.Data);
+                            _vue.isLoading = false;
+                        }
+                    });
+                }
+            },
+            created: function () {
+                if (APP.CONFIG.IS_RUNTIME) {
+                    this.statusbarHeight = plus.navigator.getStatusbarHeight();
+                }
+            },
+            mounted: function () {
+                this.loadPageData();
+
+                window.scrollChange = this.scrollChange;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no,viewport-fit=cover" />
+    <link href="../content/css/base.css" rel="stylesheet" />
+    <link href="../content/css/vant.css" rel="stylesheet" />
+    <link href="../content/css/pages/home.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="fixed" v-bind:style="{'paddingTop': statusbarHeight + 'px'}" v-bind:class="{'van-hairline--bottom': scrollTop > (45 + statusbarHeight)}">
+            <div class="right-back" @click="APP.GLOBAL.gotoNewWindow('systemMessagePage','center/subPages/systemMessage')">
+                <i class="iconfont icon-youjian"></i>
+                <span class="new"></span>
+            </div>
+            <img src="../content/img/logo_text.png" class="logo_text" />
+        </div>
+        <div id="app-content" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+            <div v-if="isLoading" class="loading-box p50">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else v-cloak>
+                <van-pull-refresh v-model="isReloading" @refresh="loadPageData">
+                    <div slot="loading" class="loading">
+                        <img src="../content/img/svg/center_loading_ajax.svg" class="svg" />
+                        <span class="text">正在刷新...</span>
+                    </div>
+                    <div id="swipe" class="swipe_content">
+                        <div class="van-swipe" v-if="pageData.Swipers.length === 0">
+                            <img src="../content/img/default_swipe.jpg" class="swipe_img" />
+                        </div>
+                        <van-swipe v-bind:autoplay="3000" v-else>
+                            <van-swipe-item v-for="(item,index) in pageData.Swipers"
+                                            v-bind:key="index">
+                                <img v-lazy="item.ImageAddress" class="swipe_img" />
+                            </van-swipe-item>
+                        </van-swipe>
+                    </div>
+                    <div class="page_content">
+                        <div class="quick_menus">
+                            <ul>
+                                <li @click="gotoInvite">
+                                    <i class="iconfont icon-yaoqinghaoyou"></i>
+                                    <p class="text">邀请好友</p>
+                                </li>
+                                <li @click="APP.GLOBAL.gotoNewWindow('s1Page', 'second/s1')">
+                                    <i class="iconfont icon-jifen"></i>
+                                    <p class="text">积分兑换</p>
+                                </li>
+                                <li @click="gotoS2">
+                                    <i class="iconfont icon-xinyongqia1"></i>
+                                    <p class="text">办信用卡</p>
+                                </li>
+                                <li @click="APP.GLOBAL.toastMsg('敬请期待')">
+                                    <i class="iconfont icon-daikuanjisuanqi"></i>
+                                    <p class="text">P2P贷款</p>
+                                </li>
+                                <li @click="APP.GLOBAL.toastMsg('敬请期待')">
+                                    <i class="iconfont icon-maozi"></i>
+                                    <p class="text">商学院</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="block news_content" v-if="pageData.ComNotices.length !== 0">
+                            <div class="news clearfix">
+                                <div class="news_left van-hairline--right">
+                                    <img src="../content/img/notice_logo.png" class="big_news" />
+                                </div>
+                                <div class="news_right">
+                                    <van-swipe v-bind:autoplay="5000"
+                                               v-bind:height="35"
+                                               vertical
+                                               v-bind:show-indicators="false">
+                                        <van-swipe-item v-for="(item, index) in pageData.ComNotices">
+                                            <p class="text_content" @click="gotoNewsDetail(item)">
+                                                <span class="red" v-if="index === 0">新</span>
+                                                <span v-text="item.Title"></span>
+                                            </p>
+                                        </van-swipe-item>
+                                    </van-swipe>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block" v-if="pageData.Recommends.length !== 0">
+                            <p class="title">热门推荐</p>
+                            <div class="block_content">
+                                <ul class="hot">
+                                    <li v-for="(item,index) in pageData.Recommends"
+                                        v-bind:key="index"
+                                        @click="gotoDetail(item)">
+                                        <img v-lazy="item.ImageAddress" class="image" />
+                                        <p class="text" v-text="item.Title"></p>
+                                        <div class="bottom clearfix">
+                                            <span class="price">
+                                                <span v-text="item.Symbolize"></span>
+                                                <span v-text="numberFormat(item.Price, 2)"></span>
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <p class="title">跨境购物</p>
+                            <div class="block_content">
+                                <ul class="products">
+                                    <li v-for="(item, index) in pageData.Products" v-bind:key="index" @click="gotoDetail(item)">
+                                        <div class="image">
+                                            <img v-lazy="item.ImageAddress" />
+                                        </div>
+                                        <p class="name" v-text="item.Title"></p>
+                                        <div class="bottom clearfix">
+                                            <span class="price">
+                                                <span v-text="item.Symbolize"></span>
+                                                <span v-text="numberFormat(item.Price, 2)"></span>
+                                            </span>
+                                            <span class="queue"><span class="num" v-text="item.QueueCount"></span>人排队</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="bottom_line">
+                            <hr />
+                            <span class="txt">我是有底线的</span>
+                        </div>
+                    </div>
+                </van-pull-refresh>
+            </div>
+        </div>
+    </div>
+    <script src="../content/js/vue.js"></script>
+    <script src="../content/js/vant.min.js"></script>
+    <script src="../content/js/base.js"></script>
+    <script src="../content/js/pages/home.js"></script>
+</body>
+</html>

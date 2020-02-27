@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../content/css/base.css" rel="stylesheet" />
+    <link href="../../content/css/pages/account/success.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <div class="app-head-text"></div>
+        </div>
+        <div id="app-content">
+            <img src="../../content/img/reg_success.png" class="image" />
+            <p class="txt">注册成功</p>
+            <p class="des">恭喜，您已注册成为“全球购”会员，点击下方按钮开始Go全球吧！</p>
+            <button class="confirm_button" @click="go">GO全球</button>
+        </div>
+    </div>
+    <script src="../../content/js/vue.js"></script>
+    <script src="../../content/js/vant.min.js"></script>
+    <script src="../../content/js/base.js"></script>
+    <script src="../../content/js/pages/account/success.js"></script>
+</body>
+</html>

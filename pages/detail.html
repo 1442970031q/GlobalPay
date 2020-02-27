@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../content/css/base.css" rel="stylesheet" />
+    <link href="../content/css/vant.css" rel="stylesheet" />
+    <link href="../content/css/pages/detail.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head"
+             class="fixed tran"
+             v-bind:class="{'van-hairline--bottom': headOpacity == 1}"
+             v-bind:style="{'paddingTop': statusbarHeight + 'px', 'backgroundColor': 'rgba(255, 255, 255,' + (isFull ? 1 : headOpacity) + ')'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div v-if="!isFull" class="app-head-text" v-bind:style="{'color': 'rgba(0, 0, 0,' + headOpacity + ')'}" v-text="isLoading ? '' : pageData.Title"></div>
+            <div v-else class="app-head-text">队列已满</div>
+        </div>
+        <div id="app-content">
+            <div v-if="isLoading" class="loading-box p60">
+                <van-loading color="black"></van-loading>
+                <p class="loading-text">正在加载...</p>
+            </div>
+            <div v-else-if="isFull" v-cloak class="full_queue" v-bind:style="{'paddingTop': (45 + statusbarHeight) + 'px'}">
+                <div class="inner">
+                    <img src="../content/img/queue_full_bg.png" class="bg" />
+                    <i class="iconfont icon-zuidapaiduishu"></i>
+                    <p class="text">当前排队人数已满</p>
+                </div>
+                <button class="confirm_button" @click="flushQueue">刷新</button>
+            </div>
+            <van-pull-refresh v-else 
+                              v-cloak 
+                              v-model="isReloading" 
+                              @refresh="loadPageData" 
+                              v-bind:head-height="45 + statusbarHeight">
+                <div slot="loading" class="loading">
+                    <img src="../content/img/svg/center_loading_ajax.svg" class="svg" />
+                    <span class="text">正在刷新...</span>
+                </div>
+                <img v-if="pageData.CarouselFigureList.length === 0" class="swipe_img" src="../content/img/default_product_800_600.jpg" />
+                <van-swipe v-else v-bind:autoplay="3000">
+                    <van-swipe-item v-for="(item,index) in pageData.CarouselFigureList"
+                                    v-bind:key="index">
+                        <img v-lazy="item.ImageUrl" class="swipe_img" />
+                    </van-swipe-item>
+                </van-swipe>
+                <div class="product_top van-hairline--bottom">
+                    <p class="name" v-text="pageData.Title"></p>
+                    <div class="middle clearfix">
+                        <div class="info">
+                            <p class="price">
+                                <span v-text="pageData.Symbolize"></span>
+                                <span v-text="numberFormat(pageData.Price, 2)"></span>
+                            </p>
+                        </div>
+                        <div class="queue">
+                            <p class="value" v-text="pageData.QueueCount + ' / ' + pageData.MaxQueueCount"></p>
+                            <p class="text">队列人数</p>
+                        </div>
+                    </div>
+                    <p class="time" v-text="pageData.OpenTime"></p>
+                </div>
+                <div class="block" v-if="pageData.IsEntity=== true">
+                    <p class="title">收货地址</p>
+                    <div class="block-content">
+                        <div v-if="addressObject !== null" class="address-block clearfix" @click="selectAddress">
+                            <div class="address-block-left">
+                                <p class="first" v-html="addressObject.name + '&nbsp;&nbsp;' + addressObject.tel"></p>
+                                <p class="address-text" v-text="addressObject.address"></p>
+                            </div>
+                            <div class="address-block-right">
+                                <i class="iconfont icon-more"></i>
+                            </div>
+                        </div>
+                        <div v-else class="address-block clearfix" v-on:click="selectAddress">
+                            <p class="text-center line">请选择收货地址<i class="iconfont icon-more"></i></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="product_middle van-hairline--top van-hairline--bottom">
+                    <div class="caption van-hairline--bottom">图文详情</div>
+                    <div class="content" v-bind:class="{'safe-area': APP.CONFIG.IsSafeArea()}">
+                        <img v-for="(item,index) in pageData.images" v-bind:key="index" v-lazy="item" />
+                    </div>
+                </div>
+            </van-pull-refresh>
+            <div v-show="!isLoading && !isFull" v-cloak class="bottom_buttons" v-bind:class="{'safe-area': APP.CONFIG.IsSafeArea()}">
+                <div class="collec van-hairline--top"
+                     v-bind:class="{'van-hairline--bottom': APP.CONFIG.IsSafeArea()}">
+                    <div v-if="isLoadCollect" class="loading-box">
+                        <van-loading color="black"></van-loading>
+                    </div>
+                    <div v-else>
+                        <button v-if="!isCollect" class="collect_btn" @click="collection">
+                            <i class="iconfont icon-collection"></i>
+                            <span class="text">收藏</span>
+                        </button>
+                        <button v-else class="collect_btn" @click="cancelCollection">
+                            <i class="iconfont icon-collection-b fill"></i>
+                            <span class="text">已收藏</span>
+                        </button>
+                    </div>
+                </div>
+                <button class="confirm_button" @click="confirmPayment">立即购买</button>
+            </div>
+            <van-popup v-cloak v-model="isBankCardShow" position="bottom">
+                <div class="bank_card_dialog" v-bind:class="{'safe-area': APP.CONFIG.IsSafeArea() && !isFocus}">
+                    <p class="caption clearfix">
+                        <span class="text">请按照图例输入您的卡号</span>
+                        <i class="iconfont icon-chahao" @click="isBankCardShow = false"></i>
+                    </p>
+                    <div class="content">
+                        <div class="demo_box">
+                            <div class="mask"></div>
+                            <img src="../content/img/bank_card/card_1.jpg" class="demo_mask m1" />
+                            <img src="../content/img/bank_card/card_2.jpg" class="demo_mask m2" />
+                            <img src="../content/img/bank_card/bank_card_bg.png" class="demo" />
+                        </div>
+                        <p class="des"><b>注意：</b>为了您的消费信息准确无误，请认真核对您输入的卡号信息。</p>
+                        <div class="input_box clearfix">
+                            <input type="tel" @focus="isFocus = true" @blur="isFocus = false" maxlength="6" v-model="form.fNumber" class="input" placeholder="前6位卡号" />
+                            <input type="tel" @focus="isFocus = true" @blur="isFocus = false" maxlength="4" v-model="form.lNumber" class="input last" placeholder="后4位卡号" />
+                        </div>
+                    </div>
+                    <button class="confirm_button full" @click="checkCardNumber" v-bind:class="{'safe-area': APP.CONFIG.IsSafeArea() && !isFocus}">确认购买</button>
+                </div>
+            </van-popup>
+        </div>
+    </div>
+    <script src="../content/js/vue.js"></script>
+    <script src="../content/js/vant.min.js"></script>
+    <script src="../content/js/base.js"></script>
+    <script src="../content/js/pages/detail.js"></script>
+</body>
+</html>

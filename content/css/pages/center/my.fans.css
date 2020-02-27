@@ -1,0 +1,65 @@
+﻿.members ul {
+    padding: 5px;
+    background-color: white;
+}
+
+    .members ul li {
+        padding: 10px;
+        border-bottom: 1px solid #f9f9f9;
+    }
+
+        .members ul li:last-child {
+            border-bottom: 0;
+        }
+
+        .members ul li .avarat {
+            float: left;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .members ul li .member_right {
+            width: calc(100% - 60px);
+            margin-left: 10px;
+            float: left;
+        }
+
+            .members ul li .member_right .nn {
+                height: 25px;
+                line-height: 25px;
+                font-size: 1em;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-weight: 600;
+            }
+
+            .members ul li .member_right .middle {
+                height: 20px;
+                font-size: .8em;
+                line-height: 20px;
+                color: #6f6f6f;
+            }
+
+            .members ul li .member_right .bottom {
+                height: 20px;
+                margin-top: 5px;
+                text-align: right;
+                color: #909090;
+            }
+
+                .members ul li .member_right .bottom span {
+                    font-size: .7em;
+                    display: block;
+                    height: 20px;
+                    line-height: 20px;
+                }
+
+                    .members ul li .member_right .bottom span.exp {
+                        float: right;
+                    }
+
+                    .members ul li .member_right .bottom span.time {
+                        float: left;
+                    }

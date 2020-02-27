@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="../../../content/css/base.css" rel="stylesheet" />
+    <link href="../../../content/css/vant.css" rel="stylesheet" />
+    <link href="../../../content/css/pages/center/subPages/exchange.success.css" rel="stylesheet" />
+    <script src="html5plus://ready"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app-head" class="van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+            <i id="app-back-button" class="iconfont icon-back right-back"></i>
+            <div class="app-head-text">转换成功</div>
+        </div>
+        <div id="app-content">
+            <i class="iconfont icon-duihao1 icon"></i>
+            <p class="title">转换成功</p>
+            <div class="info">
+                <div class="clearfix">
+                    <span class="left">转换币种：</span>
+                    <span class="right" v-text="request.currencyDisplay"></span>
+                </div>
+                <div class="clearfix">
+                    <span class="left">转换金额：</span>
+                    <span class="right" v-text="numberFormat(request.amount, 2)"></span>
+                </div>
+            </div>
+            <button class="confirm_button" @click="APP.GLOBAL.closeWindow()">返回钱包</button>
+        </div>
+    </div>
+    <script src="../../../content/js/vue.js"></script>
+    <script src="../../../content/js/vant.min.js"></script>
+    <script src="../../../content/js/base.js"></script>
+    <script>
+        var _vue = new Vue({
+            el: '#app',
+            data: {
+                'request': {
+                    'currencyDisplay': APP.GLOBAL.queryString('t'),
+                    'amount': APP.GLOBAL.queryString('amount')
+                },
+                'statusbarHeight': 20
+            },
+            methods: {
+                'pageClose': function () {
+                    plus.navigator.setStatusBarStyle('light');
+                }
+            },
+            created: function () {
+                if (APP.CONFIG.IS_RUNTIME) {
+                    this.statusbarHeight = plus.navigator.getStatusbarHeight();
+                }
+            },
+            mounted: function () {
+                window.onPageClose = this.pageClose;
+            }
+        });
+    </script>
+</body>
+</html>

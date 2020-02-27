@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link href="../../content/css/vant.css" rel="stylesheet" />
+		<link href="../../content/css/base.css" rel="stylesheet" />
+		<link href="../../content/css/pages/center/security.css" rel="stylesheet" />
+		<script src="html5plus://ready"></script>
+	</head>
+
+    <body>
+        <div id="app">
+            <div id="app-head" class="van-hairline--bottom" v-bind:style="{'paddingTop': statusbarHeight + 'px'}">
+                <i id="app-back-button" class="iconfont icon-back right-back"></i>
+                <div class="app-head-text">账户安全</div>
+            </div>
+            <div id="app-content">
+                <ul class="items">
+                    <li class="clearfix" @click="APP.GLOBAL.gotoNewWindow('new.passwordPage','dataAmend/new.password')">
+                        <i class="iconfont icon-mima1"></i>
+                        <div class="item_right">
+                            <p class="text">登录密码</p>
+                            <p class="des">修改您的登录密码</p>
+                        </div>
+                        <div class="more">
+                            <i class="iconfont icon-more"></i>
+                        </div>
+                    </li>
+                    <li class="clearfix" @click="changePin">
+                        <i class="iconfont icon-anquan"></i>
+                        <div class="item_right">
+                            <p class="text">交易密码</p>
+                            <p class="des">修改您的交易密码</p>
+                        </div>
+                        <div class="more">
+                            <i class="iconfont icon-more"></i>
+                        </div>
+                    </li>
+                    <li class="clearfix" @click="APP.GLOBAL.gotoNewWindow('id.uploadPage','subPages/id.upload')">
+                        <i class="iconfont icon-shenfenzheng" id="smal"></i>
+                        <div class="item_right">
+                            <p class="text">上传信息</p>
+                            <p class="des">上传身份证信息</p>
+                        </div>
+                        <div class="more">
+                            <i class="iconfont icon-more"></i>
+                        </div>
+                    </li>
+                    <li class="clearfix" @click="gotoGestureLock">
+                        <i class="iconfont icon-shoushijiesuo"></i>
+                        <div class="item_right">
+                            <p class="text">手势锁</p>
+                            <p class="des">创建或修改您的手势密码</p>
+                        </div>
+                        <div class="more">
+                            <i class="iconfont icon-more"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <img src="../../content/img/security.png" class="bg" />
+        <script src="../../content/js/vue.js"></script>
+        <script src="../../content/js/vant.min.js"></script>
+        <script src="../../content/js/base.js"></script>
+        <script>
+            var _vue = new Vue({
+                el: '#app',
+                data: {
+                    'currentUser': APP.GLOBAL.getUserModel(),
+                    'statusbarHeight': 20
+                },
+                methods: {
+                    'gotoGestureLock': function () {
+                        if (this.currentUser.IsSetHandPwd) {
+                            APP.GLOBAL.gotoNewWindow('gesture.lock.successPage', 'subPages/gesture.lock.success');
+                        } else {
+                            APP.GLOBAL.gotoNewWindow('gesture.lockPage', 'subPages/gesture.lock');
+                        }
+                    },
+                    'changePin': function () {
+                        if (this.currentUser.IsSetPin) {
+                            APP.GLOBAL.gotoNewWindow('reset.pinPage', 'dataAmend/reset.pin');
+                        } else {
+                            APP.GLOBAL.gotoNewWindow('pay.passwordPage', 'dataAmend/pay.password');
+                        }
+                    },
+                    'updatePage': function () {
+                        this.currentUser = Object.assign(this.currentUser, APP.GLOBAL.getUserModel());
+                    }
+                },
+                created: function () {
+                    if (APP.CONFIG.IS_RUNTIME) {
+                        this.statusbarHeight = plus.navigator.getStatusbarHeight();
+                    }
+                }
+            });
+        </script>
+    </body>
+
+</html>
